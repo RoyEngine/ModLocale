@@ -1,2 +1,31 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Python cache
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+
+# Virtual env / tooling
+.venv/
+venv/
+.env
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs / temp
+*.log
+*.tmp
+*.bak
+
+# If you generate new outputs/reports later, ignore these:
+# (Keep legacy/Localization_File/output/Extract_* as historical baselines for now)
+out/
+reports/
+cache/
+tmp/
+
+# Optional: if you later decide to NOT version jar files
+# **/*.jar
