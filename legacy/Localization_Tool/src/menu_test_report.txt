@@ -1,0 +1,1875 @@
+本地化工具交互式菜单测试报告
+==================================================
+
+测试时间: 2025-12-13 01:15:23
+测试脚本: D:\Poki\Tool\src\main.py
+
+测试用例 1: Extract模式 - 简洁模式 - 提取英文
+输入序列: ['1', '1', '1']
+退出码: 0
+结果: 失败
+输出:
+------------------------------
+[OK] Tree-sitter库导入成功
+[OK] tree_sitter_java库导入成功
+[OK] tree_sitter_kotlin库导入成功
+[INFO] 加载语言资源: zh
+[OK] Tree-sitter库导入成功
+[OK] tree_sitter_java库导入成功
+[OK] tree_sitter_kotlin库导入成功
+[INFO] 加载语言资源: zh
+==========================================
+             本地化工具
+==========================================
+请选择本地化模式：
+1. Extract模式(仅提取字符串，默认简洁模式)
+2. Extend模式(执行映射流程，默认简洁模式)
+3. 高级模式(自定义提取/映射，可配置粒度/主体)
+==========================================
+输入数字(1/2/3，直接回车默认选1)：1
+
+==========================================
+        Extract模式 - 简洁模式(自动检测)
+==========================================
+请选择提取语言：
+1. 提取英文(优先检测src/无则反编译未汉化jar)
+2. 提取中文(优先检测src/无则反编译已汉化jar)
+==========================================
+输入数字(1/2，直接回车默认选1)：1
+
+执行配置：
+模式：Extract
+流程：英文提取流程
+==========================================
+[NOTE] 开始重命名模组文件夹...
+
+===== 开始重命名 English 下的模组文件夹 =====
+[INFO] 共收集到 1 个模组文件夹信息，按 1 个mod_id分组
+
+===== 重命名完成 =====
+[INFO] 总文件夹数: 1
+[INFO] 成功重命名: 0
+[INFO] 跳过重命名: 0
+[INFO] 重命名失败: 0
+[NOTE] 开始重命名备份文件夹...
+
+===== 开始重命名 English 下的模组文件夹 =====
+[INFO] 共收集到 4 个模组文件夹信息，按 2 个mod_id分组
+[INFO] 文件夹 Aptly Simple Hullmods 2.1.2c 名称已正确，无需重命名
+[INFO] 文件夹 Second-in-Command 1.7.0 名称已正确，无需重命名
+
+===== 重命名完成 =====
+[INFO] 总文件夹数: 4
+[INFO] 成功重命名: 0
+[INFO] 跳过重命名: 2
+[INFO] 重命名失败: 0
+[NOTE] 开始恢复备份...
+
+===== 清理并从备份恢复文件夹 =====
+
+===== 收集 File 下的mod文件夹信息 =====
+[INFO] 收集到mod: Second-in-Command 舰队副官 1.7.0 (id: second_in_command, language: Chinese)
+[INFO] 共收集到 1 个mod_id，对应 1 个文件夹
+[LIST] 收集到目标文件夹 1 个mod_id
+
+===== 收集 File_backup 下的mod文件夹信息 =====
+[INFO] 收集到mod: Aptly Simple Hullmods 2.1.2c (id: aptlysimplehullmods, language: Chinese)
+[INFO] 收集到mod: Second-in-Command 1.7.0 (id: second_in_command, language: Chinese)
+[INFO] 收集到mod: Aptly Simple Hullmods 2.1.2c (id: aptlysimplehullmods, language: English)
+[INFO] 收集到mod: Second-in-Command 1.7.0 (id: second_in_command, language: English)
+[INFO] 共收集到 2 个mod_id，对应 4 个文件夹
+[LIST] 收集到备份文件夹 2 个mod_id
+[LINK] 匹配到mod_id: second_in_command
+   目标文件夹: Second-in-Command 舰队副官 1.7.0 (语言: Chinese)
+   备份文件夹: Second-in-Command 1.7.0 (语言: Chinese)
+OK 删除原有D:\Poki\Tool\project\Extract\File\Chinese\Second-in-Command 舰队副官 1.7.0\src文件夹
+OK 恢复D:\Poki\Tool\project\Extract\File_backup\Chinese\Second-in-Command 1.7.0\src文件夹 -> D:\Poki\Tool\project\Extract\File\Chinese\Second-in-Command 舰队副官 1.7.0\src
+[PROCESS] 开始处理JAR文件...
+[OK] 报告保存成功: D:\Poki\Tool\project\Extract\Report\extract_20251213_011513_report.json
+
+执行结果：
+状态：fail
+总数量：0
+成功数量：0
+失败数量：1
+失败原因：
+  - 未找到src文件夹或JAR文件
+
+错误信息:
+------------------------------
+2025-12-13 01:15:13,645 - localization_tool - INFO - ==========================================
+2025-12-13 01:15:13,645 - localization_tool - INFO -              本地化工具
+2025-12-13 01:15:13,645 - localization_tool - INFO - ==========================================
+2025-12-13 01:15:13,645 - localization_tool - INFO - 工具启动，开始解析命令行参数
+2025-12-13 01:15:13,645 - localization_tool - INFO - 检查项目结构...
+2025-12-13 01:15:13,645 - localization_tool - INFO - 项目结构检查完成
+2025-12-13 01:15:13,646 - localization_tool - INFO - 测试模式已启用，输入序列：1,1,1
+2025-12-13 01:15:13,646 - localization_tool - INFO - 命令行参数解析完成：mode=None, sub_flow=None
+2025-12-13 01:15:13,646 - localization_tool - INFO - 工具基础路径：D:\Poki\Tool
+2025-12-13 01:15:13,646 - localization_tool - INFO - 未指定模式，显示主菜单
+2025-12-13 01:15:13,646 - localization_tool - INFO - 用户选择主模式：1
+2025-12-13 01:15:13,646 - localization_tool - INFO - 用户选择Extract子流程：英文提取流程
+2025-12-13 01:15:13,803 - localization_tool - INFO - 流程执行完成，结果：status=fail, total=0, success=0, fail=1
+2025-12-13 01:15:13,804 - localization_tool - WARNING - 执行失败项：['未找到src文件夹或JAR文件']
+2025-12-13 01:15:13,804 - localization_tool - INFO - ==========================================
+2025-12-13 01:15:13,804 - localization_tool - INFO -              工具执行结束
+2025-12-13 01:15:13,804 - localization_tool - INFO - ==========================================
+
+
+==================================================
+
+测试用例 2: Extract模式 - 完整模式 - 已有英文src
+输入序列: ['1', '2', '1']
+退出码: 0
+结果: 失败
+输出:
+------------------------------
+[OK] Tree-sitter库导入成功
+[OK] tree_sitter_java库导入成功
+[OK] tree_sitter_kotlin库导入成功
+[INFO] 加载语言资源: zh
+[OK] Tree-sitter库导入成功
+[OK] tree_sitter_java库导入成功
+[OK] tree_sitter_kotlin库导入成功
+[INFO] 加载语言资源: zh
+==========================================
+             本地化工具
+==========================================
+请选择本地化模式：
+1. Extract模式(仅提取字符串，默认简洁模式)
+2. Extend模式(执行映射流程，默认简洁模式)
+3. 高级模式(自定义提取/映射，可配置粒度/主体)
+==========================================
+输入数字(1/2/3，直接回车默认选1)：1
+
+==========================================
+        Extract模式 - 简洁模式(自动检测)
+==========================================
+请选择提取语言：
+1. 提取英文(优先检测src/无则反编译未汉化jar)
+2. 提取中文(优先检测src/无则反编译已汉化jar)
+==========================================
+输入数字(1/2，直接回车默认选1)：2
+
+执行配置：
+模式：Extract
+流程：中文提取流程
+==========================================
+[NOTE] 开始重命名模组文件夹...
+
+===== 开始重命名 Chinese 下的模组文件夹 =====
+[INFO] 共收集到 1 个模组文件夹信息，按 1 个mod_id分组
+[WARN]  未找到mod_id为 second_in_command 的英文模组，将使用中文模组信息重命名
+[INFO] 文件夹 Second-in-Command 舰队副官 1.7.0 名称已正确，无需重命名
+
+===== 重命名完成 =====
+[INFO] 总文件夹数: 1
+[INFO] 成功重命名: 0
+[INFO] 跳过重命名: 1
+[INFO] 重命名失败: 0
+[NOTE] 开始重命名备份文件夹...
+
+===== 开始重命名 Chinese 下的模组文件夹 =====
+[INFO] 共收集到 4 个模组文件夹信息，按 2 个mod_id分组
+[INFO] 文件夹 Aptly Simple Hullmods 2.1.2c 名称已正确，无需重命名
+[INFO] 文件夹 Second-in-Command 1.7.0 名称已正确，无需重命名
+
+===== 重命名完成 =====
+[INFO] 总文件夹数: 4
+[INFO] 成功重命名: 0
+[INFO] 跳过重命名: 2
+[INFO] 重命名失败: 0
+[NOTE] 开始恢复备份...
+
+===== 清理并从备份恢复文件夹 =====
+
+===== 收集 File 下的mod文件夹信息 =====
+[INFO] 收集到mod: Second-in-Command 舰队副官 1.7.0 (id: second_in_command, language: Chinese)
+[INFO] 共收集到 1 个mod_id，对应 1 个文件夹
+[LIST] 收集到目标文件夹 1 个mod_id
+
+===== 收集 File_backup 下的mod文件夹信息 =====
+[INFO] 收集到mod: Aptly Simple Hullmods 2.1.2c (id: aptlysimplehullmods, language: Chinese)
+[INFO] 收集到mod: Second-in-Command 1.7.0 (id: second_in_command, language: Chinese)
+[INFO] 收集到mod: Aptly Simple Hullmods 2.1.2c (id: aptlysimplehullmods, language: English)
+[INFO] 收集到mod: Second-in-Command 1.7.0 (id: second_in_command, language: English)
+[INFO] 共收集到 2 个mod_id，对应 4 个文件夹
+[LIST] 收集到备份文件夹 2 个mod_id
+[LINK] 匹配到mod_id: second_in_command
+   目标文件夹: Second-in-Command 舰队副官 1.7.0 (语言: Chinese)
+   备份文件夹: Second-in-Command 1.7.0 (语言: Chinese)
+OK 删除原有D:\Poki\Tool\project\Extract\File\Chinese\Second-in-Command 舰队副官 1.7.0\src文件夹
+OK 恢复D:\Poki\Tool\project\Extract\File_backup\Chinese\Second-in-Command 1.7.0\src文件夹 -> D:\Poki\Tool\project\Extract\File\Chinese\Second-in-Command 舰队副官 1.7.0\src
+[SEARCH] 找到 1 个src文件夹，将使用第一个进行提取：D:\Poki\Tool\project\Extract\File\Chinese\Second-in-Command 舰队副官 1.7.0\src
+[INFO] 使用模组文件夹作为提取源：D:\Poki\Tool\project\Extract\File\Chinese\Second-in-Command 舰队副官 1.7.0
+[OK] 验证通过：src文件夹包含中文内容
+[WARN]  读取mod_info.json失败: D:\Poki\Tool\project\Extract\File\Chinese\Second-in-Command 舰队副官 1.7.0\mod_info.json - Expecting property name enclosed in double quotes: line 2 column 31 (char 32)
+  尝试获取Java语言对象...
+  语言对象类型: <class 'PyCapsule'>
+  成功转换为Language对象
+  尝试获取Kotlin语言对象...
+  语言对象类型: <class 'PyCapsule'>
+  成功转换为Language对象
+[OK] 成功加载Java和Kotlin语言解析器
+[OK] 成功保存YAML映射到: D:\Poki\Tool\project\Extract\Strings\Chinese\Second-in-Command 舰队副官 1.7.0_unknown_Extract_20251213_011514_Chinese_strings\Chinese_mappings.yaml
+OK Chinese提取完成，共处理 1222 个文件
+[OK] 报告保存成功: D:\Poki\Tool\project\Extract\Report\extract_20251213_011514_report.json
+
+执行结果：
+状态：success
+总数量：1222
+成功数量：1222
+失败数量：0
+
+错误信息:
+------------------------------
+2025-12-13 01:15:14,462 - localization_tool - INFO - ==========================================
+2025-12-13 01:15:14,462 - localization_tool - INFO -              本地化工具
+2025-12-13 01:15:14,462 - localization_tool - INFO - ==========================================
+2025-12-13 01:15:14,462 - localization_tool - INFO - 工具启动，开始解析命令行参数
+2025-12-13 01:15:14,462 - localization_tool - INFO - 检查项目结构...
+2025-12-13 01:15:14,462 - localization_tool - INFO - 项目结构检查完成
+2025-12-13 01:15:14,463 - localization_tool - INFO - 测试模式已启用，输入序列：1,2,1
+2025-12-13 01:15:14,463 - localization_tool - INFO - 命令行参数解析完成：mode=None, sub_flow=None
+2025-12-13 01:15:14,463 - localization_tool - INFO - 工具基础路径：D:\Poki\Tool
+2025-12-13 01:15:14,463 - localization_tool - INFO - 未指定模式，显示主菜单
+2025-12-13 01:15:14,463 - localization_tool - INFO - 用户选择主模式：1
+2025-12-13 01:15:14,463 - localization_tool - INFO - 用户选择Extract子流程：中文提取流程
+2025-12-13 01:15:15,297 - localization_tool - INFO - 流程执行完成，结果：status=success, total=1222, success=1222, fail=0
+2025-12-13 01:15:15,297 - localization_tool - INFO - ==========================================
+2025-12-13 01:15:15,297 - localization_tool - INFO -              工具执行结束
+2025-12-13 01:15:15,297 - localization_tool - INFO - ==========================================
+
+
+==================================================
+
+测试用例 3: Extract模式 - 完整模式 - 没有英文src
+输入序列: ['1', '2', '2']
+退出码: 0
+结果: 失败
+输出:
+------------------------------
+[OK] Tree-sitter库导入成功
+[OK] tree_sitter_java库导入成功
+[OK] tree_sitter_kotlin库导入成功
+[INFO] 加载语言资源: zh
+[OK] Tree-sitter库导入成功
+[OK] tree_sitter_java库导入成功
+[OK] tree_sitter_kotlin库导入成功
+[INFO] 加载语言资源: zh
+==========================================
+             本地化工具
+==========================================
+请选择本地化模式：
+1. Extract模式(仅提取字符串，默认简洁模式)
+2. Extend模式(执行映射流程，默认简洁模式)
+3. 高级模式(自定义提取/映射，可配置粒度/主体)
+==========================================
+输入数字(1/2/3，直接回车默认选1)：1
+
+==========================================
+        Extract模式 - 简洁模式(自动检测)
+==========================================
+请选择提取语言：
+1. 提取英文(优先检测src/无则反编译未汉化jar)
+2. 提取中文(优先检测src/无则反编译已汉化jar)
+==========================================
+输入数字(1/2，直接回车默认选1)：2
+
+执行配置：
+模式：Extract
+流程：中文提取流程
+==========================================
+[NOTE] 开始重命名模组文件夹...
+
+===== 开始重命名 Chinese 下的模组文件夹 =====
+[INFO] 共收集到 0 个模组文件夹信息，按 0 个mod_id分组
+[INFO] 未在 D:\Poki\Tool\project\Extract\File\Chinese 下找到需要重命名的模组文件夹
+[NOTE] 开始重命名备份文件夹...
+
+===== 开始重命名 Chinese 下的模组文件夹 =====
+[INFO] 共收集到 4 个模组文件夹信息，按 2 个mod_id分组
+[INFO] 文件夹 Aptly Simple Hullmods 2.1.2c 名称已正确，无需重命名
+[INFO] 文件夹 Second-in-Command 1.7.0 名称已正确，无需重命名
+
+===== 重命名完成 =====
+[INFO] 总文件夹数: 4
+[INFO] 成功重命名: 0
+[INFO] 跳过重命名: 2
+[INFO] 重命名失败: 0
+[NOTE] 开始恢复备份...
+
+===== 清理并从备份恢复文件夹 =====
+
+===== 收集 File 下的mod文件夹信息 =====
+[INFO] 共收集到 0 个mod_id，对应 0 个文件夹
+[LIST] 收集到目标文件夹 0 个mod_id
+
+===== 收集 File_backup 下的mod文件夹信息 =====
+[INFO] 收集到mod: Aptly Simple Hullmods 2.1.2c (id: aptlysimplehullmods, language: Chinese)
+[INFO] 收集到mod: Second-in-Command 1.7.0 (id: second_in_command, language: Chinese)
+[INFO] 收集到mod: Aptly Simple Hullmods 2.1.2c (id: aptlysimplehullmods, language: English)
+[INFO] 收集到mod: Second-in-Command 1.7.0 (id: second_in_command, language: English)
+[INFO] 共收集到 2 个mod_id，对应 4 个文件夹
+[LIST] 收集到备份文件夹 2 个mod_id
+[PROCESS] 开始处理JAR文件...
+[OK] 报告保存成功: D:\Poki\Tool\project\Extract\Report\extract_20251213_011516_report.json
+
+执行结果：
+状态：fail
+总数量：0
+成功数量：0
+失败数量：1
+失败原因：
+  - 未找到src文件夹或JAR文件
+
+错误信息:
+------------------------------
+2025-12-13 01:15:16,022 - localization_tool - INFO - ==========================================
+2025-12-13 01:15:16,022 - localization_tool - INFO -              本地化工具
+2025-12-13 01:15:16,023 - localization_tool - INFO - ==========================================
+2025-12-13 01:15:16,023 - localization_tool - INFO - 工具启动，开始解析命令行参数
+2025-12-13 01:15:16,023 - localization_tool - INFO - 检查项目结构...
+2025-12-13 01:15:16,023 - localization_tool - INFO - 项目结构检查完成
+2025-12-13 01:15:16,024 - localization_tool - INFO - 测试模式已启用，输入序列：1,2,2
+2025-12-13 01:15:16,024 - localization_tool - INFO - 命令行参数解析完成：mode=None, sub_flow=None
+2025-12-13 01:15:16,024 - localization_tool - INFO - 工具基础路径：D:\Poki\Tool
+2025-12-13 01:15:16,024 - localization_tool - INFO - 未指定模式，显示主菜单
+2025-12-13 01:15:16,024 - localization_tool - INFO - 用户选择主模式：1
+2025-12-13 01:15:16,024 - localization_tool - INFO - 用户选择Extract子流程：中文提取流程
+2025-12-13 01:15:16,045 - localization_tool - INFO - 流程执行完成，结果：status=fail, total=0, success=0, fail=1
+2025-12-13 01:15:16,045 - localization_tool - WARNING - 执行失败项：['未找到src文件夹或JAR文件']
+2025-12-13 01:15:16,045 - localization_tool - INFO - ==========================================
+2025-12-13 01:15:16,045 - localization_tool - INFO -              工具执行结束
+2025-12-13 01:15:16,045 - localization_tool - INFO - ==========================================
+
+
+==================================================
+
+测试用例 4: Extract模式 - 完整模式 - 已有中文src
+输入序列: ['1', '2', '3']
+退出码: 0
+结果: 失败
+输出:
+------------------------------
+[OK] Tree-sitter库导入成功
+[OK] tree_sitter_java库导入成功
+[OK] tree_sitter_kotlin库导入成功
+[INFO] 加载语言资源: zh
+[OK] Tree-sitter库导入成功
+[OK] tree_sitter_java库导入成功
+[OK] tree_sitter_kotlin库导入成功
+[INFO] 加载语言资源: zh
+==========================================
+             本地化工具
+==========================================
+请选择本地化模式：
+1. Extract模式(仅提取字符串，默认简洁模式)
+2. Extend模式(执行映射流程，默认简洁模式)
+3. 高级模式(自定义提取/映射，可配置粒度/主体)
+==========================================
+输入数字(1/2/3，直接回车默认选1)：1
+
+==========================================
+        Extract模式 - 简洁模式(自动检测)
+==========================================
+请选择提取语言：
+1. 提取英文(优先检测src/无则反编译未汉化jar)
+2. 提取中文(优先检测src/无则反编译已汉化jar)
+==========================================
+输入数字(1/2，直接回车默认选1)：2
+
+执行配置：
+模式：Extract
+流程：中文提取流程
+==========================================
+[NOTE] 开始重命名模组文件夹...
+
+===== 开始重命名 Chinese 下的模组文件夹 =====
+[INFO] 共收集到 0 个模组文件夹信息，按 0 个mod_id分组
+[INFO] 未在 D:\Poki\Tool\project\Extract\File\Chinese 下找到需要重命名的模组文件夹
+[NOTE] 开始重命名备份文件夹...
+
+===== 开始重命名 Chinese 下的模组文件夹 =====
+[INFO] 共收集到 4 个模组文件夹信息，按 2 个mod_id分组
+[INFO] 文件夹 Aptly Simple Hullmods 2.1.2c 名称已正确，无需重命名
+[INFO] 文件夹 Second-in-Command 1.7.0 名称已正确，无需重命名
+
+===== 重命名完成 =====
+[INFO] 总文件夹数: 4
+[INFO] 成功重命名: 0
+[INFO] 跳过重命名: 2
+[INFO] 重命名失败: 0
+[NOTE] 开始恢复备份...
+
+===== 清理并从备份恢复文件夹 =====
+
+===== 收集 File 下的mod文件夹信息 =====
+[INFO] 共收集到 0 个mod_id，对应 0 个文件夹
+[LIST] 收集到目标文件夹 0 个mod_id
+
+===== 收集 File_backup 下的mod文件夹信息 =====
+[INFO] 收集到mod: Aptly Simple Hullmods 2.1.2c (id: aptlysimplehullmods, language: Chinese)
+[INFO] 收集到mod: Second-in-Command 1.7.0 (id: second_in_command, language: Chinese)
+[INFO] 收集到mod: Aptly Simple Hullmods 2.1.2c (id: aptlysimplehullmods, language: English)
+[INFO] 收集到mod: Second-in-Command 1.7.0 (id: second_in_command, language: English)
+[INFO] 共收集到 2 个mod_id，对应 4 个文件夹
+[LIST] 收集到备份文件夹 2 个mod_id
+[PROCESS] 开始处理JAR文件...
+[OK] 报告保存成功: D:\Poki\Tool\project\Extract\Report\extract_20251213_011516_report.json
+
+执行结果：
+状态：fail
+总数量：0
+成功数量：0
+失败数量：1
+失败原因：
+  - 未找到src文件夹或JAR文件
+
+错误信息:
+------------------------------
+2025-12-13 01:15:16,760 - localization_tool - INFO - ==========================================
+2025-12-13 01:15:16,760 - localization_tool - INFO -              本地化工具
+2025-12-13 01:15:16,760 - localization_tool - INFO - ==========================================
+2025-12-13 01:15:16,760 - localization_tool - INFO - 工具启动，开始解析命令行参数
+2025-12-13 01:15:16,760 - localization_tool - INFO - 检查项目结构...
+2025-12-13 01:15:16,760 - localization_tool - INFO - 项目结构检查完成
+2025-12-13 01:15:16,761 - localization_tool - INFO - 测试模式已启用，输入序列：1,2,3
+2025-12-13 01:15:16,761 - localization_tool - INFO - 命令行参数解析完成：mode=None, sub_flow=None
+2025-12-13 01:15:16,761 - localization_tool - INFO - 工具基础路径：D:\Poki\Tool
+2025-12-13 01:15:16,761 - localization_tool - INFO - 未指定模式，显示主菜单
+2025-12-13 01:15:16,761 - localization_tool - INFO - 用户选择主模式：1
+2025-12-13 01:15:16,761 - localization_tool - INFO - 用户选择Extract子流程：中文提取流程
+2025-12-13 01:15:16,782 - localization_tool - INFO - 流程执行完成，结果：status=fail, total=0, success=0, fail=1
+2025-12-13 01:15:16,782 - localization_tool - WARNING - 执行失败项：['未找到src文件夹或JAR文件']
+2025-12-13 01:15:16,782 - localization_tool - INFO - ==========================================
+2025-12-13 01:15:16,782 - localization_tool - INFO -              工具执行结束
+2025-12-13 01:15:16,782 - localization_tool - INFO - ==========================================
+
+
+==================================================
+
+测试用例 5: Extend模式 - 简洁模式 - 中文映射到英文
+输入序列: ['2', '1', '1']
+退出码: 0
+结果: 失败
+输出:
+------------------------------
+[OK] Tree-sitter库导入成功
+[OK] tree_sitter_java库导入成功
+[OK] tree_sitter_kotlin库导入成功
+[INFO] 加载语言资源: zh
+[OK] Tree-sitter库导入成功
+[OK] tree_sitter_java库导入成功
+[OK] tree_sitter_kotlin库导入成功
+[INFO] 加载语言资源: zh
+==========================================
+             本地化工具
+==========================================
+请选择本地化模式：
+1. Extract模式(仅提取字符串，默认简洁模式)
+2. Extend模式(执行映射流程，默认简洁模式)
+3. 高级模式(自定义提取/映射，可配置粒度/主体)
+==========================================
+输入数字(1/2/3，直接回车默认选1)：2
+
+==========================================
+            Extend模式 - 简洁模式
+==========================================
+请选择映射方向：
+1. 中文映射到英文(优先检测映射规则/无则自动检测src/jar)
+2. 英文映射到中文(优先检测映射规则/无则自动检测src/jar)
+==========================================
+输入数字(1/2，直接回车默认选1)：1
+
+==========================================
+        Extend模式 - [中文→英文] 简洁模式
+==========================================
+正在执行：优先检测映射规则文件夹→检测src文件夹→无则反编译jar
+流程步骤：创建文件夹→重命名模组→恢复备份→字符串映射...
+
+执行配置：
+模式：Extend
+流程：已有中文src文件夹映射流程
+==========================================
+[NOTE] 开始重命名模组文件夹...
+
+===== 开始重命名 Chinese 下的模组文件夹 =====
+[INFO] 共收集到 4 个模组文件夹信息，按 2 个mod_id分组
+[INFO] 文件夹 Aptly Simple Hullmods 2.1.2c 名称已正确，无需重命名
+[INFO] 文件夹 Second-in-Command 1.7.0 名称已正确，无需重命名
+
+===== 重命名完成 =====
+[INFO] 总文件夹数: 4
+[INFO] 成功重命名: 0
+[INFO] 跳过重命名: 2
+[INFO] 重命名失败: 0
+
+===== 开始重命名 English 下的模组文件夹 =====
+[INFO] 共收集到 4 个模组文件夹信息，按 2 个mod_id分组
+[INFO] 文件夹 Aptly Simple Hullmods 2.1.2c 名称已正确，无需重命名
+[INFO] 文件夹 Second-in-Command 1.7.0 名称已正确，无需重命名
+
+===== 重命名完成 =====
+[INFO] 总文件夹数: 4
+[INFO] 成功重命名: 0
+[INFO] 跳过重命名: 2
+[INFO] 重命名失败: 0
+[NOTE] 开始重命名备份文件夹...
+
+===== 开始重命名 Chinese 下的模组文件夹 =====
+[INFO] 共收集到 4 个模组文件夹信息，按 2 个mod_id分组
+[INFO] 文件夹 Aptly Simple Hullmods 2.1.2c 名称已正确，无需重命名
+[INFO] 文件夹 Second-in-Command 1.7.0 名称已正确，无需重命名
+
+===== 重命名完成 =====
+[INFO] 总文件夹数: 4
+[INFO] 成功重命名: 0
+[INFO] 跳过重命名: 2
+[INFO] 重命名失败: 0
+
+===== 开始重命名 English 下的模组文件夹 =====
+[INFO] 共收集到 4 个模组文件夹信息，按 2 个mod_id分组
+[INFO] 文件夹 Aptly Simple Hullmods 2.1.2c 名称已正确，无需重命名
+[INFO] 文件夹 Second-in-Command 1.7.0 名称已正确，无需重命名
+
+===== 重命名完成 =====
+[INFO] 总文件夹数: 4
+[INFO] 成功重命名: 0
+[INFO] 跳过重命名: 2
+[INFO] 重命名失败: 0
+[NOTE] 开始恢复备份...
+
+===== 清理并从备份恢复文件夹 =====
+
+===== 收集 File 下的mod文件夹信息 =====
+[INFO] 收集到mod: Aptly Simple Hullmods 2.1.2c (id: aptlysimplehullmods, language: Chinese)
+[INFO] 收集到mod: Second-in-Command 1.7.0 (id: second_in_command, language: Chinese)
+[INFO] 收集到mod: Aptly Simple Hullmods 2.1.2c (id: aptlysimplehullmods, language: English)
+[INFO] 收集到mod: Second-in-Command 1.7.0 (id: second_in_command, language: English)
+[INFO] 共收集到 2 个mod_id，对应 4 个文件夹
+[LIST] 收集到目标文件夹 2 个mod_id
+
+===== 收集 File_backup 下的mod文件夹信息 =====
+[INFO] 收集到mod: Aptly Simple Hullmods 2.1.2c (id: aptlysimplehullmods, language: Chinese)
+[INFO] 收集到mod: Second-in-Command 1.7.0 (id: second_in_command, language: Chinese)
+[INFO] 收集到mod: Aptly Simple Hullmods 2.1.2c (id: aptlysimplehullmods, language: English)
+[INFO] 收集到mod: Second-in-Command 1.7.0 (id: second_in_command, language: English)
+[INFO] 共收集到 2 个mod_id，对应 4 个文件夹
+[LIST] 收集到备份文件夹 2 个mod_id
+[LINK] 匹配到mod_id: aptlysimplehullmods
+   目标文件夹: Aptly Simple Hullmods 2.1.2c (语言: Chinese)
+   备份文件夹: Aptly Simple Hullmods 2.1.2c (语言: Chinese)
+OK 删除原有D:\Poki\Tool\project\Extend\File\Chinese\Aptly Simple Hullmods 2.1.2c\src文件夹
+OK 恢复D:\Poki\Tool\project\Extend\File_backup\Chinese\Aptly Simple Hullmods 2.1.2c\src文件夹 -> D:\Poki\Tool\project\Extend\File\Chinese\Aptly Simple Hullmods 2.1.2c\src
+[LINK] 匹配到mod_id: aptlysimplehullmods
+   目标文件夹: Aptly Simple Hullmods 2.1.2c (语言: English)
+   备份文件夹: Aptly Simple Hullmods 2.1.2c (语言: English)
+OK 删除原有D:\Poki\Tool\project\Extend\File\English\Aptly Simple Hullmods 2.1.2c\src文件夹
+OK 恢复D:\Poki\Tool\project\Extend\File_backup\English\Aptly Simple Hullmods 2.1.2c\src文件夹 -> D:\Poki\Tool\project\Extend\File\English\Aptly Simple Hullmods 2.1.2c\src
+[LINK] 匹配到mod_id: second_in_command
+   目标文件夹: Second-in-Command 1.7.0 (语言: Chinese)
+   备份文件夹: Second-in-Command 1.7.0 (语言: Chinese)
+OK 删除原有D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src文件夹
+OK 恢复D:\Poki\Tool\project\Extend\File_backup\Chinese\Second-in-Command 1.7.0\src文件夹 -> D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src
+[LINK] 匹配到mod_id: second_in_command
+   目标文件夹: Second-in-Command 1.7.0 (语言: English)
+   备份文件夹: Second-in-Command 1.7.0 (语言: English)
+OK 删除原有D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src文件夹
+OK 恢复D:\Poki\Tool\project\Extend\File_backup\English\Second-in-Command 1.7.0\src文件夹 -> D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src
+[DIR] 映射规则文件路径: D:\Poki\Tool\project\Extend\Strings\Chinese
+[LIST] 加载映射规则：共 0 条规则
+[LIST] 发现中文mod: Aptly Simple Hullmods 2.1.2c (id: aptlysimplehullmods, version: 2.1.2c)
+[LIST] 发现中文mod: Second-in-Command 1.7.0 (id: second_in_command, version: 1.7.0)
+[LIST] 发现英文mod: Aptly Simple Hullmods 2.1.2c (id: aptlysimplehullmods, version: 2.1.2c)
+[LIST] 发现英文mod: Second-in-Command 1.7.0 (id: second_in_command, version: 1.7.0)
+[LINK] 建立映射关系: Aptly Simple Hullmods 2.1.2c -> Aptly Simple Hullmods 2.1.2c (id: aptlysimplehullmods)
+   版本信息: 中文 2.1.2c -> 英文 2.1.2c
+[LINK] 建立映射关系: Second-in-Command 1.7.0 -> Second-in-Command 1.7.0 (id: second_in_command)
+   版本信息: 中文 1.7.0 -> 英文 1.7.0
+
+[NOTE] 处理mod: Aptly Simple Hullmods 2.1.2c
+----------------------------------
+[WARN]  src文件夹不包含中文，跳过映射
+
+[NOTE] 处理mod: Second-in-Command 1.7.0
+----------------------------------
+[LIST] 使用src文件夹进行映射(包含中文)
+[LIST] 开始对 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src 执行字符串映射
+  尝试获取Java语言对象...
+  语言对象类型: <class 'PyCapsule'>
+  成功转换为Language对象
+  尝试获取Kotlin语言对象...
+  语言对象类型: <class 'PyCapsule'>
+  成功转换为Language对象
+[OK] 成功加载Java和Kotlin语言解析器
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\data\scripts\plugins\LevelupPluginImpl.java 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\data\scripts\plugins\LevelupPluginImpl.java 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\data\scripts\plugins\LevelupPluginImpl.java
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\Runcodes.java 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\Runcodes.java 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\Runcodes.java
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\SCCampaignEventListener.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\SCCampaignEventListener.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\SCCampaignPlugin.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\SCCampaignPlugin.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\SCCampaignPlugin.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\SCData.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\SCData.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\SCData.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\SCModPlugin.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\SCModPlugin.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\SCSectorData.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\SCSectorData.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\SCSectorData.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\SCUtils.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\SCUtils.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\hullmods\InactiveSmodsHullmod.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\hullmods\InactiveSmodsHullmod.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\hullmods\SCControllerHullmod.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\hullmods\SCControllerHullmod.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\interactions\ExecutiveOfficerRescueSpecial.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\interactions\ExecutiveOfficerRescueSpecial.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\SCAddOfficersToFleetInteraction.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\SCAddOfficersToFleetInteraction.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\SCCheckForEncounterTag.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\SCCheckForEncounterTag.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\SCCheckForEncounterTag.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\SCIsFleetInteraction.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\SCIsFleetInteraction.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\SCIsFleetInteraction.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\SCOfficerHireDialog.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\SCOfficerHireDialog.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\SCStartBarEventDialog.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\SCStartBarEventDialog.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\SCStoreSkillpoints.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\SCStoreSkillpoints.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\ShouldShowSiCBarEvent.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\ShouldShowSiCBarEvent.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\ShouldShowSiCBarEvent.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\AutomatedShipsReplacementLevel1.java 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\AutomatedShipsReplacementLevel1.java 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\AutomatedShipsReplacementLevel1.java
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\AutomatedShipsReplacementLevel2.java 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\AutomatedShipsReplacementLevel2.java 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\AutomatedShipsReplacementLevel2.java
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\CombatEnduranceDescFix.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\CombatEnduranceDescFix.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\DerelictOperationsReplacementLevel1.java 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\DerelictOperationsReplacementLevel1.java 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\DerelictOperationsReplacementLevel1.java
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\EnergyWeaponMasteryDescFix.java 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\EnergyWeaponMasteryDescFix.java
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\NPCFleetInflater.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\NPCFleetInflater.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\NPCFleetInflater.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\NPCOfficerGenerator.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\NPCOfficerGenerator.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\ReflectionUtils.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\ReflectionUtils.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\SCExtensions.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\SCExtensions.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\SCExtensions.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\SCSettings.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\SCSettings.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\SpecialEventHandler.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\SpecialEventHandler.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\UIExtensions.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\UIExtensions.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\UIExtensions.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\VanillaSkillsUtil.java 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\VanillaSkillsUtil.java
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\VanillaSkillTooltip.java 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\VanillaSkillTooltip.java
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\VanillaSkillTooltipForVanillaSection.java 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\VanillaSkillTooltipForVanillaSection.java
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\backgrounds\AssociatesBackground.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\backgrounds\AssociatesBackground.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\codex\CodexHandler.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\codex\CodexHandler.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\commands\AddExecutiveCommand.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\commands\AddExecutiveCommand.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\commands\LevelExecutiveCommand.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\commands\LevelExecutiveCommand.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\commands\ListAptitudesCommand.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\commands\ListAptitudesCommand.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\snippets\AddAllOfficersSnippet.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\snippets\AddAllOfficersSnippet.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\snippets\AddXPToOfficersSnippet.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\snippets\AddXPToOfficersSnippet.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\AutomatedShipsManager.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\scripts\AutomatedShipsManager.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\CombatHandler.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\CombatHandler.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\scripts\CombatHandler.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\CommDirectoryRecolorScript.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\scripts\CommDirectoryRecolorScript.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\ControllerHullmodAdderScript.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\ControllerHullmodAdderScript.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\scripts\ControllerHullmodAdderScript.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\ExecutiveOfficerCommAdder.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\scripts\ExecutiveOfficerCommAdder.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\ExecutiveOfficerSalvageSpecialGenerator.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\ExecutiveOfficerSalvageSpecialGenerator.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\scripts\ExecutiveOfficerSalvageSpecialGenerator.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\SCCRPluginImpl.java 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\scripts\SCCRPluginImpl.java
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\SCNeuralJunctionScript.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\SCNeuralJunctionScript.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\scripts\SCNeuralJunctionScript.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\SCXPTracker.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\SCXPTracker.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\scripts\SCXPTracker.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\SectorSeedAdderScript.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\SectorSeedAdderScript.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\scripts\SectorSeedAdderScript.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\SkillPanelReplacerScript.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\SkillPanelReplacerScript.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\scripts\SkillPanelReplacerScript.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\VanillaSkillsDisabler.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\VanillaSkillsDisabler.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\scripts\VanillaSkillsDisabler.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\PlayerLevelEffects.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\PlayerLevelEffects.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\AptitudeAutomated.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\automated\AptitudeAutomated.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\AutomatedShips.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\automated\AutomatedShips.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\AutonomousExpertise.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\AutonomousExpertise.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\automated\AutonomousExpertise.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\DeadlyPersistence.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\automated\DeadlyPersistence.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\ElectronicWarfare.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\automated\ElectronicWarfare.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\FinalGambit.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\automated\FinalGambit.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\LimitBreaker.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\automated\LimitBreaker.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\MagneticShielding.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\automated\MagneticShielding.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\NeuralJunction.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\automated\NeuralJunction.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\Overclock.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\automated\Overclock.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\SCBaseAutoPointsSkillPlugin.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\automated\SCBaseAutoPointsSkillPlugin.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\SelfRepair.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\automated\SelfRepair.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\SpecialisedEquipment.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\SpecialisedEquipment.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\automated\SpecialisedEquipment.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\WideRangeTransmission.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\automated\WideRangeTransmission.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\scripts\FinalGambitActivator.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\automated\scripts\FinalGambitActivator.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\AptitudeEngineering.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\AptitudeEngineering.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\CompactStorage.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\CompactStorage.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\CoolingSystems.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\CoolingSystems.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\FuelOptimisation.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\FuelOptimisation.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\PrepareForTheWorst.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\PrepareForTheWorst.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\ReliableEngineering.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\ReliableEngineering.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\Resiliency.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\Resiliency.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\SalvagingEquipment.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\SalvagingEquipment.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\ShockAbsorption.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\ShockAbsorption.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\SolidConstruction.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\SolidConstruction.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\StealthCoating.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\StealthCoating.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\scripts\CompactStorageScript.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\scripts\CompactStorageScript.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\scripts\CompactStorageScript.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\scripts\SolidConstructionScript.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\scripts\SolidConstructionScript.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\scripts\SolidConstructionScript.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\example\ExampleAptitude.java 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\example\ExampleAptitude.java 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\example\ExampleAptitude.java
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\example\ExampleSkill.java 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\example\ExampleSkill.java
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\AptitudeImprovisation.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\AptitudeImprovisation.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\DefensiveConfiguration.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\DefensiveConfiguration.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\DerelictFortifications.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\DerelictFortifications.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\DerelictOperations.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\DerelictOperations.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\EnhancedOverrides.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\EnhancedOverrides.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\Mobilization.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\Mobilization.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\Preservation.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\Preservation.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\Redistribution.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\Redistribution.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\SalvagedArmor.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\SalvagedArmor.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\ScrappyMaintenance.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\ScrappyMaintenance.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\SecuredMounts.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\SecuredMounts.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\management\AptitudeManagement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\management\AptitudeManagement.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\management\Authority.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\management\Authority.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\management\BestOfTheBest.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\management\BestOfTheBest.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\management\CommandAndConquer.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\management\CommandAndConquer.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\management\CrewTraining.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\management\CrewTraining.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\management\InGoodHands.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\management\InGoodHands.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\management\OfficerManagement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\management\OfficerManagement.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\management\OfficerTraining.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\management\OfficerTraining.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\management\ReEntry.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\management\ReEntry.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\management\TopCondition.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\management\TopCondition.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\management\WellOrganized.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\management\WellOrganized.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\misc\InactiveSkill.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\misc\InactiveSkill.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\misc\SCBaseVanillaShipSkill.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\misc\SCBaseVanillaShipSkill.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\misc\SCBaseVanillaShipSkill.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\misc\SCPlaceholderShipSkill.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\misc\SCPlaceholderShipSkill.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\misc\SCPlaceholderShipSkill.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\misc\UtilitySkill.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\misc\UtilitySkill.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\AllOut.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\AllOut.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\Ambush.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\Ambush.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\AptitudePiracy.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\AptitudePiracy.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\BountyBoard.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\BountyBoard.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\GenerousDonation.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\GenerousDonation.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\HuntingGrounds.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\HuntingGrounds.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\ImprovisedRaids.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\ImprovisedRaids.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\LegitimateSalvage.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\LegitimateSalvage.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\LowgradeDeployment.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\LowgradeDeployment.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\Outmanoeuvred.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\Outmanoeuvred.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\ProvisionalReplacements.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\ProvisionalReplacements.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\Steadfast.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\Steadfast.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\Stockpile.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\Stockpile.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\AptitudeSmallcraft.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\AptitudeSmallcraft.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\CoordinatedManeuvers.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\CoordinatedManeuvers.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\Jumpstart.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\Jumpstart.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\LeaderOfThePack.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\LeaderOfThePack.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\LowProfile.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\LowProfile.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\QuickAsTheWind.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\QuickAsTheWind.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\SafeRecovery.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\SafeRecovery.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\SupportDoctrine.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\SupportDoctrine.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\TogetherAsOne.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\TogetherAsOne.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\TrappedPrey.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\TrappedPrey.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\WolfpackTactics.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\WolfpackTactics.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\special\christmas\AptitudeChristmas.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\special\christmas\AptitudeChristmas.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\special\christmas\AptitudeChristmas.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\special\christmas\ChristmasSpirit.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\special\christmas\ChristmasSpirit.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\AdAstra.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\AdAstra.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\AptitudeStarfaring.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\AptitudeStarfaring.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\BulkTransport.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\BulkTransport.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\ContinuousRepairs.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\ContinuousRepairs.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\EmergencyOrder.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\EmergencyOrder.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\Expedition.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\Expedition.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\MakeshiftEquipment.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\MakeshiftEquipment.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\Navigation.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\Navigation.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\ReactiveBurn.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\ReactiveBurn.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\RecoveryEfforts.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\RecoveryEfforts.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\Salvaging.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\Salvaging.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\Starmapping.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\Starmapping.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\abilities\SensorBurstOverride.java 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\abilities\SensorBurstOverride.java
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\abilities\SustainedBurnOverride.java 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\abilities\SustainedBurnOverride.java
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\AdvancedManeuvers.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\AdvancedManeuvers.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\AptitudeStrikecraft.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\AptitudeStrikecraft.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\Barrage.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\Barrage.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\CarrierGroup.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\CarrierGroup.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\DistancedSupport.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\DistancedSupport.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\FighterUplink.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\FighterUplink.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\Huntsman.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\Huntsman.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\MobileDefenses.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\MobileDefenses.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\Reconfiguration.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\Reconfiguration.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\SwarmDeployment.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\SwarmDeployment.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\Synchronised.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\Synchronised.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\SystemProficiency.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\SystemProficiency.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\scripts\SynchronisedSkillScript.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\scripts\SynchronisedSkillScript.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\scripts\SynchronisedSkillScript.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\scripts\TemporarySlowdown.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\scripts\TemporarySlowdown.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\scripts\TemporarySlowdown.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\synchronised\scripts\SynchronisedScript.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\synchronised\scripts\SynchronisedScript.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\synchronised\scripts\SynchronisedScript.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\AcceleratedBarrels.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\AcceleratedBarrels.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\AptitudeTactical.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\AptitudeTactical.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\DefensiveProtocols.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\DefensiveProtocols.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\EfficientOrdnance.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\EfficientOrdnance.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\FocusedFire.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\FocusedFire.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\FullThrottle.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\FullThrottle.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\MassBombardment.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\MassBombardment.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\PristineCondition.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\PristineCondition.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\RapidResponse.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\RapidResponse.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\Spotters.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\Spotters.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\Superiority.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\Superiority.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\TacticalDrills.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\TacticalDrills.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\technology\AdvancedWeaponry.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\technology\AdvancedWeaponry.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\technology\AptitudeTechnology.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\technology\AptitudeTechnology.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\technology\Countermeasures.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\technology\Countermeasures.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\technology\DeepDive.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\technology\DeepDive.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\technology\Energised.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\technology\Energised.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\technology\FluxRegulation.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\technology\FluxRegulation.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\technology\FocusedLenses.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\technology\FocusedLenses.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\technology\MakeshiftDrones.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\technology\MakeshiftDrones.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\technology\MakeshiftDrones.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\technology\NeuralLink.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\technology\NeuralLink.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\technology\OptimisedShields.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\technology\OptimisedShields.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\technology\PhaseCoilTuning.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\technology\PhaseCoilTuning.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\technology\ReinforcedGrid.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\technology\ReinforcedGrid.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\technology\UnlockedEngines.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\technology\UnlockedEngines.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\AptitudeWarfare.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\AptitudeWarfare.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\DeflectivePlating.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\DeflectivePlating.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\ImmovableObject.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\ImmovableObject.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\IronSight.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\IronSight.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\Overprepared.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\Overprepared.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\OverwhelmingForce.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\OverwhelmingForce.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\RedundantBays.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\RedundantBays.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\ReserveThrusters.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\ReserveThrusters.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\StablisedTargeting.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\StablisedTargeting.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\SurefireImpact.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\SurefireImpact.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\Tenacity.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\Tenacity.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\specs\SCAptitudeSection.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\specs\SCAptitudeSection.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\specs\SCAptitudeSection.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\specs\SCAptitudeSpec.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\specs\SCAptitudeSpec.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\specs\SCAptitudeSpec.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\specs\SCBaseAptitudePlugin.java 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\specs\SCBaseAptitudePlugin.java 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\specs\SCBaseAptitudePlugin.java
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\specs\SCBaseSkillPlugin.java 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\specs\SCBaseSkillPlugin.java 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\specs\SCBaseSkillPlugin.java
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\specs\SCCategorySpec.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\specs\SCCategorySpec.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\specs\SCCategorySpec.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\specs\SCOfficer.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\specs\SCOfficer.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\specs\SCSkillSpec.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\specs\SCSkillSpec.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\specs\SCSkillSpec.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\specs\SCSpecStore.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\specs\SCSpecStore.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\SCOfficerPickerMenuPanel.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\SCOfficerPickerMenuPanel.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\SCPlayerPanel.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\SCPlayerPanel.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\SCSkillMenuPanel.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\SCSkillMenuPanel.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\AptitudeBackgroundElement.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\AptitudeBackgroundElement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\AptitudeBackgroundElement.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\BackgroundlessTextfield.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\BackgroundlessTextfield.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\BackgroundlessTextfield.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\ClickableTextButton.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\ClickableTextButton.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\ClickableTextButton.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\CombatSkillWidgetElement.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\CombatSkillWidgetElement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\CombatSkillWidgetElement.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\ConfirmCancelButton.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\ConfirmCancelButton.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\ConfirmCancelButton.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\DialogAptitudeBackgroundElement.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\DialogAptitudeBackgroundElement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\DialogAptitudeBackgroundElement.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\FullDialogAptitudeBackgroundElement.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\FullDialogAptitudeBackgroundElement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\FullDialogAptitudeBackgroundElement.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\HelpIconElement.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\HelpIconElement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\HelpIconElement.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\OfficerXPBar.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\OfficerXPBar.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\OfficerXPBar.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\PlayerAptitudeBackgroundElement.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\PlayerAptitudeBackgroundElement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\PlayerAptitudeBackgroundElement.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\PlayerXPBarElement.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\PlayerXPBarElement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\PlayerXPBarElement.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SCOfficerPickerElement.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SCOfficerPickerElement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SCOfficerPickerElement.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SeedDisplayElement.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SeedDisplayElement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SeedDisplayElement.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SkillGapElement.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SkillGapElement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SkillGapElement.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SkillPointsBox.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SkillPointsBox.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SkillSeperatorElement.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SkillSeperatorElement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SkillSeperatorElement.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SkillUnderlineElement.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SkillUnderlineElement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SkillUnderlineElement.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SkillWidgetElement.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SkillWidgetElement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SkillWidgetElement.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\StoryPointsBox.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\StoryPointsBox.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\VanillaAptitudeBackgroundElement.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\VanillaAptitudeBackgroundElement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\VanillaAptitudeBackgroundElement.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\VanillaAptitudeSkillWidgetElement.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\VanillaAptitudeSkillWidgetElement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\VanillaAptitudeSkillWidgetElement.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\intel\SectorSeedIntel.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\intel\SectorSeedIntel.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\panels\AssosciatesManagePanelPlugin.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\panels\AssosciatesManagePanelPlugin.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\panels\AssosciatesManagePanelPlugin.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\panels\BackgroundPanelPlugin.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\panels\BackgroundPanelPlugin.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\panels\BackgroundPanelPlugin.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\panels\ManagePanelPlugin.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\panels\ManagePanelPlugin.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\panels\ManagePanelPlugin.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\sim\SiCSimPlugin.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\sim\SiCSimPlugin.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\tooltips\OfficerTooltipCreator.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\tooltips\OfficerTooltipCreator.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\tooltips\PlayerTooltipCreator.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\tooltips\PlayerTooltipCreator.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\tooltips\SCSkillTooltipCreator.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\tooltips\SCSkillTooltipCreator.kt
+[OK] 报告保存成功: D:\Poki\Tool\project\Extend\Report\extend_20251213_011517_report.json
+
+执行结果：
+状态：success
+总数量：2
+成功数量：2
+失败数量：0
+
+错误信息:
+------------------------------
+2025-12-13 01:15:17,414 - localization_tool - INFO - ==========================================
+2025-12-13 01:15:17,415 - localization_tool - INFO -              本地化工具
+2025-12-13 01:15:17,415 - localization_tool - INFO - ==========================================
+2025-12-13 01:15:17,415 - localization_tool - INFO - 工具启动，开始解析命令行参数
+2025-12-13 01:15:17,415 - localization_tool - INFO - 检查项目结构...
+2025-12-13 01:15:17,415 - localization_tool - INFO - 项目结构检查完成
+2025-12-13 01:15:17,417 - localization_tool - INFO - 测试模式已启用，输入序列：2,1,1
+2025-12-13 01:15:17,417 - localization_tool - INFO - 命令行参数解析完成：mode=None, sub_flow=None
+2025-12-13 01:15:17,417 - localization_tool - INFO - 工具基础路径：D:\Poki\Tool
+2025-12-13 01:15:17,417 - localization_tool - INFO - 未指定模式，显示主菜单
+2025-12-13 01:15:17,417 - localization_tool - INFO - 用户选择主模式：2
+2025-12-13 01:15:17,417 - localization_tool - INFO - 用户选择Extend子流程：已有中文src文件夹映射流程
+2025-12-13 01:15:18,116 - localization_tool - INFO - 流程执行完成，结果：status=success, total=2, success=2, fail=0
+2025-12-13 01:15:18,116 - localization_tool - INFO - ==========================================
+2025-12-13 01:15:18,116 - localization_tool - INFO -              工具执行结束
+2025-12-13 01:15:18,116 - localization_tool - INFO - ==========================================
+
+
+==================================================
+
+测试用例 6: Extend模式 - 完整模式 - 已有中文src
+输入序列: ['2', '1', '2', '1']
+退出码: 0
+结果: 失败
+输出:
+------------------------------
+[OK] Tree-sitter库导入成功
+[OK] tree_sitter_java库导入成功
+[OK] tree_sitter_kotlin库导入成功
+[INFO] 加载语言资源: zh
+[OK] Tree-sitter库导入成功
+[OK] tree_sitter_java库导入成功
+[OK] tree_sitter_kotlin库导入成功
+[INFO] 加载语言资源: zh
+==========================================
+             本地化工具
+==========================================
+请选择本地化模式：
+1. Extract模式(仅提取字符串，默认简洁模式)
+2. Extend模式(执行映射流程，默认简洁模式)
+3. 高级模式(自定义提取/映射，可配置粒度/主体)
+==========================================
+输入数字(1/2/3，直接回车默认选1)：2
+
+==========================================
+            Extend模式 - 简洁模式
+==========================================
+请选择映射方向：
+1. 中文映射到英文(优先检测映射规则/无则自动检测src/jar)
+2. 英文映射到中文(优先检测映射规则/无则自动检测src/jar)
+==========================================
+输入数字(1/2，直接回车默认选1)：1
+
+==========================================
+        Extend模式 - [中文→英文] 简洁模式
+==========================================
+正在执行：优先检测映射规则文件夹→检测src文件夹→无则反编译jar
+流程步骤：创建文件夹→重命名模组→恢复备份→字符串映射...
+
+执行配置：
+模式：Extend
+流程：已有中文src文件夹映射流程
+==========================================
+[NOTE] 开始重命名模组文件夹...
+
+===== 开始重命名 Chinese 下的模组文件夹 =====
+[INFO] 共收集到 4 个模组文件夹信息，按 2 个mod_id分组
+[INFO] 文件夹 Aptly Simple Hullmods 2.1.2c 名称已正确，无需重命名
+[INFO] 文件夹 Second-in-Command 1.7.0 名称已正确，无需重命名
+
+===== 重命名完成 =====
+[INFO] 总文件夹数: 4
+[INFO] 成功重命名: 0
+[INFO] 跳过重命名: 2
+[INFO] 重命名失败: 0
+
+===== 开始重命名 English 下的模组文件夹 =====
+[INFO] 共收集到 4 个模组文件夹信息，按 2 个mod_id分组
+[INFO] 文件夹 Aptly Simple Hullmods 2.1.2c 名称已正确，无需重命名
+[INFO] 文件夹 Second-in-Command 1.7.0 名称已正确，无需重命名
+
+===== 重命名完成 =====
+[INFO] 总文件夹数: 4
+[INFO] 成功重命名: 0
+[INFO] 跳过重命名: 2
+[INFO] 重命名失败: 0
+[NOTE] 开始重命名备份文件夹...
+
+===== 开始重命名 Chinese 下的模组文件夹 =====
+[INFO] 共收集到 4 个模组文件夹信息，按 2 个mod_id分组
+[INFO] 文件夹 Aptly Simple Hullmods 2.1.2c 名称已正确，无需重命名
+[INFO] 文件夹 Second-in-Command 1.7.0 名称已正确，无需重命名
+
+===== 重命名完成 =====
+[INFO] 总文件夹数: 4
+[INFO] 成功重命名: 0
+[INFO] 跳过重命名: 2
+[INFO] 重命名失败: 0
+
+===== 开始重命名 English 下的模组文件夹 =====
+[INFO] 共收集到 4 个模组文件夹信息，按 2 个mod_id分组
+[INFO] 文件夹 Aptly Simple Hullmods 2.1.2c 名称已正确，无需重命名
+[INFO] 文件夹 Second-in-Command 1.7.0 名称已正确，无需重命名
+
+===== 重命名完成 =====
+[INFO] 总文件夹数: 4
+[INFO] 成功重命名: 0
+[INFO] 跳过重命名: 2
+[INFO] 重命名失败: 0
+[NOTE] 开始恢复备份...
+
+===== 清理并从备份恢复文件夹 =====
+
+===== 收集 File 下的mod文件夹信息 =====
+[INFO] 收集到mod: Aptly Simple Hullmods 2.1.2c (id: aptlysimplehullmods, language: Chinese)
+[INFO] 收集到mod: Second-in-Command 1.7.0 (id: second_in_command, language: Chinese)
+[INFO] 收集到mod: Aptly Simple Hullmods 2.1.2c (id: aptlysimplehullmods, language: English)
+[INFO] 收集到mod: Second-in-Command 1.7.0 (id: second_in_command, language: English)
+[INFO] 共收集到 2 个mod_id，对应 4 个文件夹
+[LIST] 收集到目标文件夹 2 个mod_id
+
+===== 收集 File_backup 下的mod文件夹信息 =====
+[INFO] 收集到mod: Aptly Simple Hullmods 2.1.2c (id: aptlysimplehullmods, language: Chinese)
+[INFO] 收集到mod: Second-in-Command 1.7.0 (id: second_in_command, language: Chinese)
+[INFO] 收集到mod: Aptly Simple Hullmods 2.1.2c (id: aptlysimplehullmods, language: English)
+[INFO] 收集到mod: Second-in-Command 1.7.0 (id: second_in_command, language: English)
+[INFO] 共收集到 2 个mod_id，对应 4 个文件夹
+[LIST] 收集到备份文件夹 2 个mod_id
+[LINK] 匹配到mod_id: aptlysimplehullmods
+   目标文件夹: Aptly Simple Hullmods 2.1.2c (语言: Chinese)
+   备份文件夹: Aptly Simple Hullmods 2.1.2c (语言: Chinese)
+OK 删除原有D:\Poki\Tool\project\Extend\File\Chinese\Aptly Simple Hullmods 2.1.2c\src文件夹
+OK 恢复D:\Poki\Tool\project\Extend\File_backup\Chinese\Aptly Simple Hullmods 2.1.2c\src文件夹 -> D:\Poki\Tool\project\Extend\File\Chinese\Aptly Simple Hullmods 2.1.2c\src
+[LINK] 匹配到mod_id: aptlysimplehullmods
+   目标文件夹: Aptly Simple Hullmods 2.1.2c (语言: English)
+   备份文件夹: Aptly Simple Hullmods 2.1.2c (语言: English)
+OK 删除原有D:\Poki\Tool\project\Extend\File\English\Aptly Simple Hullmods 2.1.2c\src文件夹
+OK 恢复D:\Poki\Tool\project\Extend\File_backup\English\Aptly Simple Hullmods 2.1.2c\src文件夹 -> D:\Poki\Tool\project\Extend\File\English\Aptly Simple Hullmods 2.1.2c\src
+[LINK] 匹配到mod_id: second_in_command
+   目标文件夹: Second-in-Command 1.7.0 (语言: Chinese)
+   备份文件夹: Second-in-Command 1.7.0 (语言: Chinese)
+OK 删除原有D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src文件夹
+OK 恢复D:\Poki\Tool\project\Extend\File_backup\Chinese\Second-in-Command 1.7.0\src文件夹 -> D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src
+[LINK] 匹配到mod_id: second_in_command
+   目标文件夹: Second-in-Command 1.7.0 (语言: English)
+   备份文件夹: Second-in-Command 1.7.0 (语言: English)
+OK 删除原有D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src文件夹
+OK 恢复D:\Poki\Tool\project\Extend\File_backup\English\Second-in-Command 1.7.0\src文件夹 -> D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src
+[DIR] 映射规则文件路径: D:\Poki\Tool\project\Extend\Strings\Chinese
+[LIST] 加载映射规则：共 0 条规则
+[LIST] 发现中文mod: Aptly Simple Hullmods 2.1.2c (id: aptlysimplehullmods, version: 2.1.2c)
+[LIST] 发现中文mod: Second-in-Command 1.7.0 (id: second_in_command, version: 1.7.0)
+[LIST] 发现英文mod: Aptly Simple Hullmods 2.1.2c (id: aptlysimplehullmods, version: 2.1.2c)
+[LIST] 发现英文mod: Second-in-Command 1.7.0 (id: second_in_command, version: 1.7.0)
+[LINK] 建立映射关系: Aptly Simple Hullmods 2.1.2c -> Aptly Simple Hullmods 2.1.2c (id: aptlysimplehullmods)
+   版本信息: 中文 2.1.2c -> 英文 2.1.2c
+[LINK] 建立映射关系: Second-in-Command 1.7.0 -> Second-in-Command 1.7.0 (id: second_in_command)
+   版本信息: 中文 1.7.0 -> 英文 1.7.0
+
+[NOTE] 处理mod: Aptly Simple Hullmods 2.1.2c
+----------------------------------
+[WARN]  src文件夹不包含中文，跳过映射
+
+[NOTE] 处理mod: Second-in-Command 1.7.0
+----------------------------------
+[LIST] 使用src文件夹进行映射(包含中文)
+[LIST] 开始对 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src 执行字符串映射
+  尝试获取Java语言对象...
+  语言对象类型: <class 'PyCapsule'>
+  成功转换为Language对象
+  尝试获取Kotlin语言对象...
+  语言对象类型: <class 'PyCapsule'>
+  成功转换为Language对象
+[OK] 成功加载Java和Kotlin语言解析器
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\data\scripts\plugins\LevelupPluginImpl.java 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\data\scripts\plugins\LevelupPluginImpl.java 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\data\scripts\plugins\LevelupPluginImpl.java
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\Runcodes.java 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\Runcodes.java 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\Runcodes.java
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\SCCampaignEventListener.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\SCCampaignEventListener.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\SCCampaignPlugin.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\SCCampaignPlugin.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\SCCampaignPlugin.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\SCData.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\SCData.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\SCData.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\SCModPlugin.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\SCModPlugin.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\SCSectorData.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\SCSectorData.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\SCSectorData.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\SCUtils.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\SCUtils.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\hullmods\InactiveSmodsHullmod.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\hullmods\InactiveSmodsHullmod.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\hullmods\SCControllerHullmod.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\hullmods\SCControllerHullmod.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\interactions\ExecutiveOfficerRescueSpecial.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\interactions\ExecutiveOfficerRescueSpecial.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\SCAddOfficersToFleetInteraction.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\SCAddOfficersToFleetInteraction.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\SCCheckForEncounterTag.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\SCCheckForEncounterTag.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\SCCheckForEncounterTag.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\SCIsFleetInteraction.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\SCIsFleetInteraction.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\SCIsFleetInteraction.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\SCOfficerHireDialog.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\SCOfficerHireDialog.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\SCStartBarEventDialog.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\SCStartBarEventDialog.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\SCStoreSkillpoints.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\SCStoreSkillpoints.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\ShouldShowSiCBarEvent.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\ShouldShowSiCBarEvent.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\interactions\rules\ShouldShowSiCBarEvent.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\AutomatedShipsReplacementLevel1.java 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\AutomatedShipsReplacementLevel1.java 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\AutomatedShipsReplacementLevel1.java
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\AutomatedShipsReplacementLevel2.java 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\AutomatedShipsReplacementLevel2.java 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\AutomatedShipsReplacementLevel2.java
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\CombatEnduranceDescFix.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\CombatEnduranceDescFix.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\DerelictOperationsReplacementLevel1.java 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\DerelictOperationsReplacementLevel1.java 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\DerelictOperationsReplacementLevel1.java
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\EnergyWeaponMasteryDescFix.java 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\EnergyWeaponMasteryDescFix.java
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\NPCFleetInflater.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\NPCFleetInflater.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\NPCFleetInflater.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\NPCOfficerGenerator.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\NPCOfficerGenerator.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\ReflectionUtils.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\ReflectionUtils.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\SCExtensions.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\SCExtensions.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\SCExtensions.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\SCSettings.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\SCSettings.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\SpecialEventHandler.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\SpecialEventHandler.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\UIExtensions.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\UIExtensions.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\UIExtensions.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\VanillaSkillsUtil.java 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\VanillaSkillsUtil.java
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\VanillaSkillTooltip.java 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\VanillaSkillTooltip.java
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\VanillaSkillTooltipForVanillaSection.java 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\VanillaSkillTooltipForVanillaSection.java
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\backgrounds\AssociatesBackground.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\backgrounds\AssociatesBackground.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\codex\CodexHandler.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\codex\CodexHandler.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\commands\AddExecutiveCommand.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\commands\AddExecutiveCommand.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\commands\LevelExecutiveCommand.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\commands\LevelExecutiveCommand.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\commands\ListAptitudesCommand.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\commands\ListAptitudesCommand.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\snippets\AddAllOfficersSnippet.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\snippets\AddAllOfficersSnippet.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\misc\snippets\AddXPToOfficersSnippet.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\misc\snippets\AddXPToOfficersSnippet.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\AutomatedShipsManager.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\scripts\AutomatedShipsManager.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\CombatHandler.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\CombatHandler.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\scripts\CombatHandler.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\CommDirectoryRecolorScript.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\scripts\CommDirectoryRecolorScript.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\ControllerHullmodAdderScript.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\ControllerHullmodAdderScript.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\scripts\ControllerHullmodAdderScript.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\ExecutiveOfficerCommAdder.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\scripts\ExecutiveOfficerCommAdder.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\ExecutiveOfficerSalvageSpecialGenerator.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\ExecutiveOfficerSalvageSpecialGenerator.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\scripts\ExecutiveOfficerSalvageSpecialGenerator.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\SCCRPluginImpl.java 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\scripts\SCCRPluginImpl.java
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\SCNeuralJunctionScript.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\SCNeuralJunctionScript.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\scripts\SCNeuralJunctionScript.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\SCXPTracker.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\SCXPTracker.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\scripts\SCXPTracker.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\SectorSeedAdderScript.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\SectorSeedAdderScript.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\scripts\SectorSeedAdderScript.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\SkillPanelReplacerScript.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\SkillPanelReplacerScript.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\scripts\SkillPanelReplacerScript.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\VanillaSkillsDisabler.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\scripts\VanillaSkillsDisabler.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\scripts\VanillaSkillsDisabler.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\PlayerLevelEffects.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\PlayerLevelEffects.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\AptitudeAutomated.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\automated\AptitudeAutomated.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\AutomatedShips.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\automated\AutomatedShips.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\AutonomousExpertise.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\AutonomousExpertise.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\automated\AutonomousExpertise.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\DeadlyPersistence.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\automated\DeadlyPersistence.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\ElectronicWarfare.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\automated\ElectronicWarfare.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\FinalGambit.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\automated\FinalGambit.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\LimitBreaker.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\automated\LimitBreaker.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\MagneticShielding.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\automated\MagneticShielding.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\NeuralJunction.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\automated\NeuralJunction.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\Overclock.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\automated\Overclock.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\SCBaseAutoPointsSkillPlugin.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\automated\SCBaseAutoPointsSkillPlugin.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\SelfRepair.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\automated\SelfRepair.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\SpecialisedEquipment.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\SpecialisedEquipment.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\automated\SpecialisedEquipment.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\WideRangeTransmission.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\automated\WideRangeTransmission.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\automated\scripts\FinalGambitActivator.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\automated\scripts\FinalGambitActivator.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\AptitudeEngineering.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\AptitudeEngineering.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\CompactStorage.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\CompactStorage.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\CoolingSystems.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\CoolingSystems.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\FuelOptimisation.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\FuelOptimisation.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\PrepareForTheWorst.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\PrepareForTheWorst.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\ReliableEngineering.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\ReliableEngineering.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\Resiliency.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\Resiliency.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\SalvagingEquipment.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\SalvagingEquipment.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\ShockAbsorption.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\ShockAbsorption.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\SolidConstruction.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\SolidConstruction.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\StealthCoating.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\StealthCoating.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\scripts\CompactStorageScript.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\scripts\CompactStorageScript.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\scripts\CompactStorageScript.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\scripts\SolidConstructionScript.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\scripts\SolidConstructionScript.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\engineering\scripts\SolidConstructionScript.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\example\ExampleAptitude.java 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\example\ExampleAptitude.java 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\example\ExampleAptitude.java
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\example\ExampleSkill.java 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\example\ExampleSkill.java
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\AptitudeImprovisation.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\AptitudeImprovisation.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\DefensiveConfiguration.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\DefensiveConfiguration.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\DerelictFortifications.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\DerelictFortifications.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\DerelictOperations.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\DerelictOperations.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\EnhancedOverrides.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\EnhancedOverrides.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\Mobilization.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\Mobilization.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\Preservation.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\Preservation.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\Redistribution.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\Redistribution.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\SalvagedArmor.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\SalvagedArmor.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\ScrappyMaintenance.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\ScrappyMaintenance.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\SecuredMounts.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\improvisation\SecuredMounts.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\management\AptitudeManagement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\management\AptitudeManagement.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\management\Authority.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\management\Authority.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\management\BestOfTheBest.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\management\BestOfTheBest.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\management\CommandAndConquer.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\management\CommandAndConquer.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\management\CrewTraining.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\management\CrewTraining.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\management\InGoodHands.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\management\InGoodHands.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\management\OfficerManagement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\management\OfficerManagement.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\management\OfficerTraining.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\management\OfficerTraining.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\management\ReEntry.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\management\ReEntry.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\management\TopCondition.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\management\TopCondition.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\management\WellOrganized.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\management\WellOrganized.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\misc\InactiveSkill.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\misc\InactiveSkill.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\misc\SCBaseVanillaShipSkill.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\misc\SCBaseVanillaShipSkill.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\misc\SCBaseVanillaShipSkill.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\misc\SCPlaceholderShipSkill.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\misc\SCPlaceholderShipSkill.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\misc\SCPlaceholderShipSkill.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\misc\UtilitySkill.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\misc\UtilitySkill.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\AllOut.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\AllOut.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\Ambush.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\Ambush.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\AptitudePiracy.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\AptitudePiracy.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\BountyBoard.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\BountyBoard.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\GenerousDonation.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\GenerousDonation.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\HuntingGrounds.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\HuntingGrounds.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\ImprovisedRaids.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\ImprovisedRaids.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\LegitimateSalvage.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\LegitimateSalvage.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\LowgradeDeployment.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\LowgradeDeployment.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\Outmanoeuvred.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\Outmanoeuvred.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\ProvisionalReplacements.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\ProvisionalReplacements.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\Steadfast.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\Steadfast.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\Stockpile.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\piracy\Stockpile.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\AptitudeSmallcraft.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\AptitudeSmallcraft.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\CoordinatedManeuvers.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\CoordinatedManeuvers.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\Jumpstart.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\Jumpstart.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\LeaderOfThePack.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\LeaderOfThePack.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\LowProfile.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\LowProfile.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\QuickAsTheWind.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\QuickAsTheWind.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\SafeRecovery.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\SafeRecovery.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\SupportDoctrine.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\SupportDoctrine.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\TogetherAsOne.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\TogetherAsOne.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\TrappedPrey.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\TrappedPrey.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\WolfpackTactics.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\smallcraft\WolfpackTactics.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\special\christmas\AptitudeChristmas.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\special\christmas\AptitudeChristmas.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\special\christmas\AptitudeChristmas.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\special\christmas\ChristmasSpirit.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\special\christmas\ChristmasSpirit.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\AdAstra.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\AdAstra.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\AptitudeStarfaring.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\AptitudeStarfaring.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\BulkTransport.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\BulkTransport.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\ContinuousRepairs.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\ContinuousRepairs.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\EmergencyOrder.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\EmergencyOrder.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\Expedition.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\Expedition.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\MakeshiftEquipment.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\MakeshiftEquipment.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\Navigation.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\Navigation.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\ReactiveBurn.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\ReactiveBurn.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\RecoveryEfforts.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\RecoveryEfforts.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\Salvaging.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\Salvaging.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\Starmapping.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\Starmapping.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\abilities\SensorBurstOverride.java 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\abilities\SensorBurstOverride.java
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\abilities\SustainedBurnOverride.java 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\starfaring\abilities\SustainedBurnOverride.java
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\AdvancedManeuvers.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\AdvancedManeuvers.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\AptitudeStrikecraft.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\AptitudeStrikecraft.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\Barrage.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\Barrage.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\CarrierGroup.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\CarrierGroup.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\DistancedSupport.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\DistancedSupport.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\FighterUplink.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\FighterUplink.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\Huntsman.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\Huntsman.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\MobileDefenses.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\MobileDefenses.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\Reconfiguration.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\Reconfiguration.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\SwarmDeployment.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\SwarmDeployment.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\Synchronised.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\Synchronised.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\SystemProficiency.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\SystemProficiency.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\scripts\SynchronisedSkillScript.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\scripts\SynchronisedSkillScript.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\scripts\SynchronisedSkillScript.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\scripts\TemporarySlowdown.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\scripts\TemporarySlowdown.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\strikecraft\scripts\TemporarySlowdown.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\synchronised\scripts\SynchronisedScript.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\synchronised\scripts\SynchronisedScript.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\synchronised\scripts\SynchronisedScript.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\AcceleratedBarrels.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\AcceleratedBarrels.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\AptitudeTactical.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\AptitudeTactical.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\DefensiveProtocols.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\DefensiveProtocols.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\EfficientOrdnance.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\EfficientOrdnance.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\FocusedFire.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\FocusedFire.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\FullThrottle.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\FullThrottle.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\MassBombardment.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\MassBombardment.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\PristineCondition.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\PristineCondition.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\RapidResponse.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\RapidResponse.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\Spotters.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\Spotters.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\Superiority.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\Superiority.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\TacticalDrills.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\tactical\TacticalDrills.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\technology\AdvancedWeaponry.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\technology\AdvancedWeaponry.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\technology\AptitudeTechnology.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\technology\AptitudeTechnology.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\technology\Countermeasures.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\technology\Countermeasures.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\technology\DeepDive.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\technology\DeepDive.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\technology\Energised.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\technology\Energised.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\technology\FluxRegulation.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\technology\FluxRegulation.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\technology\FocusedLenses.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\technology\FocusedLenses.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\technology\MakeshiftDrones.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\technology\MakeshiftDrones.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\technology\MakeshiftDrones.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\technology\NeuralLink.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\technology\NeuralLink.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\technology\OptimisedShields.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\technology\OptimisedShields.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\technology\PhaseCoilTuning.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\technology\PhaseCoilTuning.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\technology\ReinforcedGrid.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\technology\ReinforcedGrid.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\technology\UnlockedEngines.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\technology\UnlockedEngines.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\AptitudeWarfare.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\AptitudeWarfare.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\DeflectivePlating.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\DeflectivePlating.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\ImmovableObject.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\ImmovableObject.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\IronSight.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\IronSight.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\Overprepared.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\Overprepared.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\OverwhelmingForce.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\OverwhelmingForce.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\RedundantBays.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\RedundantBays.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\ReserveThrusters.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\ReserveThrusters.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\StablisedTargeting.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\StablisedTargeting.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\SurefireImpact.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\SurefireImpact.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\Tenacity.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\skills\warfare\Tenacity.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\specs\SCAptitudeSection.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\specs\SCAptitudeSection.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\specs\SCAptitudeSection.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\specs\SCAptitudeSpec.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\specs\SCAptitudeSpec.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\specs\SCAptitudeSpec.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\specs\SCBaseAptitudePlugin.java 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\specs\SCBaseAptitudePlugin.java 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\specs\SCBaseAptitudePlugin.java
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\specs\SCBaseSkillPlugin.java 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\specs\SCBaseSkillPlugin.java 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\specs\SCBaseSkillPlugin.java
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\specs\SCCategorySpec.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\specs\SCCategorySpec.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\specs\SCCategorySpec.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\specs\SCOfficer.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\specs\SCOfficer.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\specs\SCSkillSpec.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\specs\SCSkillSpec.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\specs\SCSkillSpec.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\specs\SCSpecStore.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\specs\SCSpecStore.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\SCOfficerPickerMenuPanel.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\SCOfficerPickerMenuPanel.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\SCPlayerPanel.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\SCPlayerPanel.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\SCSkillMenuPanel.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\SCSkillMenuPanel.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\AptitudeBackgroundElement.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\AptitudeBackgroundElement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\AptitudeBackgroundElement.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\BackgroundlessTextfield.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\BackgroundlessTextfield.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\BackgroundlessTextfield.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\ClickableTextButton.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\ClickableTextButton.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\ClickableTextButton.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\CombatSkillWidgetElement.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\CombatSkillWidgetElement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\CombatSkillWidgetElement.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\ConfirmCancelButton.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\ConfirmCancelButton.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\ConfirmCancelButton.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\DialogAptitudeBackgroundElement.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\DialogAptitudeBackgroundElement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\DialogAptitudeBackgroundElement.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\FullDialogAptitudeBackgroundElement.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\FullDialogAptitudeBackgroundElement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\FullDialogAptitudeBackgroundElement.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\HelpIconElement.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\HelpIconElement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\HelpIconElement.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\OfficerXPBar.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\OfficerXPBar.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\OfficerXPBar.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\PlayerAptitudeBackgroundElement.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\PlayerAptitudeBackgroundElement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\PlayerAptitudeBackgroundElement.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\PlayerXPBarElement.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\PlayerXPBarElement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\PlayerXPBarElement.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SCOfficerPickerElement.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SCOfficerPickerElement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SCOfficerPickerElement.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SeedDisplayElement.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SeedDisplayElement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SeedDisplayElement.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SkillGapElement.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SkillGapElement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SkillGapElement.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SkillPointsBox.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SkillPointsBox.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SkillSeperatorElement.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SkillSeperatorElement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SkillSeperatorElement.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SkillUnderlineElement.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SkillUnderlineElement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SkillUnderlineElement.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SkillWidgetElement.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SkillWidgetElement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\SkillWidgetElement.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\StoryPointsBox.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\StoryPointsBox.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\VanillaAptitudeBackgroundElement.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\VanillaAptitudeBackgroundElement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\VanillaAptitudeBackgroundElement.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\VanillaAptitudeSkillWidgetElement.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\elements\VanillaAptitudeSkillWidgetElement.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\elements\VanillaAptitudeSkillWidgetElement.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\intel\SectorSeedIntel.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\intel\SectorSeedIntel.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\panels\AssosciatesManagePanelPlugin.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\panels\AssosciatesManagePanelPlugin.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\panels\AssosciatesManagePanelPlugin.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\panels\BackgroundPanelPlugin.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\panels\BackgroundPanelPlugin.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\panels\BackgroundPanelPlugin.kt
+[WARN]  未从文件 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\panels\ManagePanelPlugin.kt 提取到任何字符串
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\panels\ManagePanelPlugin.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\panels\ManagePanelPlugin.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\sim\SiCSimPlugin.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\sim\SiCSimPlugin.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\tooltips\OfficerTooltipCreator.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\tooltips\OfficerTooltipCreator.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\tooltips\PlayerTooltipCreator.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\tooltips\PlayerTooltipCreator.kt
+[OK] 成功将 D:\Poki\Tool\project\Extend\File\Chinese\Second-in-Command 1.7.0\src\second_in_command\ui\tooltips\SCSkillTooltipCreator.kt 映射到 D:\Poki\Tool\project\Extend\File\English\Second-in-Command 1.7.0\src\second_in_command\ui\tooltips\SCSkillTooltipCreator.kt
+[OK] 报告保存成功: D:\Poki\Tool\project\Extend\Report\extend_20251213_011518_report.json
+
+执行结果：
+状态：success
+总数量：2
+成功数量：2
+失败数量：0
+
+错误信息:
+------------------------------
+2025-12-13 01:15:18,888 - localization_tool - INFO - ==========================================
+2025-12-13 01:15:18,888 - localization_tool - INFO -              本地化工具
+2025-12-13 01:15:18,888 - localization_tool - INFO - ==========================================
+2025-12-13 01:15:18,888 - localization_tool - INFO - 工具启动，开始解析命令行参数
+2025-12-13 01:15:18,888 - localization_tool - INFO - 检查项目结构...
+2025-12-13 01:15:18,888 - localization_tool - INFO - 项目结构检查完成
+2025-12-13 01:15:18,890 - localization_tool - INFO - 测试模式已启用，输入序列：2,1,2,1
+2025-12-13 01:15:18,890 - localization_tool - INFO - 命令行参数解析完成：mode=None, sub_flow=None
+2025-12-13 01:15:18,890 - localization_tool - INFO - 工具基础路径：D:\Poki\Tool
+2025-12-13 01:15:18,890 - localization_tool - INFO - 未指定模式，显示主菜单
+2025-12-13 01:15:18,890 - localization_tool - INFO - 用户选择主模式：2
+2025-12-13 01:15:18,890 - localization_tool - INFO - 用户选择Extend子流程：已有中文src文件夹映射流程
+2025-12-13 01:15:19,616 - localization_tool - INFO - 流程执行完成，结果：status=success, total=2, success=2, fail=0
+2025-12-13 01:15:19,616 - localization_tool - INFO - ==========================================
+2025-12-13 01:15:19,616 - localization_tool - INFO -              工具执行结束
+2025-12-13 01:15:19,616 - localization_tool - INFO - ==========================================
+
+
+==================================================
+
+测试用例 7: Extend模式 - 完整模式 - 已有英文src
+输入序列: ['2', '2', '2', '1']
+退出码: 0
+结果: 失败
+输出:
+------------------------------
+[OK] Tree-sitter库导入成功
+[OK] tree_sitter_java库导入成功
+[OK] tree_sitter_kotlin库导入成功
+[INFO] 加载语言资源: zh
+[OK] Tree-sitter库导入成功
+[OK] tree_sitter_java库导入成功
+[OK] tree_sitter_kotlin库导入成功
+[INFO] 加载语言资源: zh
+==========================================
+             本地化工具
+==========================================
+请选择本地化模式：
+1. Extract模式(仅提取字符串，默认简洁模式)
+2. Extend模式(执行映射流程，默认简洁模式)
+3. 高级模式(自定义提取/映射，可配置粒度/主体)
+==========================================
+输入数字(1/2/3，直接回车默认选1)：2
+
+==========================================
+            Extend模式 - 简洁模式
+==========================================
+请选择映射方向：
+1. 中文映射到英文(优先检测映射规则/无则自动检测src/jar)
+2. 英文映射到中文(优先检测映射规则/无则自动检测src/jar)
+==========================================
+输入数字(1/2，直接回车默认选1)：2
+
+==========================================
+        Extend模式 - [英文→中文] 简洁模式
+==========================================
+正在执行：优先检测映射规则文件夹→检测src文件夹→无则反编译jar
+流程步骤：创建文件夹→重命名模组→恢复备份→字符串映射...
+
+执行配置：
+模式：Extend
+流程：已有英文src文件夹映射流程
+==========================================
+[OK] 报告保存成功: D:\Poki\Tool\project\Extend\Report\extend_20251213_011520_report.json
+
+执行结果：
+状态：fail
+总数量：0
+成功数量：0
+失败数量：1
+失败原因：
+  - 未知子流程: 已有英文src文件夹映射流程
+
+错误信息:
+------------------------------
+2025-12-13 01:15:20,356 - localization_tool - INFO - ==========================================
+2025-12-13 01:15:20,356 - localization_tool - INFO -              本地化工具
+2025-12-13 01:15:20,356 - localization_tool - INFO - ==========================================
+2025-12-13 01:15:20,356 - localization_tool - INFO - 工具启动，开始解析命令行参数
+2025-12-13 01:15:20,356 - localization_tool - INFO - 检查项目结构...
+2025-12-13 01:15:20,356 - localization_tool - INFO - 项目结构检查完成
+2025-12-13 01:15:20,357 - localization_tool - INFO - 测试模式已启用，输入序列：2,2,2,1
+2025-12-13 01:15:20,358 - localization_tool - INFO - 命令行参数解析完成：mode=None, sub_flow=None
+2025-12-13 01:15:20,358 - localization_tool - INFO - 工具基础路径：D:\Poki\Tool
+2025-12-13 01:15:20,358 - localization_tool - INFO - 未指定模式，显示主菜单
+2025-12-13 01:15:20,358 - localization_tool - INFO - 用户选择主模式：2
+2025-12-13 01:15:20,358 - localization_tool - INFO - 用户选择Extend子流程：已有英文src文件夹映射流程
+2025-12-13 01:15:20,358 - localization_tool - INFO - 流程执行完成，结果：status=fail, total=0, success=0, fail=1
+2025-12-13 01:15:20,359 - localization_tool - WARNING - 执行失败项：['未知子流程: 已有英文src文件夹映射流程']
+2025-12-13 01:15:20,359 - localization_tool - INFO - ==========================================
+2025-12-13 01:15:20,359 - localization_tool - INFO -              工具执行结束
+2025-12-13 01:15:20,359 - localization_tool - INFO - ==========================================
+
+
+==================================================
+
+测试用例 8: 高级模式 - 全部功能 - Extract子模式
+输入序列: ['3', '1', '1', '1']
+退出码: 0
+结果: 失败
+输出:
+------------------------------
+[OK] Tree-sitter库导入成功
+[OK] tree_sitter_java库导入成功
+[OK] tree_sitter_kotlin库导入成功
+[INFO] 加载语言资源: zh
+[OK] Tree-sitter库导入成功
+[OK] tree_sitter_java库导入成功
+[OK] tree_sitter_kotlin库导入成功
+[INFO] 加载语言资源: zh
+==========================================
+             本地化工具
+==========================================
+请选择本地化模式：
+1. Extract模式(仅提取字符串，默认简洁模式)
+2. Extend模式(执行映射流程，默认简洁模式)
+3. 高级模式(自定义提取/映射，可配置粒度/主体)
+==========================================
+输入数字(1/2/3，直接回车默认选1)：3
+
+==========================================
+        高级模式 - 操作主体选择
+==========================================
+请选择操作主体(默认：全部功能)：
+1. 全部功能(支持所有语言/流程)
+2. 仅中文(仅显示中文相关流程)
+3. 仅英文(仅显示英文相关流程)
+==========================================
+输入数字(1/2/3，直接回车默认选1)：1
+
+==========================================
+        高级模式 - [全部功能] 子模式选择
+==========================================
+请选择子模式：
+1. Extract子模式(自定义提取流程)
+2. Extend子模式(自定义映射流程)
+==========================================
+输入数字(1/2，直接回车默认选1)：1
+
+==========================================
+        高级模式 - [全部功能-Extract] 粒度选择
+==========================================
+请选择流程粒度(默认：简洁模式)：
+1. 简洁模式(自动检测src文件夹，无则反编译jar)
+2. 完整模式(手动选择具体提取/映射流程)
+==========================================
+输入数字(1/2，直接回车默认选1)：1
+
+==========================================
+        高级模式 - [全部功能-Extract-简洁]
+==========================================
+请选择提取语言：
+1. 提取英文(优先检测src/无则反编译未汉化jar)
+2. 提取中文(优先检测src/无则反编译已汉化jar)
+==========================================
+输入数字(1/2，直接回车默认选1)：
+
+已选定：高级模式 → 全部功能 → Extract子模式 → 简洁模式
+开始执行流程：
+1. 检测src文件夹是否存在且仅含目标语言...
+2. 反编译jar(若src无有效内容)...
+3. 提取字符串→保存映射规则→生成报告...
+
+执行配置：
+模式：Extract(高级模式)
+流程：英文提取流程
+==========================================
+[NOTE] 开始重命名模组文件夹...
+
+===== 开始重命名 English 下的模组文件夹 =====
+[INFO] 共收集到 0 个模组文件夹信息，按 0 个mod_id分组
+[INFO] 未在 D:\Poki\Tool\project\Extract\File\English 下找到需要重命名的模组文件夹
+[NOTE] 开始重命名备份文件夹...
+
+===== 开始重命名 English 下的模组文件夹 =====
+[INFO] 共收集到 4 个模组文件夹信息，按 2 个mod_id分组
+[INFO] 文件夹 Aptly Simple Hullmods 2.1.2c 名称已正确，无需重命名
+[INFO] 文件夹 Second-in-Command 1.7.0 名称已正确，无需重命名
+
+===== 重命名完成 =====
+[INFO] 总文件夹数: 4
+[INFO] 成功重命名: 0
+[INFO] 跳过重命名: 2
+[INFO] 重命名失败: 0
+[NOTE] 开始恢复备份...
+
+===== 清理并从备份恢复文件夹 =====
+
+===== 收集 File 下的mod文件夹信息 =====
+[INFO] 共收集到 0 个mod_id，对应 0 个文件夹
+[LIST] 收集到目标文件夹 0 个mod_id
+
+===== 收集 File_backup 下的mod文件夹信息 =====
+[INFO] 收集到mod: Aptly Simple Hullmods 2.1.2c (id: aptlysimplehullmods, language: Chinese)
+[INFO] 收集到mod: Second-in-Command 1.7.0 (id: second_in_command, language: Chinese)
+[INFO] 收集到mod: Aptly Simple Hullmods 2.1.2c (id: aptlysimplehullmods, language: English)
+[INFO] 收集到mod: Second-in-Command 1.7.0 (id: second_in_command, language: English)
+[INFO] 共收集到 2 个mod_id，对应 4 个文件夹
+[LIST] 收集到备份文件夹 2 个mod_id
+[PROCESS] 开始处理JAR文件...
+[OK] 报告保存成功: D:\Poki\Tool\project\Extract\Report\extract_20251213_011521_report.json
+
+执行结果：
+状态：fail
+总数量：0
+成功数量：0
+失败数量：1
+失败原因：
+  - 未找到src文件夹或JAR文件
+
+错误信息:
+------------------------------
+2025-12-13 01:15:21,104 - localization_tool - INFO - ==========================================
+2025-12-13 01:15:21,104 - localization_tool - INFO -              本地化工具
+2025-12-13 01:15:21,104 - localization_tool - INFO - ==========================================
+2025-12-13 01:15:21,104 - localization_tool - INFO - 工具启动，开始解析命令行参数
+2025-12-13 01:15:21,104 - localization_tool - INFO - 检查项目结构...
+2025-12-13 01:15:21,104 - localization_tool - INFO - 项目结构检查完成
+2025-12-13 01:15:21,106 - localization_tool - INFO - 测试模式已启用，输入序列：3,1,1,1
+2025-12-13 01:15:21,106 - localization_tool - INFO - 命令行参数解析完成：mode=None, sub_flow=None
+2025-12-13 01:15:21,106 - localization_tool - INFO - 工具基础路径：D:\Poki\Tool
+2025-12-13 01:15:21,106 - localization_tool - INFO - 未指定模式，显示主菜单
+2025-12-13 01:15:21,106 - localization_tool - INFO - 用户选择主模式：3
+2025-12-13 01:15:21,106 - localization_tool - INFO - 用户选择高级模式子流程：英文提取流程
+2025-12-13 01:15:21,128 - localization_tool - INFO - 流程执行完成，结果：status=fail, total=0, success=0, fail=1
+2025-12-13 01:15:21,129 - localization_tool - WARNING - 执行失败项：['未找到src文件夹或JAR文件']
+2025-12-13 01:15:21,129 - localization_tool - INFO - ==========================================
+2025-12-13 01:15:21,129 - localization_tool - INFO -              工具执行结束
+2025-12-13 01:15:21,129 - localization_tool - INFO - ==========================================
+
+
+==================================================
+
+测试用例 9: 高级模式 - 仅中文 - Extract子模式
+输入序列: ['3', '2', '1', '1']
+退出码: 0
+结果: 失败
+输出:
+------------------------------
+[OK] Tree-sitter库导入成功
+[OK] tree_sitter_java库导入成功
+[OK] tree_sitter_kotlin库导入成功
+[INFO] 加载语言资源: zh
+[OK] Tree-sitter库导入成功
+[OK] tree_sitter_java库导入成功
+[OK] tree_sitter_kotlin库导入成功
+[INFO] 加载语言资源: zh
+==========================================
+             本地化工具
+==========================================
+请选择本地化模式：
+1. Extract模式(仅提取字符串，默认简洁模式)
+2. Extend模式(执行映射流程，默认简洁模式)
+3. 高级模式(自定义提取/映射，可配置粒度/主体)
+==========================================
+输入数字(1/2/3，直接回车默认选1)：3
+
+==========================================
+        高级模式 - 操作主体选择
+==========================================
+请选择操作主体(默认：全部功能)：
+1. 全部功能(支持所有语言/流程)
+2. 仅中文(仅显示中文相关流程)
+3. 仅英文(仅显示英文相关流程)
+==========================================
+输入数字(1/2/3，直接回车默认选1)：2
+
+==========================================
+        高级模式 - [仅中文] 子模式选择
+==========================================
+请选择子模式：
+1. Extract子模式(自定义提取流程)
+2. Extend子模式(自定义映射流程)
+==========================================
+输入数字(1/2，直接回车默认选1)：1
+
+==========================================
+        高级模式 - [仅中文-Extract] 粒度选择
+==========================================
+请选择流程粒度(默认：简洁模式)：
+1. 简洁模式(自动检测src文件夹，无则反编译jar)
+2. 完整模式(手动选择具体提取/映射流程)
+==========================================
+输入数字(1/2，直接回车默认选1)：1
+
+==========================================
+        高级模式 - [仅中文-Extract-简洁]
+==========================================
+请选择提取语言：
+1. 提取中文(优先检测src/无则反编译已汉化jar)
+==========================================
+输入数字(1，直接回车默认选1)：
+
+已选定：高级模式 → 仅中文 → Extract子模式 → 简洁模式
+开始执行流程：
+1. 检测src文件夹是否存在且仅含目标语言...
+2. 反编译jar(若src无有效内容)...
+3. 提取字符串→保存映射规则→生成报告...
+
+执行配置：
+模式：Extract(高级模式)
+流程：中文提取流程
+==========================================
+[NOTE] 开始重命名模组文件夹...
+
+===== 开始重命名 Chinese 下的模组文件夹 =====
+[INFO] 共收集到 0 个模组文件夹信息，按 0 个mod_id分组
+[INFO] 未在 D:\Poki\Tool\project\Extract\File\Chinese 下找到需要重命名的模组文件夹
+[NOTE] 开始重命名备份文件夹...
+
+===== 开始重命名 Chinese 下的模组文件夹 =====
+[INFO] 共收集到 4 个模组文件夹信息，按 2 个mod_id分组
+[INFO] 文件夹 Aptly Simple Hullmods 2.1.2c 名称已正确，无需重命名
+[INFO] 文件夹 Second-in-Command 1.7.0 名称已正确，无需重命名
+
+===== 重命名完成 =====
+[INFO] 总文件夹数: 4
+[INFO] 成功重命名: 0
+[INFO] 跳过重命名: 2
+[INFO] 重命名失败: 0
+[NOTE] 开始恢复备份...
+
+===== 清理并从备份恢复文件夹 =====
+
+===== 收集 File 下的mod文件夹信息 =====
+[INFO] 共收集到 0 个mod_id，对应 0 个文件夹
+[LIST] 收集到目标文件夹 0 个mod_id
+
+===== 收集 File_backup 下的mod文件夹信息 =====
+[INFO] 收集到mod: Aptly Simple Hullmods 2.1.2c (id: aptlysimplehullmods, language: Chinese)
+[INFO] 收集到mod: Second-in-Command 1.7.0 (id: second_in_command, language: Chinese)
+[INFO] 收集到mod: Aptly Simple Hullmods 2.1.2c (id: aptlysimplehullmods, language: English)
+[INFO] 收集到mod: Second-in-Command 1.7.0 (id: second_in_command, language: English)
+[INFO] 共收集到 2 个mod_id，对应 4 个文件夹
+[LIST] 收集到备份文件夹 2 个mod_id
+[PROCESS] 开始处理JAR文件...
+[OK] 报告保存成功: D:\Poki\Tool\project\Extract\Report\extract_20251213_011521_report.json
+
+执行结果：
+状态：fail
+总数量：0
+成功数量：0
+失败数量：1
+失败原因：
+  - 未找到src文件夹或JAR文件
+
+错误信息:
+------------------------------
+2025-12-13 01:15:21,814 - localization_tool - INFO - ==========================================
+2025-12-13 01:15:21,814 - localization_tool - INFO -              本地化工具
+2025-12-13 01:15:21,814 - localization_tool - INFO - ==========================================
+2025-12-13 01:15:21,815 - localization_tool - INFO - 工具启动，开始解析命令行参数
+2025-12-13 01:15:21,815 - localization_tool - INFO - 检查项目结构...
+2025-12-13 01:15:21,815 - localization_tool - INFO - 项目结构检查完成
+2025-12-13 01:15:21,816 - localization_tool - INFO - 测试模式已启用，输入序列：3,2,1,1
+2025-12-13 01:15:21,816 - localization_tool - INFO - 命令行参数解析完成：mode=None, sub_flow=None
+2025-12-13 01:15:21,816 - localization_tool - INFO - 工具基础路径：D:\Poki\Tool
+2025-12-13 01:15:21,816 - localization_tool - INFO - 未指定模式，显示主菜单
+2025-12-13 01:15:21,816 - localization_tool - INFO - 用户选择主模式：3
+2025-12-13 01:15:21,816 - localization_tool - INFO - 用户选择高级模式子流程：中文提取流程
+2025-12-13 01:15:21,839 - localization_tool - INFO - 流程执行完成，结果：status=fail, total=0, success=0, fail=1
+2025-12-13 01:15:21,839 - localization_tool - WARNING - 执行失败项：['未找到src文件夹或JAR文件']
+2025-12-13 01:15:21,839 - localization_tool - INFO - ==========================================
+2025-12-13 01:15:21,839 - localization_tool - INFO -              工具执行结束
+2025-12-13 01:15:21,839 - localization_tool - INFO - ==========================================
+
+
+==================================================
+
+测试用例 10: 高级模式 - 仅英文 - Extend子模式
+输入序列: ['3', '3', '2', '1']
+退出码: 0
+结果: 失败
+输出:
+------------------------------
+[OK] Tree-sitter库导入成功
+[OK] tree_sitter_java库导入成功
+[OK] tree_sitter_kotlin库导入成功
+[INFO] 加载语言资源: zh
+[OK] Tree-sitter库导入成功
+[OK] tree_sitter_java库导入成功
+[OK] tree_sitter_kotlin库导入成功
+[INFO] 加载语言资源: zh
+==========================================
+             本地化工具
+==========================================
+请选择本地化模式：
+1. Extract模式(仅提取字符串，默认简洁模式)
+2. Extend模式(执行映射流程，默认简洁模式)
+3. 高级模式(自定义提取/映射，可配置粒度/主体)
+==========================================
+输入数字(1/2/3，直接回车默认选1)：3
+
+==========================================
+        高级模式 - 操作主体选择
+==========================================
+请选择操作主体(默认：全部功能)：
+1. 全部功能(支持所有语言/流程)
+2. 仅中文(仅显示中文相关流程)
+3. 仅英文(仅显示英文相关流程)
+==========================================
+输入数字(1/2/3，直接回车默认选1)：3
+
+==========================================
+        高级模式 - [仅英文] 子模式选择
+==========================================
+请选择子模式：
+1. Extract子模式(自定义提取流程)
+2. Extend子模式(自定义映射流程)
+==========================================
+输入数字(1/2，直接回车默认选1)：2
+
+==========================================
+        高级模式 - [仅英文-Extend] 粒度选择
+==========================================
+请选择流程粒度(默认：简洁模式)：
+1. 简洁模式(自动检测src文件夹，无则反编译jar)
+2. 完整模式(手动选择具体提取/映射流程)
+==========================================
+输入数字(1/2，直接回车默认选1)：1
+
+==========================================
+        高级模式 - [仅英文-Extend-简洁]
+==========================================
+请选择映射方向：
+1. 英文映射到中文(优先检测映射规则/无则自动检测src/jar)
+==========================================
+输入数字(1，直接回车默认选1)：
+
+已选定：高级模式 → 仅英文 → Extend子模式 → 简洁模式
+开始执行流程：
+1. 检测src文件夹是否存在且仅含目标语言...
+2. 反编译jar(若src无有效内容)...
+3. 提取字符串→保存映射规则→生成报告...
+
+执行配置：
+模式：Extend(高级模式)
+流程：已有英文src文件夹映射流程
+==========================================
+[OK] 报告保存成功: D:\Poki\Tool\project\Extend\Report\extend_20251213_011522_report.json
+
+执行结果：
+状态：fail
+总数量：0
+成功数量：0
+失败数量：1
+失败原因：
+  - 未知子流程: 已有英文src文件夹映射流程
+
+错误信息:
+------------------------------
+2025-12-13 01:15:22,521 - localization_tool - INFO - ==========================================
+2025-12-13 01:15:22,521 - localization_tool - INFO -              本地化工具
+2025-12-13 01:15:22,521 - localization_tool - INFO - ==========================================
+2025-12-13 01:15:22,521 - localization_tool - INFO - 工具启动，开始解析命令行参数
+2025-12-13 01:15:22,521 - localization_tool - INFO - 检查项目结构...
+2025-12-13 01:15:22,521 - localization_tool - INFO - 项目结构检查完成
+2025-12-13 01:15:22,522 - localization_tool - INFO - 测试模式已启用，输入序列：3,3,2,1
+2025-12-13 01:15:22,522 - localization_tool - INFO - 命令行参数解析完成：mode=None, sub_flow=None
+2025-12-13 01:15:22,522 - localization_tool - INFO - 工具基础路径：D:\Poki\Tool
+2025-12-13 01:15:22,522 - localization_tool - INFO - 未指定模式，显示主菜单
+2025-12-13 01:15:22,522 - localization_tool - INFO - 用户选择主模式：3
+2025-12-13 01:15:22,522 - localization_tool - INFO - 用户选择高级模式子流程：已有英文src文件夹映射流程
+2025-12-13 01:15:22,523 - localization_tool - INFO - 流程执行完成，结果：status=fail, total=0, success=0, fail=1
+2025-12-13 01:15:22,523 - localization_tool - WARNING - 执行失败项：['未知子流程: 已有英文src文件夹映射流程']
+2025-12-13 01:15:22,523 - localization_tool - INFO - ==========================================
+2025-12-13 01:15:22,523 - localization_tool - INFO -              工具执行结束
+2025-12-13 01:15:22,523 - localization_tool - INFO - ==========================================
+
+
+==================================================
+
