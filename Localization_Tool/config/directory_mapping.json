@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0",
+  "description": "本地化工具目录映射配置",
+  "source_mappings": {
+    "extract": {
+      "file": "${mod_root}/source"
+    },
+    "extend": {
+      "file": "${mod_root}/source"
+    }
+  },
+  "backup_mappings": {
+    "extract": "${mod_root}/source_backup",
+    "extend": "${mod_root}/source_backup"
+  },
+  "output_mappings": {
+    "extract": "${mod_root}/output",
+    "extend": "${mod_root}/output"
+  }
+}

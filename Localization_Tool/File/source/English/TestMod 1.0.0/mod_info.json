@@ -1,0 +1,7 @@
+{
+    "id": "testmod",
+    "name": "TestMod",
+    "version": "1.0.0",
+    "author": "Test Author",
+    "description": "A test mod for localization tool"
+}

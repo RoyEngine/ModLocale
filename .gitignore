@@ -1,0 +1,35 @@
+# Python cache
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+
+# Virtual env / tooling
+.venv/
+venv/
+.env
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs / temp
+*.log
+*.tmp
+*.bak
+
+# Trae IDE 配置
+.trae/
+trae/
+
+# Output / reports
+out/
+reports/
+cache/
+tmp/
+
+# Project-specific directories
+Localization_Tool/.pytest_cache/
+Localization_Tool/logs/

@@ -1,0 +1,29 @@
+output/
+  - output/Extend_en2zh
+  - output/Extend_zh2en
+  - output/Extract_Chinese
+  - output/Extract_English
+    - output/Quality Captains 1.7.0/Quality Captains 1.7.0
+    - output/Second-in-Command 1.7.0/Second-in-Command 1.7.0
+    - output/TestMod 1.0.0/TestMod 1.0.0
+rule/
+  - rule/Chinese
+  - rule/English
+    - rule/Quality Captains 1.7.0
+    - rule/Second-in-Command 1.7.0
+    - rule/TestMod 1.0.0/
+  - source/Chinese
+    - source/Quality Captains 高质量舰长 1.7.0
+    - source/Second-in-Command 舰队副官 1.7.0
+  - source/English
+    - source/Quality Captains 1.7.0
+    - source/Second-in-Command 1.7.0
+    - source/TestMod 1.0.0/TestMod 1.0.0
+source_backup/
+  - source_backup/Chinese
+    - source_backup/Quality Captains 高质量舰长 1.7.0
+    - source_backup/Second-in-Command 舰队副官 1.7.0
+  - source_backup/English
+    - source_backup/Quality Captains 1.7.0
+    - source_backup/Second-in-Command 1.7.0   
+    - source_backup/TestMod 1.0.0
