@@ -163,11 +163,12 @@ class RuleConflictDetector:
         }
     
     @staticmethod
-    def resolve_conflicts(conflicts: Dict[str, Any], resolution_strategy: str = "latest") -> List[Dict[str, Any]]:
+    def resolve_conflicts(mappings: List[Dict[str, Any]], conflicts: Dict[str, Any], resolution_strategy: str = "latest") -> List[Dict[str, Any]]:
         """
         解决冲突
         
         Args:
+            mappings: 原始映射列表
             conflicts: 冲突信息
             resolution_strategy: 解决策略，可选值：
                 - latest: 使用最新的映射(默认)
@@ -182,9 +183,103 @@ class RuleConflictDetector:
         if resolution_strategy == "manual":
             return conflicts
         
-        # 这里简化处理，实际需要根据冲突类型和策略进行更复杂的解决
-        # 目前仅返回冲突摘要
-        return conflicts["conflict_summary"]
+        print(f"[INFO] 使用{resolution_strategy}策略解决冲突")
+        
+        # 创建映射ID到索引的字典，用于快速查找
+        mapping_dict = {}
+        for i, mapping in enumerate(mappings):
+            mapping_dict[mapping.get("id", f"auto_{i}")] = i
+        
+        # 解决重复ID冲突
+        resolved_mappings = mappings.copy()
+        
+        # 解决重复ID冲突
+        for conflict in conflicts["duplicate_ids"]:
+            conflict_ids = [item["index"] for item in conflict["conflicts"]]
+            conflict_mappings = [item["mapping"] for item in conflict["conflicts"]]
+            
+            if resolution_strategy == "latest":
+                # 使用最后一个映射
+                selected = conflict_mappings[-1]
+                selected_index = conflict_ids[-1]
+            elif resolution_strategy == "first":
+                # 使用第一个映射
+                selected = conflict_mappings[0]
+                selected_index = conflict_ids[0]
+            elif resolution_strategy == "longest":
+                # 使用最长的翻译
+                selected = max(conflict_mappings, key=lambda x: len(x.get("translated", "")))
+                selected_index = conflict_ids[conflict_mappings.index(selected)]
+            elif resolution_strategy == "shortest":
+                # 使用最短的翻译
+                selected = min(conflict_mappings, key=lambda x: len(x.get("translated", "")))
+                selected_index = conflict_ids[conflict_mappings.index(selected)]
+            else:
+                # 默认使用最新的映射
+                selected = conflict_mappings[-1]
+                selected_index = conflict_ids[-1]
+            
+            # 保留选中的映射，移除其他冲突映射
+            for i in sorted(conflict_ids, reverse=True):
+                if i != selected_index:
+                    del resolved_mappings[i]
+        
+        # 解决重复原始字符串冲突
+        for conflict in conflicts["duplicate_originals"]:
+            original = conflict["original"]
+            conflict_ids = [item["index"] for item in conflict["conflicts"]]
+            conflict_mappings = [item["mapping"] for item in conflict["conflicts"]]
+            
+            if resolution_strategy == "latest":
+                selected = conflict_mappings[-1]
+                selected_index = conflict_ids[-1]
+            elif resolution_strategy == "first":
+                selected = conflict_mappings[0]
+                selected_index = conflict_ids[0]
+            elif resolution_strategy == "longest":
+                selected = max(conflict_mappings, key=lambda x: len(x.get("translated", "")))
+                selected_index = conflict_ids[conflict_mappings.index(selected)]
+            elif resolution_strategy == "shortest":
+                selected = min(conflict_mappings, key=lambda x: len(x.get("translated", "")))
+                selected_index = conflict_ids[conflict_mappings.index(selected)]
+            else:
+                selected = conflict_mappings[-1]
+                selected_index = conflict_ids[-1]
+            
+            # 保留选中的映射，移除其他冲突映射
+            for i in sorted(conflict_ids, reverse=True):
+                if i != selected_index:
+                    del resolved_mappings[i]
+        
+        # 解决翻译冲突
+        for conflict in conflicts["translation_conflicts"]:
+            original = conflict["original"]
+            conflict_ids = [item["index"] for item in conflict["conflicts"]]
+            conflict_mappings = [item["mapping"] for item in conflict["conflicts"]]
+            
+            if resolution_strategy == "latest":
+                selected = conflict_mappings[-1]
+                selected_index = conflict_ids[-1]
+            elif resolution_strategy == "first":
+                selected = conflict_mappings[0]
+                selected_index = conflict_ids[0]
+            elif resolution_strategy == "longest":
+                selected = max(conflict_mappings, key=lambda x: len(x.get("translated", "")))
+                selected_index = conflict_ids[conflict_mappings.index(selected)]
+            elif resolution_strategy == "shortest":
+                selected = min(conflict_mappings, key=lambda x: len(x.get("translated", "")))
+                selected_index = conflict_ids[conflict_mappings.index(selected)]
+            else:
+                selected = conflict_mappings[-1]
+                selected_index = conflict_ids[-1]
+            
+            # 保留选中的映射，移除其他冲突映射
+            for i in sorted(conflict_ids, reverse=True):
+                if i != selected_index:
+                    del resolved_mappings[i]
+        
+        print(f"[OK] 冲突解决完成，剩余 {len(resolved_mappings)} 条映射")
+        return resolved_mappings
     
     @staticmethod
     def generate_conflict_report(conflicts: Dict[str, Any]) -> str:
@@ -697,14 +792,267 @@ def save_yaml_mappings(mappings: List[Dict[str, Any]], file_path: str, version_c
             success = True
         
         if success:
-            print(f"[OK] 成功保存YAML映射到: {file_path}")
+            print(f"[OK] 映射规则已保存到: {file_path}")
         else:
-            print(f"[ERROR] 保存YAML映射失败: {file_path}")
-            
+            print(f"[ERROR] 映射规则保存失败: {file_path}")
         return success
     except Exception as e:
         print(f"[ERROR] 保存YAML映射失败: {file_path} - {e}")
         return False
+
+
+def generate_translation_rules(english_mappings: List[Dict[str, Any]], chinese_mappings: List[Dict[str, Any]], output_file: str, mod_id: str = "") -> bool:
+    """
+    利用双语数据生成翻译规则文件
+    
+    Args:
+        english_mappings: 英文映射列表
+        chinese_mappings: 中文映射列表
+        output_file: 输出文件路径
+        mod_id: 模组ID
+        
+    Returns:
+        bool: 是否生成成功
+    """
+    print(f"[INFO] 开始生成翻译规则文件")
+    print(f"[INFO] 英文映射条目数: {len(english_mappings)}")
+    print(f"[INFO] 中文映射条目数: {len(chinese_mappings)}")
+    
+    # 数据验证
+    if not english_mappings:
+        print(f"[ERROR] 英文映射数据为空")
+        return False
+    
+    if not chinese_mappings:
+        print(f"[ERROR] 中文映射数据为空")
+        return False
+    
+    # 验证数据对齐
+    if len(english_mappings) != len(chinese_mappings):
+        print(f"[WARN] 英文和中文映射条目数不一致: 英文{len(english_mappings)}条，中文{len(chinese_mappings)}条")
+        # 只处理前N条，N为较小的数量
+        min_len = min(len(english_mappings), len(chinese_mappings))
+        english_mappings = english_mappings[:min_len]
+        chinese_mappings = chinese_mappings[:min_len]
+        print(f"[INFO] 只处理前{min_len}条映射数据")
+    
+    # 确保输出目录存在
+    os.makedirs(os.path.dirname(output_file), exist_ok=True)
+    
+    # 生成翻译规则
+    rules = []
+    
+    # 遍历双语映射对，添加数据验证
+    for i, (en_item, zh_item) in enumerate(zip(english_mappings, chinese_mappings)):
+        # 验证条目完整性
+        if not en_item or not isinstance(en_item, dict):
+            print(f"[WARN] 跳过无效的英文映射条目 #{i+1}")
+            continue
+        
+        if not zh_item or not isinstance(zh_item, dict):
+            print(f"[WARN] 跳过无效的中文映射条目 #{i+1}")
+            continue
+        
+        original = en_item.get('original')
+        if not original:
+            print(f"[WARN] 跳过缺少original字段的英文映射条目 #{i+1}")
+            continue
+        
+        # 获取中文翻译
+        translated = zh_item.get('original', '')
+        if not translated:
+            print(f"[WARN] 中文映射条目 #{i+1}缺少翻译内容，使用空字符串")
+        
+        # 构建规则条目
+        rule = {
+            'id': en_item.get('id', f'auto_{i+1}'),
+            'original': original,
+            'translated': translated,
+            'context': en_item.get('context', {}),
+            'status': 'translated',
+            'placeholders': en_item.get('placeholders', []),
+            'created_at': datetime.now().isoformat()
+        }
+        rules.append(rule)
+    
+    # 检查生成的规则数量
+    if not rules:
+        print(f"[ERROR] 没有生成任何规则，可能是数据格式错误")
+        return False
+    
+    # 保存规则文件
+    success = save_yaml_mappings(rules, output_file, version_control=True, mod_id=mod_id)
+    
+    if success:
+        print(f"[OK] 翻译规则已生成到: {output_file}")
+        print(f"[OK] 生成规则条目数: {len(rules)}")
+    else:
+        print(f"[ERROR] 翻译规则生成失败")
+    
+    return success
+
+
+def generate_incremental_rules(english_mappings: List[Dict[str, Any]], existing_rules: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """
+    基于双语对生成增量规则
+    
+    Args:
+        english_mappings: 新的英文映射列表
+        existing_rules: 现有的翻译规则列表
+        
+    Returns:
+        List[Dict[str, Any]]: 增量规则列表
+    """
+    print(f"[INFO] 开始生成增量规则")
+    print(f"[INFO] 新的英文映射条目数: {len(english_mappings)}")
+    print(f"[INFO] 现有规则条目数: {len(existing_rules)}")
+    
+    # 创建现有规则的字典，用于快速查找
+    existing_dict = {item['original']: item for item in existing_rules}
+    
+    incremental_rules = []
+    
+    for en_item in english_mappings:
+        original = en_item.get('original', '')
+        
+        if original in existing_dict:
+            # 已存在的规则，保留翻译，标记为保留
+            existing_rule = existing_dict[original].copy()
+            existing_rule['status'] = 'translated'
+            incremental_rules.append(existing_rule)
+        else:
+            # 新的规则，需要翻译，标记为未翻译
+            new_rule = {
+                'id': en_item.get('id', ''),
+                'original': original,
+                'translated': '',
+                'context': en_item.get('context', {}),
+                'status': 'untranslated',
+                'placeholders': en_item.get('placeholders', [])
+            }
+            incremental_rules.append(new_rule)
+    
+    print(f"[OK] 增量规则生成完成，共 {len(incremental_rules)} 条")
+    
+    return incremental_rules
+
+
+def update_translation_rules(existing_rules_file: str, new_english_file: str, new_chinese_file: str, output_file: str, mod_id: str = "") -> bool:
+    """
+    更新现有规则，确保增量学习
+    
+    Args:
+        existing_rules_file: 现有规则文件路径
+        new_english_file: 新的英文映射文件路径
+        new_chinese_file: 新的中文映射文件路径
+        output_file: 输出文件路径
+        mod_id: 模组ID
+        
+    Returns:
+        bool: 是否更新成功
+    """
+    print(f"[INFO] 开始更新翻译规则")
+    print(f"[INFO] 现有规则文件: {existing_rules_file}")
+    print(f"[INFO] 新的英文文件: {new_english_file}")
+    print(f"[INFO] 新的中文文件: {new_chinese_file}")
+    
+    # 验证输入文件是否存在
+    for file_path in [existing_rules_file, new_english_file, new_chinese_file]:
+        if not os.path.exists(file_path):
+            print(f"[ERROR] 文件不存在: {file_path}")
+            return False
+    
+    # 加载现有规则
+    existing_rules = load_yaml_mappings(existing_rules_file)
+    print(f"[INFO] 现有规则条目数: {len(existing_rules)}")
+    
+    # 加载新的英文和中文映射
+    new_english_mappings = load_yaml_mappings(new_english_file)
+    new_chinese_mappings = load_yaml_mappings(new_chinese_file)
+    print(f"[INFO] 新的英文映射条目数: {len(new_english_mappings)}")
+    print(f"[INFO] 新的中文映射条目数: {len(new_chinese_mappings)}")
+    
+    # 数据对齐验证
+    if len(new_english_mappings) != len(new_chinese_mappings):
+        print(f"[WARN] 新的英文和中文映射条目数不一致")
+        min_len = min(len(new_english_mappings), len(new_chinese_mappings))
+        new_english_mappings = new_english_mappings[:min_len]
+        new_chinese_mappings = new_chinese_mappings[:min_len]
+        print(f"[INFO] 只处理前{min_len}条新映射数据")
+    
+    # 创建现有规则的字典，用于快速查找
+    existing_dict = {}
+    for rule in existing_rules:
+        original = rule.get('original')
+        if original:
+            existing_dict[original] = rule
+    
+    # 生成更新后的规则
+    updated_rules = []
+    new_entries = 0
+    updated_entries = 0
+    skipped_entries = 0
+    
+    for i, (en_item, zh_item) in enumerate(zip(new_english_mappings, new_chinese_mappings)):
+        original = en_item.get('original')
+        if not original:
+            print(f"[WARN] 跳过缺少original字段的新英文映射条目 #{i+1}")
+            skipped_entries += 1
+            continue
+        
+        translated = zh_item.get('original', '')
+        
+        if original in existing_dict:
+            # 已有该原始字符串的规则，更新翻译
+            existing_rule = existing_dict[original].copy()
+            
+            # 只更新翻译和状态，保留其他字段
+            existing_rule['translated'] = translated
+            existing_rule['status'] = 'translated'
+            existing_rule['updated_at'] = datetime.now().isoformat()
+            
+            updated_rules.append(existing_rule)
+            updated_entries += 1
+        else:
+            # 新的原始字符串，创建新规则
+            new_rule = {
+                'id': en_item.get('id', f'auto_{i+1}'),
+                'original': original,
+                'translated': translated,
+                'context': en_item.get('context', {}),
+                'status': 'translated',
+                'placeholders': en_item.get('placeholders', []),
+                'created_at': datetime.now().isoformat()
+            }
+            updated_rules.append(new_rule)
+            new_entries += 1
+    
+    # 添加未在新映射中出现的现有规则（保留未翻译内容）
+    for rule in existing_rules:
+        original = rule.get('original')
+        if original and original not in {r.get('original') for r in updated_rules}:
+            updated_rules.append(rule.copy())
+            skipped_entries += 1
+    
+    # 检查更新后的规则数量
+    if not updated_rules:
+        print(f"[ERROR] 没有生成任何更新后的规则")
+        return False
+    
+    # 保存更新后的规则
+    success = save_yaml_mappings(updated_rules, output_file, version_control=True, mod_id=mod_id)
+    
+    if success:
+        print(f"[OK] 翻译规则已更新到: {output_file}")
+        print(f"[OK] 更新统计:")
+        print(f"      新增规则: {new_entries} 条")
+        print(f"      更新规则: {updated_entries} 条")
+        print(f"      跳过规则: {skipped_entries} 条")
+        print(f"      总规则数: {len(updated_rules)} 条")
+    else:
+        print(f"[ERROR] 翻译规则更新失败")
+    
+    return success
 
 
 def generate_initial_yaml_mappings(ast_mappings: List[Dict[str, Any]], mark_unmapped: bool = False) -> List[Dict[str, Any]]:
@@ -1060,6 +1408,170 @@ def generate_unmapped_report(rules: List[Dict[str, Any]], output_file: str = Non
                         f.write(f"... 还有 {len(stats['rules']) - 10} 条未映射内容\n")
                     f.write("\n")
             print(f"[OK] 文本报告已保存到: {output_file}")
+    
+    return report
+
+
+def generate_translation_report(rules: List[Dict[str, Any]], output_file: str = None, format: str = "markdown") -> Dict[str, Any]:
+    """
+    生成完整的翻译报告
+    
+    Args:
+        rules: 映射规则列表
+        output_file: 输出报告文件路径
+        format: 报告格式，可选值：markdown, json
+    
+    Returns:
+        Dict[str, Any]: 翻译报告
+    """
+    from datetime import datetime
+    
+    # 统计不同状态的规则数量
+    total_rules = len(rules)
+    
+    # 状态统计
+    status_counts = {
+        'translated': 0,
+        'untranslated': 0,
+        'unmapped': 0,
+        'needs_review': 0,
+        'new': 0
+    }
+    
+    for rule in rules:
+        status = rule.get('status', 'untranslated')
+        if status in status_counts:
+            status_counts[status] += 1
+        else:
+            status_counts[status] = 1
+    
+    # 计算翻译进度
+    translated_count = status_counts['translated']
+    translation_progress = (translated_count / total_rules) * 100 if total_rules > 0 else 0
+    
+    # 检测冲突
+    detector = RuleConflictDetector()
+    conflicts = detector.detect_all_conflicts(rules)
+    
+    # 按文件路径分组统计
+    file_statistics = {}
+    for rule in rules:
+        if ':' in rule['id']:
+            file_path = rule['id'].split(':')[0]
+        else:
+            file_path = 'unknown'
+        
+        if file_path not in file_statistics:
+            file_statistics[file_path] = {
+                'total': 0,
+                'status_counts': status_counts.copy(),
+                'rules': []
+            }
+        
+        file_statistics[file_path]['total'] += 1
+        status = rule.get('status', 'untranslated')
+        file_statistics[file_path]['status_counts'][status] += 1
+        file_statistics[file_path]['rules'].append(rule)
+    
+    # 生成报告数据
+    report = {
+        'timestamp': datetime.now().isoformat(),
+        'total_rules': total_rules,
+        'status_counts': status_counts,
+        'translation_progress': round(translation_progress, 2),
+        'conflicts': conflicts,
+        'file_statistics': file_statistics,
+        'rules': rules
+    }
+    
+    # 保存报告
+    if output_file:
+        output_dir = os.path.dirname(output_file)
+        if output_dir and not os.path.exists(output_dir):
+            os.makedirs(output_dir, exist_ok=True)
+        
+        if format == 'json' or output_file.endswith('.json'):
+            # 保存为JSON格式
+            import json
+            with open(output_file, 'w', encoding='utf-8') as f:
+                json.dump(report, f, ensure_ascii=False, indent=2)
+            print(f"[OK] JSON报告已保存到: {output_file}")
+        else:
+            # 保存为Markdown格式
+            with open(output_file, 'w', encoding='utf-8') as f:
+                # 写入报告标题和基本信息
+                f.write("# 翻译进度报告\n\n")
+                f.write(f"生成时间: {report['timestamp']}\n")
+                f.write(f"总规则数: {report['total_rules']}\n")
+                f.write(f"翻译进度: {report['translation_progress']}%\n")
+                f.write("\n")
+                
+                # 写入状态统计
+                f.write("## 状态统计\n\n")
+                f.write("| 状态 | 数量 | 占比 |\n")
+                f.write("|------|------|------|\n")
+                for status, count in report['status_counts'].items():
+                    ratio = (count / total_rules) * 100 if total_rules > 0 else 0
+                    f.write(f"| {status} | {count} | {round(ratio, 2)}% |\n")
+                f.write("\n")
+                
+                # 写入冲突统计
+                f.write("## 冲突统计\n\n")
+                total_conflicts = report['conflicts']['total_conflicts']
+                f.write(f"总冲突数: {total_conflicts}\n")
+                
+                if total_conflicts > 0:
+                    f.write("\n")
+                    f.write("### 冲突详情\n\n")
+                    
+                    # 重复ID冲突
+                    if report['conflicts']['duplicate_ids']:
+                        f.write("#### 重复ID冲突\n\n")
+                        for conflict in report['conflicts']['duplicate_ids']:
+                            f.write(f"- ID: {conflict['id']}\n")
+                            for i, item in enumerate(conflict['conflicts']):
+                                f.write(f"  冲突 {i+1}: {item['mapping'].get('original', 'N/A')} -> {item['mapping'].get('translated', 'N/A')}\n")
+                        f.write("\n")
+                    
+                    # 重复原始字符串冲突
+                    if report['conflicts']['duplicate_originals']:
+                        f.write("#### 重复原始字符串冲突\n\n")
+                        for conflict in report['conflicts']['duplicate_originals']:
+                            f.write(f"- 原始字符串: {conflict['original']}\n")
+                            for i, item in enumerate(conflict['conflicts']):
+                                f.write(f"  冲突 {i+1}: {item['mapping'].get('translated', 'N/A')} (ID: {item['mapping'].get('id', 'N/A')})\n")
+                        f.write("\n")
+                    
+                    # 翻译冲突
+                    if report['conflicts']['translation_conflicts']:
+                        f.write("#### 翻译冲突\n\n")
+                        for conflict in report['conflicts']['translation_conflicts']:
+                            f.write(f"- 原始字符串: {conflict['original']}\n")
+                            f.write(f"  不同翻译: {', '.join(conflict['unique_translations'])}\n")
+                        f.write("\n")
+                else:
+                    f.write("无冲突\n\n")
+                
+                # 写入按文件统计
+                f.write("## 按文件统计\n\n")
+                for file_path, stats in sorted(file_statistics.items(), key=lambda x: x[1]['total'], reverse=True):
+                    f.write(f"### {file_path}\n\n")
+                    f.write(f"总规则数: {stats['total']}\n")
+                    
+                    # 计算该文件的翻译进度
+                    file_translated = stats['status_counts']['translated']
+                    file_progress = (file_translated / stats['total']) * 100 if stats['total'] > 0 else 0
+                    f.write(f"翻译进度: {round(file_progress, 2)}%\n")
+                    
+                    f.write("\n")
+                    f.write("| 状态 | 数量 |\n")
+                    f.write("|------|------|\n")
+                    for status, count in stats['status_counts'].items():
+                        if count > 0:
+                            f.write(f"| {status} | {count} |\n")
+                    f.write("\n")
+            
+            print(f"[OK] {format.upper()}报告已保存到: {output_file}")
     
     return report
 

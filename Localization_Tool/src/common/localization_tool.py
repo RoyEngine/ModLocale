@@ -25,7 +25,9 @@ from .yaml_utils import (
     generate_unmapped_report,
     list_unmapped_content,
     mark_unmapped_as_translated,
-    RuleConflictDetector
+    RuleConflictDetector,
+    generate_translation_rules,
+    update_translation_rules
 )
 from .tree_sitter_utils import extract_ast_mappings
 
@@ -222,6 +224,61 @@ def command_conflict(args: argparse.Namespace) -> int:
     
     return 0
 
+def command_generate_rules(args: argparse.Namespace) -> int:
+    """
+    生成自监督规则命令
+    """
+    print("=" * 60)
+    print("        自监督规则生成工具")
+    print("=" * 60)
+    
+    # 验证输入参数
+    if not os.path.exists(args.english_file):
+        print(f"[ERROR] 英文映射文件不存在: {args.english_file}")
+        return 1
+    
+    if not os.path.exists(args.chinese_file):
+        print(f"[ERROR] 中文映射文件不存在: {args.chinese_file}")
+        return 1
+    
+    # 加载双语映射文件
+    print(f"[INFO] 加载英文映射文件: {args.english_file}")
+    english_mappings = load_yaml_mappings(args.english_file)
+    
+    print(f"[INFO] 加载中文映射文件: {args.chinese_file}")
+    chinese_mappings = load_yaml_mappings(args.chinese_file)
+    
+    # 生成翻译规则
+    success = generate_translation_rules(english_mappings, chinese_mappings, args.output_file, args.mod_id)
+    
+    return 0 if success else 1
+
+def command_update_rules(args: argparse.Namespace) -> int:
+    """
+    更新翻译规则命令
+    """
+    print("=" * 60)
+    print("        翻译规则更新工具")
+    print("=" * 60)
+    
+    # 验证输入参数
+    if not os.path.exists(args.existing_rules):
+        print(f"[ERROR] 现有规则文件不存在: {args.existing_rules}")
+        return 1
+    
+    if not os.path.exists(args.new_english):
+        print(f"[ERROR] 新的英文映射文件不存在: {args.new_english}")
+        return 1
+    
+    if not os.path.exists(args.new_chinese):
+        print(f"[ERROR] 新的中文映射文件不存在: {args.new_chinese}")
+        return 1
+    
+    # 更新翻译规则
+    success = update_translation_rules(args.existing_rules, args.new_english, args.new_chinese, args.output_file, args.mod_id)
+    
+    return 0 if success else 1
+
 def main() -> int:
     """
     主函数
@@ -350,6 +407,66 @@ python -m src.common.localization_tool conflict --rule-file ./Localization_File/
         default="latest"
     )
     
+    # 4. 生成自监督规则命令
+    parser_generate_rules = subparsers.add_parser("generate-rules", help="从双语数据生成翻译规则")
+    parser_generate_rules.add_argument(
+        "--english-file",
+        type=str,
+        help="英文映射文件路径",
+        required=True
+    )
+    parser_generate_rules.add_argument(
+        "--chinese-file",
+        type=str,
+        help="中文映射文件路径",
+        required=True
+    )
+    parser_generate_rules.add_argument(
+        "--output-file",
+        type=str,
+        help="输出规则文件路径",
+        required=True
+    )
+    parser_generate_rules.add_argument(
+        "--mod-id",
+        type=str,
+        help="模组ID",
+        default=""
+    )
+    
+    # 5. 更新翻译规则命令
+    parser_update_rules = subparsers.add_parser("update-rules", help="更新现有翻译规则")
+    parser_update_rules.add_argument(
+        "--existing-rules",
+        type=str,
+        help="现有规则文件路径",
+        required=True
+    )
+    parser_update_rules.add_argument(
+        "--new-english",
+        type=str,
+        help="新的英文映射文件路径",
+        required=True
+    )
+    parser_update_rules.add_argument(
+        "--new-chinese",
+        type=str,
+        help="新的中文映射文件路径",
+        required=True
+    )
+    parser_update_rules.add_argument(
+        "--output-file",
+        type=str,
+        help="输出规则文件路径",
+        required=True
+    )
+    parser_update_rules.add_argument(
+        "--mod-id",
+        type=str,
+        help="模组ID",
+        default=""
+    )
+    
     # 解析命令行参数
     args = parser.parse_args()
     
@@ -365,6 +482,10 @@ python -m src.common.localization_tool conflict --rule-file ./Localization_File/
         return command_process_unmapped(args)
     elif args.command == "conflict":
         return command_conflict(args)
+    elif args.command == "generate-rules":
+        return command_generate_rules(args)
+    elif args.command == "update-rules":
+        return command_update_rules(args)
     else:
         print(f"[ERROR] 未知命令: {args.command}")
         return 1

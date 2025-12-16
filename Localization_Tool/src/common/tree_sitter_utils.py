@@ -400,7 +400,7 @@ def _should_filter_string(text: str) -> bool:
     if not text:
         return True
     
-    # 过滤过短的字符串(长度小于2，除非是特殊字符)
+    # 过滤过短的字符串(长度小于2，除非是特殊字符'%'和'+')
     if len(text) < 2 and text not in ['%', '+']:
         return True
     
@@ -414,14 +414,14 @@ def _should_filter_string(text: str) -> bool:
     # 2. 绝对路径：以字母开头，包含多个/或\分隔的目录，以文件名结尾
     # 3. 直接以文件名结尾，包含特定扩展名
     is_path = re.match(r'^([a-zA-Z]:?[/\\]|[^/\\\s]+[/\\])[^/\\\s]+([/\\][^/\\\s]+)*$', text) is not None
-    is_config_file = re.match(r'^[^/\\]+\.(ini|xml|cfg|json|txt)$', text) is not None
+    is_config_file = re.match(r'^[^/\\]+\.(ini|xml|cfg|json|txt|yaml|yml)$', text) is not None
     # 额外检查：如果包含/且不包含空格，并且路径中至少有一个/，可能是路径
     is_likely_path = '/' in text and ' ' not in text and text.count('/') >= 1 and not re.search(r'[A-Z]', text) and not re.search(r'[^a-zA-Z0-9_./\\-]', text)
     if is_path or is_config_file or is_likely_path:
         return True
     
     # 过滤格式字符串相关
-    if text in ['%s', '%', '+', ' sec', 'Level: ', 'DIR: ', 'placeholder_1', 'placeholder_2']:
+    if text in ['%', '%s', ' sec', 'Level: ', 'DIR: ', 'placeholder_1', 'placeholder_2', 'sec', 'secs', 'second', 'seconds']:
         return True
     
     # 过滤以example_开头的示例技能和属性名
@@ -429,15 +429,25 @@ def _should_filter_string(text: str) -> bool:
         return True
     
     # 过滤UI相关标识符
-    if 'icon_' in text or 'ui' in text.lower():
+    if 'icon_' in text or 'ui' in text.lower() or 'UI' in text:
         return True
     
     # 过滤配置和设置项
-    if text in ['noDeployCRPercent', 'cr_effect']:
+    config_items = ['noDeployCRPercent', 'cr_effect', 'deployCR', 'maxCR', 'minCR', 'cr', 'CR', 'dp', 'DP', 'deployPoints', 'deploy_points']
+    if text in config_items:
         return True
     
     # 过滤注释中常见的调试字符串
-    if text in ['wefwefwefwefe', 'efwefwefwefe', 'wefwefe']:
+    debug_strings = ['wefwefwefwefe', 'efwefwefwefe', 'wefwefe', 'test', 'debug', 'DEBUG', 'Test', 'TEST']
+    if text in debug_strings:
+        return True
+    
+    # 过滤数值相关字符串
+    if re.match(r'^\d+(\.\d+)?$', text):
+        return True
+    
+    # 过滤仅包含特殊字符的字符串（排除%和+）
+    if text not in ['%', '+'] and re.match(r'^[!@#$%^&*()_+\-=\[\]{};\':"\\|,.<>/?~`]+$', text):
         return True
     
     return False

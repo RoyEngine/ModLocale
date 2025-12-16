@@ -59,6 +59,10 @@ from .yaml_utils import (
     extract_mappings_from_processed_folder,
     update_mapping_status,
     merge_mapping_rules,
+    generate_translation_rules,
+    generate_incremental_rules,
+    update_translation_rules,
+    generate_translation_report,
 )
 # 临时禁用以下模块，优先完成核心功能开发
 # from .levenshtein_utils import (
@@ -143,6 +147,10 @@ __all__ = [
     "extract_mappings_from_processed_folder",
     "update_mapping_status",
     "merge_mapping_rules",
+    "generate_translation_rules",
+    "generate_incremental_rules",
+    "update_translation_rules",
+    "generate_translation_report",
     "logger_utils",
     "setup_logger",
     "get_logger",
