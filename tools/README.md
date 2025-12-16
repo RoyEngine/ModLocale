@@ -6,24 +6,14 @@
 |---------|------|------|----------|
 | **ast-grep** | - | AST搜索工具，用于代码分析和转换 | [查看详情](ast-grep/README.md) |
 | **cfr-0.152** | 0.152 | Java反编译工具，用于反编译JAR文件 | [查看详情](cfr-0.152/README.md) |
-| **coverage_report** | - | 代码覆盖率报告工具 | [查看详情](coverage_report/README.md) |
 | **jq** | - | JSON处理工具，用于格式化和处理JSON数据 | [查看详情](jq/README.md) |
 | **procyon-decompiler-0.6.0** | 0.6.0 | Java反编译工具，用于反编译JAR文件 | [查看详情](procyon-decompiler-0.6.0/README.md) |
 
 ## 工具分类
 
-### 代码分析与转换
-- **ast-grep**: 基于AST的代码搜索和转换工具
-
 ### Java反编译
 - **cfr-0.152**: 支持最新Java版本的反编译工具
 - **procyon-decompiler-0.6.0**: 生成高质量、易读代码的反编译工具
-
-### 数据处理
-- **jq**: 强大的JSON处理和查询工具
-
-### 测试与质量
-- **coverage_report**: 代码覆盖率报告生成工具
 
 ## 使用指南
 
