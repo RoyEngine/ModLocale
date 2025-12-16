@@ -9,7 +9,6 @@
 |--------|------|
 | `__init__.py` | 模块初始化文件 |
 | `core.py` | 扩展模式核心流程控制，包含run_extend_sub_flow函数 |
-| `mapper.py` | 字符串映射工具，用于根据映射规则更新源代码 |
 
 ## 关键实现逻辑
 
@@ -74,7 +73,6 @@ python src/main.py extend
 ## 依赖关系
 
 - 依赖`src.common`模块，使用其提供的各种工具函数
-- 依赖`src.localization`模块，使用其提供的本地化资源
 
 ## 开发和维护注意事项
 
@@ -86,10 +84,10 @@ python src/main.py extend
 
 ## 测试
 
-模块包含完整的单元测试，位于`tests/`目录下，使用pytest进行测试。
+模块包含完整的单元测试，位于项目根目录的`test/`目录下，使用pytest进行测试。
 
 ### 运行测试
 
 ```bash
-pytest src/extend_mode/tests/
+pytest test/
 ```

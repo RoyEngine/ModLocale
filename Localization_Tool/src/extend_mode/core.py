@@ -690,7 +690,8 @@ def _process_existing_chinese_rules(
             rule_files = []
             for root, dirs, files in os.walk(rule_path):
                 for file in files:
-                    if file.endswith('.yaml') or file.endswith('.yml'):
+                    # 同时检查yaml和json文件，由load_mapping_rules函数处理优先级
+                    if file.endswith('.yaml') or file.endswith('.yml') or file.endswith('.json'):
                         rule_files.append(os.path.join(root, file))
             
             if rule_files:
@@ -1038,7 +1039,8 @@ def _process_existing_english_rules(
             rule_files = []
             for root, dirs, files in os.walk(rule_path):
                 for file in files:
-                    if file.endswith('.yaml') or file.endswith('.yml'):
+                    # 同时检查yaml和json文件，由load_mapping_rules函数处理优先级
+                    if file.endswith('.yaml') or file.endswith('.yml') or file.endswith('.json'):
                         rule_files.append(os.path.join(root, file))
             
             if rule_files:

@@ -9,8 +9,6 @@
 |--------|------|
 | `__init__.py` | 模块初始化文件 |
 | `core.py` | 提取模式核心流程控制，包含run_extract_sub_flow函数 |
-| `extractor.py` | 字符串提取器，用于从源代码中提取字符串 |
-| `string_extractor.py` | 字符串提取工具，用于处理不同类型的源代码 |
 
 ## 关键实现逻辑
 
@@ -46,7 +44,6 @@
 - 普通字符串常量
 - 格式化字符串
 - 注释中的字符串
-- 资源文件中的字符串
 
 ## 使用示例
 
@@ -102,10 +99,10 @@ python src/main.py extract
 
 ## 测试
 
-模块包含完整的单元测试，位于`tests/`目录下，使用pytest进行测试。
+模块包含完整的单元测试，位于项目根目录的`test/`目录下，使用pytest进行测试。
 
 ### 运行测试
 
 ```bash
-pytest src/extract_mode/tests/
+pytest test/
 ```

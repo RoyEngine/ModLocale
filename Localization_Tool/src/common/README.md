@@ -1,27 +1,27 @@
 # common 模块
 
 ## 功能描述
-通用工具模块，为本地化工具提供各种基础功能支持，包括文件操作、JAR处理、AST解析、YAML处理等。
+通用工具模块，为本地化工具提供各种基础功能支持，包括文件操作、JAR处理、AST解析、YAML处理、配置管理等。
 
 ## 主要文件及其用途
 
 | 文件名 | 用途 |
 |--------|------|
 | `__init__.py` | 模块初始化文件，导出所有工具函数 |
+| `config_utils.py` | 配置管理工具，用于加载和管理配置文件 |
 | `file_utils.py` | 文件操作工具，包括文件夹创建、文件复制、移动等 |
+| `flow_executor.py` | 流程执行器，用于管理和执行本地化工具的工作流程 |
 | `jar_utils.py` | JAR文件处理工具，包括JAR文件检测、反编译等 |
-| `tree_sitter_utils.py` | Tree-sitter AST解析工具，用于从源代码中提取字符串和映射 |
-| `yaml_utils.py` | YAML文件处理工具，用于加载、保存和验证映射规则 |
-| `language_utils.py` | 语言管理工具，用于处理语言配置和支持 |
-| `language_resource.py` | 语言资源管理工具，用于加载和保存语言资源 |
-| `language_context.py` | 语言上下文管理工具，用于设置和获取当前语言 |
 | `levenshtein_utils.py` | 编辑距离计算工具，用于字符串相似度比较 |
+| `localization_tool.py` | 本地化工具核心类，提供主要的本地化功能 |
 | `logger_utils.py` | 日志记录工具，用于设置和获取日志记录器 |
+| `mod_info_utils.py` | 模组信息处理工具，用于加载和管理模组信息 |
 | `report_utils.py` | 报告生成工具，用于生成和保存处理报告 |
 | `suggestion_generator.py` | 建议生成工具，用于生成字符串映射建议 |
-| `test_data_manager.py` | 测试数据管理工具，用于管理测试数据 |
 | `timestamp_utils.py` | 时间戳工具，用于生成和格式化时间戳 |
 | `tools_integrator.py` | 工具集成工具，用于集成外部工具 |
+| `tree_sitter_utils.py` | Tree-sitter AST解析工具，用于从源代码中提取字符串和映射 |
+| `yaml_utils.py` | YAML文件处理工具，用于加载、保存和验证映射规则 |
 
 ## 关键实现逻辑
 
@@ -33,6 +33,9 @@
 
 ### YAML映射规则
 实现了YAML映射规则的加载、保存和验证功能，支持从源代码自动生成初始映射规则，并根据现有映射规则更新源代码。
+
+### 配置管理
+提供了配置文件的加载和管理功能，支持从不同位置加载配置，并验证配置的完整性和正确性。
 
 ### 日志记录
 集成了日志记录功能，支持不同级别日志的输出和保存，便于调试和监控。
@@ -73,8 +76,8 @@ save_report(report, "path/to/report.json")
 
 ## 依赖关系
 
-- 无外部依赖，所有功能均使用Python标准库或项目内部实现
-- 被其他模块(extend_mode、extract_mode、performance)依赖
+- 外部依赖：tree-sitter库用于AST解析
+- 被其他模块(extend_mode、extract_mode、init_mode、decompile_mode)依赖
 
 ## 开发和维护注意事项
 
@@ -87,9 +90,9 @@ save_report(report, "path/to/report.json")
 
 ## 测试
 
-模块包含完整的单元测试，位于`tests/`目录下，使用pytest进行测试。
+模块包含完整的单元测试，位于项目根目录的`test/`目录下，使用pytest进行测试。
 
 ### 运行测试
 ```bash
-pytest src/common/tests/
+pytest test/
 ```

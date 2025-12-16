@@ -1583,7 +1583,7 @@ def _extract_strings_rules_list(rules: Dict[str, Any]) -> List[Dict[str, Any]]:
 
 def load_mapping_rules(rules_path: Any) -> List[Dict[str, Any]]:
     """
-    加载映射规则文件，支持多种输入格式
+    加载映射规则文件，支持yaml和json两种格式，优先使用yaml格式
     
     Args:
         rules_path: 规则文件路径、规则文件夹路径或包含路径的列表
@@ -1594,7 +1594,8 @@ def load_mapping_rules(rules_path: Any) -> List[Dict[str, Any]]:
     mapping_rules: List[Dict[str, Any]] = []
     
     # 支持的规则文件扩展名
-    supported_extensions = ['.json', '.yaml', '.yml']
+    yaml_extensions = ['.yaml', '.yml']
+    json_extensions = ['.json']
     
     # 如果是列表，遍历列表中的所有路径
     if isinstance(rules_path, list):
@@ -1602,22 +1603,47 @@ def load_mapping_rules(rules_path: Any) -> List[Dict[str, Any]]:
             mapping_rules.extend(load_mapping_rules(path))
         return mapping_rules
     
-    # 如果是目录，遍历目录下所有YAML和JSON文件
+    # 如果是目录，遍历目录下所有YAML和JSON文件，优先处理YAML
     if os.path.isdir(rules_path):
-        # 遍历规则目录下的所有文件
+        # 遍历规则目录下的所有文件，先收集文件信息
+        all_files = []
         for root, dirs, files in os.walk(rules_path):
             for file in files:
-                if any(file.endswith(ext) for ext in supported_extensions):
-                    file_path = os.path.join(root, file)
+                file_path = os.path.join(root, file)
+                file_name = os.path.splitext(file)[0]  # 获取文件名（不含扩展名）
+                file_ext = os.path.splitext(file)[1].lower()  # 获取扩展名（小写）
+                
+                # 只处理yaml和json文件
+                if file_ext in yaml_extensions or file_ext in json_extensions:
+                    all_files.append({
+                        'file_path': file_path,
+                        'file_name': file_name,
+                        'file_ext': file_ext,
+                        'is_yaml': file_ext in yaml_extensions
+                    })
+        
+        # 按文件名分组，同一文件名的文件放在一起
+        file_groups = {}
+        for file_info in all_files:
+            file_name = file_info['file_name']
+            if file_name not in file_groups:
+                file_groups[file_name] = []
+            file_groups[file_name].append(file_info)
+        
+        # 遍历每个文件组，优先处理yaml文件
+        for file_name, files in file_groups.items():
+            # 检查是否有yaml文件
+            yaml_files = [f for f in files if f['is_yaml']]
+            json_files = [f for f in files if not f['is_yaml']]
+            
+            if yaml_files:
+                # 有yaml文件，优先处理yaml文件
+                for file_info in yaml_files:
+                    file_path = file_info['file_path']
                     try:
-                        # 根据文件扩展名选择解析方法
-                        if file.endswith('.json'):
-                            with open(file_path, 'r', encoding='utf-8') as f:
-                                rules_data = json.load(f)
-                        else:  # YAML文件
-                            import yaml
-                            with open(file_path, 'r', encoding='utf-8') as f:
-                                rules_data = yaml.safe_load(f)
+                        import yaml
+                        with open(file_path, 'r', encoding='utf-8') as f:
+                            rules_data = yaml.safe_load(f)
                         
                         # 处理规则文件中的id字段
                         mod_id = None
@@ -1634,20 +1660,107 @@ def load_mapping_rules(rules_path: Any) -> List[Dict[str, Any]]:
                         # 提取规则
                         extracted_rules = _extract_strings_rules_list(rules_data)
                         mapping_rules.extend(extracted_rules)
-                        print(f"[OK] 加载规则文件: {file_path}")
+                        print(f"[OK] 加载规则文件(yaml优先): {file_path}")
+                        
+                        # 记录日志：选择yaml格式
+                        from src.common.logger_utils import get_logger
+                        logger = get_logger("file_utils")
+                        logger.info(f"选择映射格式: yaml，文件: {file_path}，原因: yaml优先，同一文件名存在yaml和json文件")
                     except Exception as e:
-                        print(f"[WARN]  加载规则文件失败: {file_path} - {e}")
+                        print(f"[WARN]  加载yaml规则文件失败: {file_path} - {e}")
+                        # yaml文件加载失败，尝试使用json文件
+                        from src.common.logger_utils import get_logger
+                        logger = get_logger("file_utils")
+                        logger.warning(f"yaml文件加载失败，尝试使用json文件: {file_path}，错误: {e}")
+                        
+                        if json_files:
+                            for json_file_info in json_files:
+                                json_file_path = json_file_info['file_path']
+                                try:
+                                    with open(json_file_path, 'r', encoding='utf-8') as f:
+                                        rules_data = json.load(f)
+                                    
+                                    # 处理规则文件中的id字段
+                                    mod_id = None
+                                    if isinstance(rules_data, dict) and "id" in rules_data:
+                                        mod_id = rules_data["id"]
+                                        # 验证mod_id是否存在于全局映射表中
+                                        from src.init_mode.core import get_mod_info_by_id
+                                        mod_info = get_mod_info_by_id(mod_id)
+                                        if mod_info:
+                                            print(f"[OK] 规则文件关联到mod: {mod_info.name} (id: {mod_id})")
+                                        else:
+                                            print(f"[WARN]  规则文件中的id {mod_id} 未找到对应的mod信息")
+                                    
+                                    # 提取规则
+                                    extracted_rules = _extract_strings_rules_list(rules_data)
+                                    mapping_rules.extend(extracted_rules)
+                                    print(f"[OK] 加载规则文件(json备选): {json_file_path}")
+                                    
+                                    # 记录日志：使用json格式作为备选
+                                    logger.info(f"选择映射格式: json，文件: {json_file_path}，原因: yaml文件加载失败，使用json文件作为备选")
+                                except Exception as json_e:
+                                    print(f"[WARN]  加载json规则文件失败: {json_file_path} - {json_e}")
+                                    logger.error(f"json文件加载失败: {json_file_path}，错误: {json_e}")
+            else:
+                # 没有yaml文件，处理json文件
+                for file_info in json_files:
+                    file_path = file_info['file_path']
+                    try:
+                        with open(file_path, 'r', encoding='utf-8') as f:
+                            rules_data = json.load(f)
+                        
+                        # 处理规则文件中的id字段
+                        mod_id = None
+                        if isinstance(rules_data, dict) and "id" in rules_data:
+                            mod_id = rules_data["id"]
+                            # 验证mod_id是否存在于全局映射表中
+                            from src.init_mode.core import get_mod_info_by_id
+                            mod_info = get_mod_info_by_id(mod_id)
+                            if mod_info:
+                                print(f"[OK] 规则文件关联到mod: {mod_info.name} (id: {mod_id})")
+                            else:
+                                print(f"[WARN]  规则文件中的id {mod_id} 未找到对应的mod信息")
+                        
+                        # 提取规则
+                        extracted_rules = _extract_strings_rules_list(rules_data)
+                        mapping_rules.extend(extracted_rules)
+                        print(f"[OK] 加载规则文件(json): {file_path}")
+                        
+                        # 记录日志：使用json格式
+                        from src.common.logger_utils import get_logger
+                        logger = get_logger("file_utils")
+                        logger.info(f"选择映射格式: json，文件: {file_path}，原因: 没有对应的yaml文件")
+                    except Exception as e:
+                        print(f"[WARN]  加载json规则文件失败: {file_path} - {e}")
+                        from src.common.logger_utils import get_logger
+                        logger = get_logger("file_utils")
+                        logger.error(f"json文件加载失败: {file_path}，错误: {e}")
     elif os.path.isfile(rules_path):
         # 如果是单个文件，直接加载
         try:
-            # 根据文件扩展名选择解析方法
-            if rules_path.endswith('.json'):
-                with open(rules_path, 'r', encoding='utf-8') as f:
-                    rules_data = json.load(f)
-            else:  # YAML文件
+            file_ext = os.path.splitext(rules_path)[1].lower()
+            is_yaml = file_ext in yaml_extensions
+            
+            if is_yaml:
+                # 是yaml文件，直接加载
                 import yaml
                 with open(rules_path, 'r', encoding='utf-8') as f:
                     rules_data = yaml.safe_load(f)
+                
+                print(f"[OK] 加载规则文件(yaml): {rules_path}")
+                from src.common.logger_utils import get_logger
+                logger = get_logger("file_utils")
+                logger.info(f"选择映射格式: yaml，文件: {rules_path}，原因: 文件为yaml格式")
+            else:
+                # 是json文件，直接加载
+                with open(rules_path, 'r', encoding='utf-8') as f:
+                    rules_data = json.load(f)
+                
+                print(f"[OK] 加载规则文件(json): {rules_path}")
+                from src.common.logger_utils import get_logger
+                logger = get_logger("file_utils")
+                logger.info(f"选择映射格式: json，文件: {rules_path}，原因: 文件为json格式")
             
             # 处理规则文件中的id字段
             mod_id = None
@@ -1664,10 +1777,15 @@ def load_mapping_rules(rules_path: Any) -> List[Dict[str, Any]]:
             # 提取规则
             extracted_rules = _extract_strings_rules_list(rules_data)
             mapping_rules.extend(extracted_rules)
-            print(f"[OK] 加载规则文件: {rules_path}")
         except Exception as e:
             print(f"[WARN]  加载规则文件失败: {rules_path} - {e}")
+            from src.common.logger_utils import get_logger
+            logger = get_logger("file_utils")
+            logger.error(f"加载规则文件失败: {rules_path}，错误: {e}")
     else:
         print(f"[ERROR] 规则路径不存在: {rules_path}")
+        from src.common.logger_utils import get_logger
+        logger = get_logger("file_utils")
+        logger.error(f"规则路径不存在: {rules_path}")
     
     return mapping_rules

@@ -1,0 +1,14 @@
+{
+  "process_id": "20251216_225603",
+  "mode": "Extract",
+  "sub_flow": "英文提取流程",
+  "start_time": "2025-12-16 22:56:06",
+  "end_time": "2025-12-16 22:56:06",
+  "status": "success",
+  "data": {
+    "total_count": 5,
+    "success_count": 5,
+    "fail_count": 0,
+    "fail_reasons": []
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "process_id": "20251216_225603_extract_Quality Captains 1.7.0",
+  "mode": "Extract",
+  "sub_flow": "英文提取流程",
+  "start_time": "2025-12-16 22:56:05",
+  "end_time": "2025-12-16 22:56:05",
+  "status": "success",
+  "data": {
+    "total_count": 580,
+    "success_count": 580,
+    "fail_count": 0,
+    "fail_reasons": [],
+    "unmapped_count": 580,
+    "output_path": "c:\\Users\\Roki\\Documents\\GitHub\\Tool\\Localization_Tool\\File\\output\\Extract_English\\Quality Captains 1.7.0"
+  },
+  "language": "English",
+  "output_path": "c:\\Users\\Roki\\Documents\\GitHub\\Tool\\Localization_Tool\\File\\output\\Extract_English\\Quality Captains 1.7.0"
+}
