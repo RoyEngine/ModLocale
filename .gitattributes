@@ -20,8 +20,9 @@ Thumbs.db
 *.tmp
 *.bak
 
-# Trae 
+# Trae IDE 配置
 .trae/
+trae/
 
 # If you generate new outputs/reports later, ignore these:
 # (Keep legacy/Localization_File/output/Extract_* as historical baselines for now)
