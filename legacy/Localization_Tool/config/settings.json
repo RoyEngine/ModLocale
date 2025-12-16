@@ -4,5 +4,5 @@
   "process_granularity_enabled": true,
   "precheck_mechanism_enabled": false,
   "show_welcome_guide": false,
-  "auto_open_output_folder": true
+  "auto_open_output_folder": false
 }

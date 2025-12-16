@@ -34,20 +34,24 @@ id_to_mod_info_mapping = {}
 # source_type: "source" 或 "source_backup"
 mod_mappings = {}
 
+# 全局分组映射表，用于存储mod_id到分组信息的映射
+# 格式：{mod_id: {"source_zh": str, "source_en": str, "rule_zh": str, "rule_en": str}}
+# 其中source_zh、source_en、rule_zh、rule_en为对应文件夹的绝对路径
+# 如果某个语言或类型不存在，则对应值为None
+group_mappings = {}
+
 # 项目所需的基础文件夹结构
 REQUIRED_FOLDERS = [
-    "File/source/Chinese",
-    "File/source/English",
-    "File/source_backup/Chinese",
-    "File/source_backup/English",
-    "File/output/Extract_Chinese",
-    "File/output/Extract_English",
-    "File/output/Extend_en2zh",
-    "File/output/Extend_zh2en",
-    "File/rule/Chinese",
-    "File/rule/English",
-    "tools/cfr-0.152",
-    "tools/procyon-decompiler-0.6.0",
+    "source/Chinese",
+    "source/English",
+    "source_backup/Chinese",
+    "source_backup/English",
+    "output/Extract_Chinese",
+    "output/Extract_English",
+    "output/Extend_en2zh",
+    "output/Extend_zh2en",
+    "rule/Chinese",
+    "rule/English",
 ]
 
 
@@ -324,11 +328,11 @@ def auto_rename_files_folders(base_path: str) -> Dict[str, Any]:
     failed_items = []
     skipped_items = []
     
-    # 获取正确的Localization_File路径
+    # 获取正确的File路径
     mod_root = get_directory("mod_root")
     if not mod_root:
         logger.error("无法获取mod_root路径，使用base_path作为替代")
-        mod_root = os.path.join(base_path, "Localization_File")
+        mod_root = os.path.join(base_path, "File")
     
     logger.info(f"开始自动重命名文件/文件夹，mod_root: {mod_root}")
     
@@ -471,7 +475,6 @@ def build_mod_mappings(mod_root: str) -> Dict[str, Any]:
     logger.info(f"开始构建mod映射关系，mod_root: {mod_root}")
     
     # 清空全局映射表
-    global mod_mappings
     mod_mappings.clear()
     
     success_count = 0
@@ -513,12 +516,15 @@ def build_mod_mappings(mod_root: str) -> Dict[str, Any]:
                     fail_count += 1
                     continue
                 
-                # 构建mod_id
+                # 构建mod_id，如果没有id字段，使用文件夹名称作为mod_id
                 mod_id = mod_info.mod_id
                 if not mod_id:
-                    logger.warning(f"mod文件夹 {mod_path} 缺少id信息，跳过")
-                    skipped_count += 1
-                    continue
+                    mod_id = mod_folder
+                    logger.warning(f"mod文件夹 {mod_path} 缺少id信息，使用文件夹名称作为mod_id: {mod_id}")
+                    # 更新mod_info对象的mod_id
+                    mod_info.mod_id = mod_id
+                    # 重新验证mod_info对象
+                    mod_info.valid = bool(mod_info.mod_id and (mod_info.name or mod_info.version))
                 
                 # 更新全局映射表
                 mod_mappings[mod_id] = {
@@ -605,6 +611,405 @@ def get_mod_info_by_path(mod_path: str) -> Dict[str, Any]:
             return mod_info
     
     return {}
+
+
+def build_group_mappings(mod_root: str) -> Dict[str, Any]:
+    """
+    构建分组映射关系，将mod_id与对应的source和rule文件夹关联起来
+    
+    Args:
+        mod_root: Localization_File路径
+        
+    Returns:
+        Dict[str, Any]: 包含映射结果的字典
+    """
+    timestamp = get_timestamp()
+    process_id = f"{timestamp}_build_group_mappings"
+    
+    logger.info(f"开始构建分组映射关系，mod_root: {mod_root}")
+    
+    # 清空全局分组映射表
+    global group_mappings
+    group_mappings.clear()
+    
+    success_count = 0
+    fail_count = 0
+    skipped_count = 0
+    
+    # 遍历mod_mappings，构建分组映射
+    for mod_id, mod_info in mod_mappings.items():
+        # 初始化分组信息
+        group_info = {
+            "source_zh": None,
+            "source_en": None,
+            "rule_zh": None,
+            "rule_en": None
+        }
+        
+        # 更新source文件夹路径
+        if mod_info["source_type"] == "source":
+            if mod_info["language"] == "Chinese":
+                group_info["source_zh"] = mod_info["mod_path"]
+            elif mod_info["language"] == "English":
+                group_info["source_en"] = mod_info["mod_path"]
+        
+        # 查找其他语言的source文件夹
+        for other_mod_info in mod_mappings.values():
+            if other_mod_info["mod_info"].mod_id == mod_id and other_mod_info["source_type"] == "source":
+                if other_mod_info["language"] == "Chinese" and not group_info["source_zh"]:
+                    group_info["source_zh"] = other_mod_info["mod_path"]
+                elif other_mod_info["language"] == "English" and not group_info["source_en"]:
+                    group_info["source_en"] = other_mod_info["mod_path"]
+        
+        # 查找rule文件夹
+        mod_name = mod_info["mod_info"].name
+        
+        # 中文rule文件夹
+        rule_zh_path = os.path.join(mod_root, "rule", "Chinese", mod_name)
+        if os.path.exists(rule_zh_path):
+            group_info["rule_zh"] = rule_zh_path
+        
+        # 英文rule文件夹
+        rule_en_path = os.path.join(mod_root, "rule", "English", mod_name)
+        if os.path.exists(rule_en_path):
+            group_info["rule_en"] = rule_en_path
+        
+        # 更新分组映射表
+        group_mappings[mod_id] = group_info
+        success_count += 1
+        
+        logger.info(f"构建分组映射: {mod_id}")
+        logger.debug(f"  source_zh: {group_info['source_zh']}")
+        logger.debug(f"  source_en: {group_info['source_en']}")
+        logger.debug(f"  rule_zh: {group_info['rule_zh']}")
+        logger.debug(f"  rule_en: {group_info['rule_en']}")
+    
+    logger.info(f"分组映射构建完成，成功: {success_count}, 失败: {fail_count}, 跳过: {skipped_count}")
+    
+    # 生成报告
+    report = generate_report(
+        process_id=process_id,
+        mode="Init",
+        sub_flow="构建分组映射关系",
+        status="success" if fail_count == 0 else "fail",
+        data={
+            "total_count": success_count + fail_count + skipped_count,
+            "success_count": success_count,
+            "fail_count": fail_count,
+            "skip_count": skipped_count,
+            "mod_ids": list(group_mappings.keys())
+        }
+    )
+    
+    return report
+
+
+def get_group_mapping() -> Dict[str, Any]:
+    """
+    获取完整的分组映射关系
+    
+    Returns:
+        Dict[str, Any]: 分组映射字典，格式：{mod_id: {"source_zh": str, "source_en": str, "rule_zh": str, "rule_en": str}}
+    """
+    return group_mappings
+
+
+def get_group_by_id(mod_id: str) -> Dict[str, Any]:
+    """
+    根据mod_id获取分组信息
+    
+    Args:
+        mod_id: mod的唯一标识
+        
+    Returns:
+        Dict[str, Any]: 分组信息字典，如果没有找到则返回空字典
+    """
+    return group_mappings.get(mod_id, {})
+
+
+def get_group_path(mod_id: str, group_type: str, language: str) -> str:
+    """
+    根据mod_id、分组类型和语言获取文件夹路径
+    
+    Args:
+        mod_id: mod的唯一标识
+        group_type: 分组类型，可选值："source" 或 "rule"
+        language: 语言类型，可选值："Chinese" 或 "English"
+        
+    Returns:
+        str: 文件夹路径，如果没有找到则返回空字符串
+    """
+    group_info = group_mappings.get(mod_id, {})
+    key = f"{group_type}_{'zh' if language == 'Chinese' else 'en'}"
+    return group_info.get(key, "")
+
+
+def run_extract_function(mod_id: str, language: str) -> Dict[str, Any]:
+    """
+    执行extract_mode的核心功能，提取字符串并生成规则文件和报告文档
+    
+    Args:
+        mod_id: mod的唯一标识
+        language: 语言类型，可选值："Chinese" 或 "English"
+        
+    Returns:
+        Dict[str, Any]: 执行结果
+    """
+    from src.extract_mode.core import run_extract_sub_flow
+    
+    logger.info(f"开始执行extract功能，mod_id: {mod_id}, language: {language}")
+    
+    # 获取分组信息
+    group_info = get_group_by_id(mod_id)
+    
+    # 根据语言选择对应的source文件夹
+    source_path = group_info.get(f"source_{'zh' if language == 'Chinese' else 'en'}")
+    if not source_path:
+        logger.error(f"未找到mod_id: {mod_id}的{language}源文件夹")
+        return {
+            "status": "fail",
+            "data": {
+                "total_count": 1,
+                "success_count": 0,
+                "fail_count": 1,
+                "fail_reasons": [f"未找到mod_id: {mod_id}的{language}源文件夹"]
+            }
+        }
+    
+    # 构建子流程名称
+    sub_flow = f"已有{language}src文件夹提取流程" if os.path.exists(os.path.join(source_path, "src")) else f"没有{language}src文件夹提取流程"
+    
+    # 执行extract流程
+    result = run_extract_sub_flow(sub_flow, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+    
+    logger.info(f"extract功能执行完成，mod_id: {mod_id}, language: {language}, 状态: {result['status']}")
+    
+    return result
+
+
+def run_extend_function(mod_id: str, mapping_direction: str) -> Dict[str, Any]:
+    """
+    执行extend_mode的核心功能，使用规则文件进行字符串映射
+    
+    Args:
+        mod_id: mod的唯一标识
+        mapping_direction: 映射方向，可选值："zh2en" 或 "en2zh"
+        
+    Returns:
+        Dict[str, Any]: 执行结果
+    """
+    from src.extend_mode.core import run_extend_sub_flow
+    
+    logger.info(f"开始执行extend功能，mod_id: {mod_id}, 映射方向: {mapping_direction}")
+    
+    # 获取分组信息
+    group_info = get_group_by_id(mod_id)
+    
+    # 根据映射方向选择对应的source和rule文件夹
+    if mapping_direction == "zh2en":
+        source_path = group_info.get("source_zh")
+        rule_path = group_info.get("rule_zh")
+        language = "Chinese"
+    else:
+        source_path = group_info.get("source_en")
+        rule_path = group_info.get("rule_en")
+        language = "English"
+    
+    if not source_path:
+        logger.error(f"未找到mod_id: {mod_id}的源文件夹")
+        return {
+            "status": "fail",
+            "data": {
+                "total_count": 1,
+                "success_count": 0,
+                "fail_count": 1,
+                "fail_reasons": [f"未找到mod_id: {mod_id}的源文件夹"]
+            }
+        }
+    
+    # 构建子流程名称
+    if rule_path and os.path.exists(rule_path):
+        sub_flow = f"已有{language}映射规则文件流程"
+    elif os.path.exists(os.path.join(source_path, "src")):
+        sub_flow = f"已有{language}src文件夹映射流程"
+    else:
+        sub_flow = f"没有{language}src文件夹映射流程"
+    
+    # 执行extend流程
+    result = run_extend_sub_flow(sub_flow, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+    
+    logger.info(f"extend功能执行完成，mod_id: {mod_id}, 映射方向: {mapping_direction}, 状态: {result['status']}")
+    
+    return result
+
+
+def run_decompile_function(mod_id: str, language: str) -> Dict[str, Any]:
+    """
+    执行decompile_mode的核心功能，反编译JAR文件获取src文件夹
+    
+    Args:
+        mod_id: mod的唯一标识
+        language: 语言类型，可选值："Chinese" 或 "English"
+        
+    Returns:
+        Dict[str, Any]: 执行结果
+    """
+    from src.decompile_mode.core import run_decompile_sub_flow
+    
+    logger.info(f"开始执行decompile功能，mod_id: {mod_id}, language: {language}")
+    
+    # 获取分组信息
+    group_info = get_group_by_id(mod_id)
+    
+    # 根据语言选择对应的source文件夹
+    source_path = group_info.get(f"source_{'zh' if language == 'Chinese' else 'en'}")
+    if not source_path:
+        logger.error(f"未找到mod_id: {mod_id}的{language}源文件夹")
+        return {
+            "status": "fail",
+            "data": {
+                "total_count": 1,
+                "success_count": 0,
+                "fail_count": 1,
+                "fail_reasons": [f"未找到mod_id: {mod_id}的{language}源文件夹"]
+            }
+        }
+    
+    # 检查是否有jars文件夹
+    jars_path = os.path.join(source_path, "jars")
+    if not os.path.exists(jars_path) or not os.listdir(jars_path):
+        logger.error(f"未找到mod_id: {mod_id}的{language}源文件夹中的jars文件夹或jars文件夹为空")
+        return {
+            "status": "fail",
+            "data": {
+                "total_count": 1,
+                "success_count": 0,
+                "fail_count": 1,
+                "fail_reasons": [f"未找到mod_id: {mod_id}的{language}源文件夹中的jars文件夹或jars文件夹为空"]
+            }
+        }
+    
+    # 执行decompile流程
+    result = run_decompile_sub_flow("反编译目录中所有JAR文件", os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+    
+    logger.info(f"decompile功能执行完成，mod_id: {mod_id}, language: {language}, 状态: {result['status']}")
+    
+    return result
+
+
+def run_decompile_and_extract(mod_id: str, language: str) -> Dict[str, Any]:
+    """
+    执行decompile_mode的核心功能，反编译JAR文件获取src文件夹，然后调用extract功能
+    
+    Args:
+        mod_id: mod的唯一标识
+        language: 语言类型，可选值："Chinese" 或 "English"
+        
+    Returns:
+        Dict[str, Any]: 执行结果
+    """
+    logger.info(f"开始执行decompile并extract功能，mod_id: {mod_id}, language: {language}")
+    
+    # 1. 执行decompile功能
+    decompile_result = run_decompile_function(mod_id, language)
+    if decompile_result['status'] == 'fail':
+        logger.error(f"decompile功能执行失败，mod_id: {mod_id}, language: {language}")
+        return decompile_result
+    
+    # 2. 执行extract功能
+    extract_result = run_extract_function(mod_id, language)
+    
+    logger.info(f"decompile并extract功能执行完成，mod_id: {mod_id}, language: {language}, 状态: {extract_result['status']}")
+    
+    return extract_result
+
+
+def run_parallel_processing(func, mod_ids: List[str], max_processes: int = None, timeout: int = None, **kwargs) -> Dict[str, Any]:
+    """
+    并行处理多个mod
+    
+    Args:
+        func: 要执行的函数
+        mod_ids: mod_id列表
+        max_processes: 最大进程数，默认使用CPU核心数的一半
+        timeout: 超时时间（秒），默认无超时
+        **kwargs: 传递给func的参数
+        
+    Returns:
+        Dict[str, Any]: 执行结果
+    """
+    import multiprocessing
+    import time
+    
+    logger.info(f"开始并行处理，函数: {func.__name__}, mod数量: {len(mod_ids)}, 参数: {kwargs}")
+    
+    # 合理设置最大进程数，避免资源耗尽
+    if max_processes is None:
+        # 使用CPU核心数的一半，最多不超过8个进程
+        max_processes = min(multiprocessing.cpu_count() // 2, 8)
+        logger.info(f"自动设置最大进程数: {max_processes}")
+    
+    # 使用进程池并行处理
+    with multiprocessing.Pool(processes=max_processes) as pool:
+        # 准备任务参数
+        tasks = [(mod_id,) for mod_id in mod_ids]
+        
+        try:
+            # 执行任务，支持超时设置
+            if timeout:
+                results = pool.starmap(func, tasks, timeout=timeout, **kwargs)
+            else:
+                results = pool.starmap(func, tasks, **kwargs)
+        except multiprocessing.TimeoutError:
+            logger.error(f"并行处理超时，已执行 {timeout} 秒")
+            pool.terminate()
+            pool.join()
+            return {
+                "status": "fail",
+                "data": {
+                    "total_count": len(mod_ids),
+                    "success_count": 0,
+                    "fail_count": len(mod_ids),
+                    "fail_reasons": [f"并行处理超时，已执行 {timeout} 秒"]
+                }
+            }
+        except Exception as e:
+            logger.exception(f"并行处理发生异常: {e}")
+            pool.terminate()
+            pool.join()
+            return {
+                "status": "fail",
+                "data": {
+                    "total_count": len(mod_ids),
+                    "success_count": 0,
+                    "fail_count": len(mod_ids),
+                    "fail_reasons": [f"并行处理发生异常: {str(e)}"]
+                }
+            }
+    
+    # 合并结果
+    total_count = len(results)
+    success_count = sum(1 for result in results if result['status'] == 'success')
+    fail_count = total_count - success_count
+    
+    fail_reasons = []
+    for i, result in enumerate(results):
+        if result['status'] == 'fail':
+            fail_reasons.extend([f"mod_id: {mod_ids[i]}, 原因: {reason}" for reason in result['data']['fail_reasons']])
+    
+    logger.info(f"并行处理完成，总计: {total_count}, 成功: {success_count}, 失败: {fail_count}, 最大进程数: {max_processes}")
+    
+    return {
+        "status": "success" if fail_count == 0 else "fail",
+        "data": {
+            "total_count": total_count,
+            "success_count": success_count,
+            "fail_count": fail_count,
+            "fail_reasons": fail_reasons,
+            "max_processes": max_processes,
+            "timeout": timeout
+        }
+    }
 
 
 def run_init_tasks(base_path: str) -> Dict[str, Any]:
@@ -700,13 +1105,18 @@ def run_init_tasks(base_path: str) -> Dict[str, Any]:
     logger.info("开始构建mod映射关系", extra={"stage": "BUILD_MOD_MAPPINGS"})
     mapping_result = build_mod_mappings(mod_root)
     
+    # 6. 构建分组映射关系
+    logger.info("开始构建分组映射关系", extra={"stage": "BUILD_GROUP_MAPPINGS"})
+    group_result = build_group_mappings(mod_root)
+    
     # 合并结果
     total_count = (
         structure_result['data']['total_count'] + 
         rename_result['data']['total_count'] +
         rename_mod_result['total_count'] +
         restore_result['total_count'] +
-        mapping_result['data']['total_count']
+        mapping_result['data']['total_count'] +
+        group_result['data']['total_count']
     )
     
     success_count = (
@@ -714,7 +1124,8 @@ def run_init_tasks(base_path: str) -> Dict[str, Any]:
         rename_result['data']['success_count'] +
         rename_mod_result['success_count'] +
         restore_result['success_count'] +
-        mapping_result['data']['success_count']
+        mapping_result['data']['success_count'] +
+        group_result['data']['success_count']
     )
     
     fail_count = (
@@ -722,7 +1133,8 @@ def run_init_tasks(base_path: str) -> Dict[str, Any]:
         rename_result['data']['fail_count'] +
         rename_mod_result['fail_count'] +
         restore_result['fail_count'] +
-        mapping_result['data']['fail_count']
+        mapping_result['data']['fail_count'] +
+        group_result['data']['fail_count']
     )
     
     fail_reasons = (
@@ -730,7 +1142,8 @@ def run_init_tasks(base_path: str) -> Dict[str, Any]:
         rename_result['data']['fail_reasons'] +
         rename_mod_result['fail_reasons'] +
         restore_result['fail_reasons'] +
-        mapping_result['data'].get('fail_reasons', [])
+        mapping_result['data'].get('fail_reasons', []) +
+        group_result['data'].get('fail_reasons', [])
     )
     
     # 生成综合报告
@@ -748,7 +1161,8 @@ def run_init_tasks(base_path: str) -> Dict[str, Any]:
             "rename_result": rename_result,
             "rename_mod_result": rename_mod_result,
             "restore_result": restore_result,
-            "mapping_result": mapping_result
+            "mapping_result": mapping_result,
+            "group_result": group_result
         }
     )
     

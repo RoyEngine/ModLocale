@@ -37,22 +37,23 @@ from src.decompile_mode.core import run_decompile_sub_flow  # noqa: E402
 logger = setup_logger("localization_tool")
 
 
+# 修改select_main_mode函数，移除高级模式的重复选项
 def select_main_mode() -> str:
     """
-    让用户选择主模式(Extract或Extend或高级模式或Decompile模式)
+    让用户选择主模式(Extract或Extend或Decompile或文件管理模式)
 
     Returns:
         str: 选择的模式编号("1"、"2"、"3"或"4")
     """
-    print("==========================================")
+    print("===========================================")
     print("             本地化工具")
-    print("==========================================")
+    print("===========================================")
     print("请选择本地化模式：")
     print("1. Extract模式(仅提取字符串，默认简洁模式)")
     print("2. Extend模式(执行映射流程，默认简洁模式)")
-    print("3. 高级模式(自定义提取/映射，可配置粒度/主体)")
-    print("4. Decompile模式(执行JAR文件反编译/提取)")
-    print("==========================================")
+    print("3. Decompile模式(执行JAR文件反编译/提取)")
+    print("4. 文件管理模式(文件夹创建、重命名、备份恢复)")
+    print("===========================================")
 
     while True:
         choice = input("输入数字(1/2/3/4，直接回车默认选1)：").strip()
@@ -63,6 +64,7 @@ def select_main_mode() -> str:
         print(f"输入无效，请输入正确的数字(1/2/3/4)！")
 
 
+# 简化select_extract_sub_flow函数，确保输出路径正确
 def select_extract_sub_flow() -> str:
     """
     让用户选择Extract模式的子流程
@@ -83,32 +85,38 @@ def select_extract_sub_flow() -> str:
     if detection_result["english_src"]:
         print("✅ 检测到source/English/src文件夹(含英文文本)，将优先提取此处内容")
     elif detection_result["english_jar"]:
-        print("✅ 检测到source/English/jar文件夹，将反编译未汉化jar包")
+        print("✅ 检测到source/English/jars文件夹，将反编译未汉化jar包")
     else:
-        print("❌ 未检测到source/English/src或jar文件夹，请先准备源文件")
+        print("❌ 未检测到source/English/src或jars文件夹，请先准备源文件")
     
     from src.common.config_utils import get_directory
     output_root = get_directory("output")
     if output_root:
         print(f"📤 提取结果将保存到：{output_root}/Extract_English/")
     else:
-        print("📤 提取结果将保存到：主目录/Localization_File/output/Extract_English/")
+        print("📤 提取结果将保存到：主目录/File/output/Extract_English/")
     print("   包含：字符串映射规则文件 + 流程报告 + mod_info.json")
     print("==========================================")
     print("请选择提取语言：")
     print("1. 提取英文(优先检测src/无则反编译未汉化jar)")
     print("2. 提取中文(优先检测src/无则反编译已汉化jar)")
+    print("0. 返回上一级菜单")
     print("==========================================")
 
     while True:
-        lang_choice = input("输入数字(1/2，直接回车默认选1)：").strip()
+        lang_choice = input("输入数字(1/2/0，直接回车默认选1)：").strip()
         if not lang_choice:  # 直接回车，默认选1
             return "英文提取流程"
-        elif lang_choice in ["1", "2"]:
-            return "英文提取流程" if lang_choice == "1" else "中文提取流程"
-        print(f"输入无效，请输入正确的数字(1/2)！")
+        elif lang_choice == "1":
+            return "英文提取流程"
+        elif lang_choice == "2":
+            return "中文提取流程"
+        elif lang_choice == "0":
+            return "return_to_previous"
+        print(f"输入无效，请输入正确的数字(1/2/0)！")
 
 
+# 简化select_extend_sub_flow函数，确保输出路径正确
 def select_extend_sub_flow() -> str:
     """
     让用户选择Extend模式的子流程
@@ -129,50 +137,61 @@ def select_extend_sub_flow() -> str:
     from src.common.config_utils import get_directory
     rule_path = get_directory("rules")
     if rule_path and os.path.exists(rule_path):
-        print("✅ 检测到rule文件夹，将优先使用映射规则文件")
+        print(f"✅ 检测到rule文件夹，将优先使用映射规则文件：{rule_path}")
     else:
-        print("❌ 未检测到rule文件夹，将直接检测src/jar文件夹")
+        print("❌ 未检测到rule文件夹，将直接检测src/jars文件夹")
     
     if detection_result["chinese_src"] or detection_result["chinese_jar"]:
         print("✅ 检测到source/Chinese文件夹，可进行中文相关映射")
     if detection_result["english_src"] or detection_result["english_jar"]:
         print("✅ 检测到source/English文件夹，可进行英文相关映射")
     
-    from src.common.config_utils import get_directory
     output_root = get_directory("output")
     if output_root:
         print(f"📤 映射结果将保存到：{output_root}/Extend_xxx/")
     else:
-        print("📤 映射结果将保存到：主目录/Localization_File/output/Extend_xxx/")
+        print("📤 映射结果将保存到：主目录/File/output/Extend_xxx/")
     print("   包含：映射后的源文件夹 + 字符串映射规则文件 + 流程报告 + mod_info.json")
     print("==========================================")
     
     print("请选择映射方向：")
-    print("1. 中文映射到英文(优先检测映射规则/无则自动检测src/jar)")
-    print("2. 英文映射到中文(优先检测映射规则/无则自动检测src/jar)")
+    print("1. 中文映射到英文(优先检测映射规则/无则自动检测src/jars)")
+    print("2. 英文映射到中文(优先检测映射规则/无则自动检测src/jars)")
+    print("0. 返回上一级菜单")
     print("==========================================")
     
     while True:
-        direction_choice = input("输入数字(1/2，直接回车默认选1)：").strip()
+        direction_choice = input("输入数字(1/2/0，直接回车默认选1)：").strip()
         if not direction_choice:  # 直接回车，默认选1
             return "已有中文src文件夹映射流程"
-        elif direction_choice in ["1", "2"]:
-            mapping_direction = "中文→英文" if direction_choice == "1" else "英文→中文"
+        elif direction_choice == "1":
+            mapping_direction = "中文→英文"
             
             # 显示执行信息
             print(f"\n==========================================")
             print(f"        Extend模式 - [{mapping_direction}] 简洁模式")
             print("==========================================")
-            print("正在执行：优先检测映射规则文件夹→检测src文件夹→无则反编译jar")
+            print("正在执行：优先检测映射规则文件夹→检测src/jars文件夹→映射字符串")
             print("流程步骤：创建文件夹→重命名模组→恢复备份→字符串映射...")
             
-            if direction_choice == "1":
-                return "已有中文src文件夹映射流程"
-            else:
-                return "已有英文src文件夹映射流程"
-        print(f"输入无效，请输入正确的数字(1/2)！")
+            return "已有中文src文件夹映射流程"
+        elif direction_choice == "2":
+            mapping_direction = "英文→中文"
+            
+            # 显示执行信息
+            print(f"\n==========================================")
+            print(f"        Extend模式 - [{mapping_direction}] 简洁模式")
+            print("==========================================")
+            print("正在执行：优先检测映射规则文件夹→检测src/jars文件夹→映射字符串")
+            print("流程步骤：创建文件夹→重命名模组→恢复备份→字符串映射...")
+            
+            return "已有英文src文件夹映射流程"
+        elif direction_choice == "0":
+            return "return_to_previous"
+        print(f"输入无效，请输入正确的数字(1/2/0)！")
 
 
+# 简化select_decompile_sub_flow函数，确保逻辑清晰
 def select_decompile_sub_flow() -> str:
     """
     让用户选择Decompile模式的子流程
@@ -190,14 +209,17 @@ def select_decompile_sub_flow() -> str:
     print("2. 反编译目录中所有JAR文件")
     print("3. 提取单个JAR文件内容")
     print("4. 提取目录中所有JAR文件内容")
-    print("==========================================")
+    print("0. 返回上一级菜单")
+    print("===========================================")
     
     while True:
-        decompile_choice = input("输入数字(1-4，直接回车默认选1)：").strip()
+        decompile_choice = input("输入数字(0-4，直接回车默认选1)：").strip()
         if not decompile_choice:  # 直接回车，默认选1
             decompile_choice = "1"
         
-        if decompile_choice in ["1", "2", "3", "4"]:
+        if decompile_choice == "0":
+            return "return_to_previous"
+        elif decompile_choice in ["1", "2", "3", "4"]:
             sub_flows = {
                 "1": "反编译单个JAR文件",
                 "2": "反编译目录中所有JAR文件",
@@ -210,207 +232,36 @@ def select_decompile_sub_flow() -> str:
             print(f"\n执行配置：")
             print(f"模式：Decompile")
             print(f"流程：{selected_sub_flow}")
-            print("==========================================")
+            print("===========================================")
             
             return selected_sub_flow
         else:
-            print(f"输入无效，请输入正确的数字(1-4)！")
+            print(f"输入无效，请输入正确的数字(0-4)！")
 
 
-def toggle_advanced_mode() -> None:
-    """
-    切换高级模式的开启/关闭状态
-    """
-    global ADVANCED_MODE_ENABLED
-    ADVANCED_MODE_ENABLED = not ADVANCED_MODE_ENABLED
-    set_setting("advanced_mode_enabled", ADVANCED_MODE_ENABLED)
-    status = "开启" if ADVANCED_MODE_ENABLED else "关闭"
-    print(f"\n✅ 高级模式已{status}！")
+# 移除toggle_advanced_mode函数，简化代码
 
 
-def set_main_language() -> None:
-    """
-    设置主体语言
-    """
-    global MAIN_LANGUAGE
-    
-    print("\n==========================================")
-    print("        高级模式 - 主体语言设置")
-    print("==========================================")
-    print(f"当前主体语言：{MAIN_LANGUAGE}")
-    print("请选择主体语言：")
-    print("1. 全部")
-    print("2. 中文")
-    print("3. 英文")
-    print("==========================================")
-    
-    while True:
-        choice = input("输入数字(1/2/3，直接回车默认选1)：").strip()
-        if not choice:  # 直接回车，默认选1
-            choice = "1"
-        if choice in ["1", "2", "3"]:
-            languages = ["全部", "中文", "英文"]
-            MAIN_LANGUAGE = languages[int(choice) - 1]
-            set_setting("main_language", MAIN_LANGUAGE)
-            print(f"✅ 主体语言已设置为：{MAIN_LANGUAGE}！")
-            break
-        print(f"输入无效，请输入正确的数字(1/2/3)！")
+# 移除set_main_language函数，简化代码
 
 
-def toggle_process_granularity() -> None:
-    """
-    切换流程粒度的开启/关闭状态
-    """
-    global PROCESS_GRANULARITY_ENABLED
-    PROCESS_GRANULARITY_ENABLED = not PROCESS_GRANULARITY_ENABLED
-    set_setting("process_granularity_enabled", PROCESS_GRANULARITY_ENABLED)
-    status = "开启" if PROCESS_GRANULARITY_ENABLED else "关闭"
-    print(f"\n✅ 流程粒度控制已{status}！")
+# 移除toggle_process_granularity函数，简化代码
 
 
-def toggle_precheck_mechanism() -> None:
-    """
-    切换前置检查的开启/关闭状态
-    """
-    global PRECHECK_MECHANISM_ENABLED
-    global SHOW_WELCOME_GUIDE
-    
-    PRECHECK_MECHANISM_ENABLED = not PRECHECK_MECHANISM_ENABLED
-    SHOW_WELCOME_GUIDE = PRECHECK_MECHANISM_ENABLED
-    set_setting("precheck_mechanism_enabled", PRECHECK_MECHANISM_ENABLED)
-    set_setting("show_welcome_guide", SHOW_WELCOME_GUIDE)
-    status = "开启" if PRECHECK_MECHANISM_ENABLED else "关闭"
-    print(f"\n✅ 前置检查机制已{status}！")
+# 移除toggle_precheck_mechanism函数，简化代码
 
 
-def advanced_settings() -> None:
-    """
-    高级模式CLI设置系统主入口
-    """
-    while True:
-        print("\n==========================================")
-        print("        高级模式 - CLI设置系统")
-        print("==========================================")
-        
-        # 显示高级模式主开关状态
-        status = "开启" if ADVANCED_MODE_ENABLED else "关闭"
-        print(f"1. 高级模式主开关：{status}")
-        
-        # 仅在高级模式开启状态下，显示并允许配置其他三个分支选项
-        if ADVANCED_MODE_ENABLED:
-            print(f"2. 主体语言设置：{MAIN_LANGUAGE}")
-            print(f"3. 流程粒度控制：{'开启' if PROCESS_GRANULARITY_ENABLED else '关闭'}")
-            print(f"4. 前置检查机制：{'开启' if PRECHECK_MECHANISM_ENABLED else '关闭'}")
-        
-        print("5. 返回主菜单")
-        print("==========================================")
-        
-        choice = input("输入数字(1-5，直接回车默认选5)：").strip()
-        if not choice:  # 直接回车，默认选5
-            choice = "5"
-        
-        if choice == "1":
-            # 切换高级模式主开关
-            toggle_advanced_mode()
-        elif choice == "2" and ADVANCED_MODE_ENABLED:
-            # 设置主体语言
-            set_main_language()
-        elif choice == "3" and ADVANCED_MODE_ENABLED:
-            # 切换流程粒度控制
-            toggle_process_granularity()
-        elif choice == "4" and ADVANCED_MODE_ENABLED:
-            # 切换前置检查机制
-            toggle_precheck_mechanism()
-        elif choice == "5":
-            # 返回主菜单
-            break
-        else:
-            print(f"输入无效，请输入正确的数字(1-5)！")
+# 移除advanced_settings函数，简化代码
 
 
-def select_cli_settings(subject: str = "", submode: str = "", granularity: str = "") -> None:
-    """
-    让用户选择CLI设置选项(关闭前置检查、关闭完成工作后自动打开输出文件夹)
-    
-    Args:
-        subject: 操作主体
-        submode: 子模式
-        granularity: 流程粒度
-    """
-    # 构建标题
-    title_suffix = f" [{subject}-{submode}-{granularity}]" if subject and submode and granularity else ""
-    
-    # 显示CLI设置选项组
-    print(f"\n==========================================")
-    print(f"        高级模式{title_suffix} CLI设置")
-    print("==========================================")
-    print("请选择CLI设置选项(默认：关闭前置检查，自动打开输出文件夹)：")
-    print("1. 关闭前置检查(直接进入主菜单，适合自动化测试)")
-    print("2. 开启前置检查(显示欢迎引导和文件夹结构说明)")
-    print("3. 关闭完成工作后自动打开输出文件夹")
-    print("4. 开启完成工作后自动打开输出文件夹")
-    print("==========================================")
-    
-    # 重置为默认值
-    global SHOW_WELCOME_GUIDE
-    global AUTO_OPEN_OUTPUT_FOLDER
-    SHOW_WELCOME_GUIDE = False  # 默认关闭前置检查
-    AUTO_OPEN_OUTPUT_FOLDER = True  # 默认自动打开输出文件夹
-    
-    # 循环获取用户输入，直到输入有效
-    while True:
-        cli_choice = input("输入数字(1/2/3/4，直接回车默认选1,4)：").strip()
-        if not cli_choice:  # 直接回车，使用默认设置
-            break
-        
-        # 检查输入是否有效
-        if cli_choice in ["1", "2", "3", "4"]:
-            if cli_choice == "1":
-                SHOW_WELCOME_GUIDE = False
-            elif cli_choice == "2":
-                SHOW_WELCOME_GUIDE = True
-            elif cli_choice == "3":
-                AUTO_OPEN_OUTPUT_FOLDER = False
-            elif cli_choice == "4":
-                AUTO_OPEN_OUTPUT_FOLDER = True
-            break
-        else:
-            print(f"输入无效，请输入正确的数字(1/2/3/4)！")
-    
-    # 保存设置
-    set_setting("show_welcome_guide", SHOW_WELCOME_GUIDE)
-    set_setting("auto_open_output_folder", AUTO_OPEN_OUTPUT_FOLDER)
+# 移除select_cli_settings函数，简化代码
 
 
-def select_advanced_mode() -> str:
-    """
-    高级模式入口，进入CLI设置系统
-    
-    Returns:
-        str: 选择的子流程
-    """
-    # 进入高级模式CLI设置系统
-    advanced_settings()
-    
-    # CLI设置完成后，重新显示主菜单并获取用户选择
-    mode = select_main_mode()
-    
-    # 根据用户选择的模式，获取对应的子流程
-    if mode == "1":
-        # Extract模式
-        return select_extract_sub_flow()
-    elif mode == "2":
-        # Extend模式
-        return select_extend_sub_flow()
-    else:
-        # 再次进入高级模式CLI设置系统
-        return select_advanced_mode()
-
-
+# 修改check_project_structure函数，确保目录结构符合配置
 def check_project_structure() -> bool:
     """
     检查并创建必要的项目结构，严格按照框架文档生成目录
-    
+
     Returns:
         bool: 项目结构检查结果
     """
@@ -449,30 +300,9 @@ def check_project_structure() -> bool:
         os.path.join(localization_file_path, "output", "Extend_zh2en"),
     ]
     
-    # 从配置中获取其他目录路径
-    rule_path = get_directory("rules")
-    output_path = get_directory("output")
-    logs_path = get_directory("logs")
-    
-    # 定义工具内部的必要文件夹结构 - 严格按照框架文档
-    tool_folders = [
-        # 工具内部的规则目录
-        os.path.join(rule_path, "English"),
-        os.path.join(rule_path, "Chinese"),
-        # 工具内部的输出和日志目录
-        output_path,
-        logs_path
-    ]
-    
     try:
         # 创建 Localization_File 目录结构
         for folder in localization_folders:
-            if not os.path.exists(folder):
-                os.makedirs(folder, exist_ok=True)
-                logger.info(f"创建文件夹: {folder}")
-        
-        # 创建工具内部目录结构
-        for folder in tool_folders:
             if not os.path.exists(folder):
                 os.makedirs(folder, exist_ok=True)
                 logger.info(f"创建文件夹: {folder}")
@@ -487,6 +317,7 @@ def check_project_structure() -> bool:
         return False
 
 
+# 修改show_welcome_guide函数，确保路径正确
 def show_welcome_guide():
     """
     显示欢迎信息和文件夹结构引导
@@ -495,9 +326,9 @@ def show_welcome_guide():
     print("                本地化工具")
     print("==========================================")
     print("📌 【前置检查】请确认已按以下结构存放文件：")
-    print("主目录/Localization_File/")
-    print("├─ source/English/(src/jar) ｜ 英文源文件")
-    print("├─ source/Chinese/(src/jar) ｜ 中文源文件")
+    print("Localization_Tool/File/")
+    print("├─ source/English/(src/jars) ｜ 英文源文件")
+    print("├─ source/Chinese/(src/jars) ｜ 中文源文件")
     print("├─ rule/(可选)               ｜ 映射规则文件")
     print("└─ output/(自动生成)         ｜ 结果输出区")
     print("💡 忘记结构？输入「help」查看详细引导，输入「start」进入主菜单")
@@ -515,6 +346,7 @@ def show_welcome_guide():
             print("输入无效，请输入「help」或「start」：")
 
 
+# 简化show_detailed_guide函数，确保路径正确
 def show_detailed_guide():
     """
     显示详细的用户引导
@@ -525,43 +357,45 @@ def show_detailed_guide():
     print("在开始操作前，请先完成「文件夹准备」(30秒即可搞定)，工具会严格按照你存放的文件夹结构识别文件，")
     print("输出内容也会统一整理到指定文件夹，全程无需手动翻找～")
     print("\n## 📂 第一步：主目录结构准备(必看！)")
-    print("请先在电脑任意位置创建一个「主目录」(建议命名：`Tool`)，并按以下结构存放文件夹，")
+    print("请先在Localization_Tool目录下创建「File」文件夹，并按以下结构存放文件夹，")
     print("**命名必须严格一致**(工具自动识别，错字会导致检测失败)：")
-    print("```")
-    print("主目录/ (例如：d:/Poki/Tool)")
-    print("├─ Localization_File/ (源文件存放区，工具自动创建！)")
-    print("│  ├─ source/ (源文件存放区)")
-    print("│  │  ├─ English/ (英文源文件)")
-    print("│  │  │  ├─ src/ (可选：已有英文源码文件夹，放待提取的英文文本文件)")
-    print("│  │  │  └─ jar/ (可选：待反编译的英文jar包，未汉化版)")
-    print("│  │  └─ Chinese/ (中文源文件)")
-    print("│  │     ├─ src/ (可选：已有中文化源码文件夹，放待提取/映射的中文文本文件)")
-    print("│  │     └─ jar/ (可选：待反编译的中文jar包，已汉化版)")
-    print("│  ├─ rule/ (映射规则存放区，Extend模式专属，可选)")
-    print("│  │  ├─ English/ (英文映射规则文件)")
-    print("│  │  └─ Chinese/ (中文映射规则文件)")
-    print("│  └─ output/ (工具自动生成，无需创建！所有提取/映射结果+报告都在这里)")
-    print("└─ Localization_Tool/ (工具主目录)")
-    print("   ├─ src/ (工具源代码)")
-    print("   ├─ config/ (配置文件)")
-    print("   ├─ logs/ (日志文件)")
-    print("   └─ scripts/ (启动脚本)")
-    print("```")
+    print("""```
+Localization_Tool/ (工具主目录)
+├─ File/ (源文件存放区，工具自动创建！)
+│  ├─ source/ (源文件存放区)
+│  │  ├─ English/ (英文源文件)
+│  │  │  ├─ src/ (可选：已有英文源码文件夹，放待提取的英文文本文件)
+│  │  │  └─ jars/ (可选：待反编译的英文jar包，未汉化版)
+│  │  └─ Chinese/ (中文源文件)
+│  │     ├─ src/ (可选：已有中文化源码文件夹，放待提取/映射的中文文本文件)
+│  │     └─ jars/ (可选：待反编译的中文jar包，已汉化版)
+│  ├─ rule/ (映射规则存放区，Extend模式专属，可选)
+│  │  ├─ English/ (英文映射规则文件)
+│  │  └─ Chinese/ (中文映射规则文件)
+│  └─ output/ (工具自动生成，无需创建！所有提取/映射结果+报告都在这里)
+└─ src/ (工具源代码)
+   ├─ common/ (通用模块)
+   ├─ decompile_mode/ (反编译模式)
+   ├─ extract_mode/ (提取模式)
+   ├─ extend_mode/ (映射模式)
+   └─ init_mode/ (初始化模式)
+```""")
     print("\n### ✨ 核心引导：不同模式对应哪些文件夹？")
     print("| 操作模式       | 需准备的源文件夹       | 工具会自动处理什么？|")
     print("|----------------|------------------------|---------------------------------------------|")
-    print("| Extract-提取英文 | Localization_File/source/English/src 或 Localization_File/source/English/jar | 优先读src，无则反编译jar，结果存到Localization_File/output/Extract_English |")
-    print("| Extract-提取中文 | Localization_File/source/Chinese/src 或 Localization_File/source/Chinese/jar | 优先读src，无则反编译jar，结果存到Localization_File/output/Extract_Chinese |")
-    print("| Extend-中映射英 | Localization_File/source/Chinese/xxx + Localization_File/rule/Chinese/xxx | 优先读映射规则，无则读src/jar，结果存到Localization_File/output/Extend_Zh2En |")
-    print("| Extend-英映射中 | Localization_File/source/English/xxx + Localization_File/rule/English/xxx | 优先读映射规则，无则读src/jar，结果存到Localization_File/output/Extend_En2Zh |")
-    print("\n💡 提示：Localization_File 目录会在工具启动时自动创建！")
+    print("| Extract-提取英文 | Localization_Tool/File/source/English/src 或 Localization_Tool/File/source/English/jars | 优先读src，无则反编译jar，结果存到Localization_Tool/File/output/Extract_English |")
+    print("| Extract-提取中文 | Localization_Tool/File/source/Chinese/src 或 Localization_Tool/File/source/Chinese/jars | 优先读src，无则反编译jar，结果存到Localization_Tool/File/output/Extract_Chinese |")
+    print("| Extend-中映射英 | Localization_Tool/File/source/Chinese/xxx + Localization_Tool/File/rule/Chinese/xxx | 优先读映射规则，无则读src/jars，结果存到Localization_Tool/File/output/Extend_Zh2En |")
+    print("| Extend-英映射中 | Localization_Tool/File/source/English/xxx + Localization_Tool/File/rule/English/xxx | 优先读映射规则，无则读src/jars，结果存到Localization_Tool/File/output/Extend_En2Zh |")
+    print("\n💡 提示：Localization_Tool/File 目录会在工具启动时自动创建！")
     print("\n输入「start」进入主菜单，输入「help」重新查看引导：")
 
 
+# 修改check_source_folders函数，确保路径正确
 def check_source_folders() -> dict:
     """
-    检查source文件夹下的src和jar子文件夹
-    
+    检查source文件夹下的src和jars子文件夹
+
     Returns:
         dict: 检测结果
     """
@@ -583,7 +417,7 @@ def check_source_folders() -> dict:
     if os.path.exists(english_path):
         if os.path.exists(os.path.join(english_path, "src")):
             result["english_src"] = True
-        if os.path.exists(os.path.join(english_path, "jar")):
+        if os.path.exists(os.path.join(english_path, "jars")):
             result["english_jar"] = True
     
     # 检查中文源文件夹
@@ -591,16 +425,146 @@ def check_source_folders() -> dict:
     if os.path.exists(chinese_path):
         if os.path.exists(os.path.join(chinese_path, "src")):
             result["chinese_src"] = True
-        if os.path.exists(os.path.join(chinese_path, "jar")):
+        if os.path.exists(os.path.join(chinese_path, "jars")):
             result["chinese_jar"] = True
     
     return result
 
 
+# 简化show_output_guide函数，确保路径正确
+# 添加文件管理模式的子流程选择函数
+def select_file_management_sub_flow() -> str:
+    """
+    让用户选择文件管理模式的子流程
+
+    Returns:
+        str: 选择的子流程
+    """
+    print("\n==========================================")
+    print("        文件管理模式 - 操作选择")
+    print("==========================================")
+    print("请选择文件管理操作：")
+    print("1. 初始化项目文件夹结构")
+    print("2. 重命名模组文件夹")
+    print("3. 恢复备份")
+    print("4. 执行完整文件管理流程")
+    print("0. 返回上一级菜单")
+    print("===========================================")
+
+    while True:
+        choice = input("输入数字(0-4，直接回车默认选4)：").strip()
+        if not choice:
+            choice = "4"
+        if choice == "0":
+            return "return_to_previous"
+        elif choice in ["1", "2", "3", "4"]:
+            sub_flows = {
+                "1": "初始化项目文件夹结构",
+                "2": "重命名模组文件夹",
+                "3": "恢复备份",
+                "4": "执行完整文件管理流程"
+            }
+            return sub_flows[choice]
+        print(f"输入无效，请输入正确的数字(0-4)！")
+
+# 添加文件管理模式的执行函数
+def run_file_management_sub_flow(sub_flow: str, base_path: str) -> dict:
+    """
+    运行文件管理子流程
+
+    Args:
+        sub_flow: 子流程类型
+        base_path: 基础路径
+
+    Returns:
+        dict: 处理结果
+    """
+    logger.info(f"执行文件管理子流程：{sub_flow}")
+    
+    # 导入必要的模块
+    from src.init_mode import run_init_tasks
+    from src.common.file_utils import rename_mod_folders, restore_backup
+    from src.common.config_utils import get_directory
+    
+    result = {
+        "status": "success",
+        "data": {
+            "total_count": 0,
+            "success_count": 0,
+            "fail_count": 0,
+            "fail_reasons": []
+        }
+    }
+    
+    try:
+        # 获取必要的目录路径
+        tool_root = get_directory("tool_root")
+        source_path = get_directory("source")
+        backup_path = get_directory("source_backup")
+        
+        if sub_flow == "初始化项目文件夹结构" or sub_flow == "执行完整文件管理流程":
+            # 执行初始化任务，包括创建项目结构
+            logger.info("执行初始化任务，创建项目文件夹结构")
+            init_result = run_init_tasks(tool_root)
+            if init_result['status'] == 'fail':
+                result['status'] = 'fail'
+                result['data']['fail_count'] += 1
+                result['data']['fail_reasons'].append("初始化项目结构失败")
+            else:
+                result['data']['success_count'] += 1
+        
+        if sub_flow == "重命名模组文件夹" or sub_flow == "执行完整文件管理流程":
+            # 重命名模组文件夹
+            logger.info("重命名模组文件夹")
+            if rename_mod_folders(source_path):
+                result['data']['success_count'] += 1
+            else:
+                result['status'] = 'fail'
+                result['data']['fail_count'] += 1
+                result['data']['fail_reasons'].append("重命名模组文件夹失败")
+            
+            if rename_mod_folders(backup_path):
+                result['data']['success_count'] += 1
+            else:
+                result['status'] = 'fail'
+                result['data']['fail_count'] += 1
+                result['data']['fail_reasons'].append("重命名备份文件夹失败")
+        
+        if sub_flow == "恢复备份":
+            # 恢复备份
+            logger.info("恢复备份")
+            if restore_backup(backup_path, source_path):
+                result['data']['success_count'] += 1
+            else:
+                result['status'] = 'fail'
+                result['data']['fail_count'] += 1
+                result['data']['fail_reasons'].append("恢复备份失败")
+        
+        result['data']['total_count'] = result['data']['success_count'] + result['data']['fail_count']
+        
+        print(f"\n文件管理操作完成！")
+        print(f"总计：{result['data']['total_count']} 项操作")
+        print(f"成功：{result['data']['success_count']} 项")
+        print(f"失败：{result['data']['fail_count']} 项")
+        if result['data']['fail_reasons']:
+            print(f"失败原因：")
+            for reason in result['data']['fail_reasons']:
+                print(f"  - {reason}")
+        
+        return result
+    except Exception as e:
+        logger.exception(f"执行文件管理子流程时发生异常: {e}")
+        result['status'] = 'fail'
+        result['data']['fail_count'] = 1
+        result['data']['fail_reasons'].append(str(e))
+        result['data']['total_count'] = 1
+        return result
+
+# 简化show_output_guide函数，确保输出路径正确
 def show_output_guide(output_path: str, mode: str, language: str):
     """
     显示输出文件夹引导
-    
+
     Args:
         output_path: 输出路径
         mode: 操作模式
@@ -693,12 +657,14 @@ SHOW_WELCOME_GUIDE = get_setting("show_welcome_guide")
 # 全局变量：是否自动打开输出文件夹
 AUTO_OPEN_OUTPUT_FOLDER = get_setting("auto_open_output_folder")
 
-# 高级模式配置全局变量
-ADVANCED_MODE_ENABLED = get_setting("advanced_mode_enabled")  # 高级模式主开关：False-关闭，True-开启
-MAIN_LANGUAGE = get_setting("main_language")  # 主体语言设置：全部/中文/英文
-PROCESS_GRANULARITY_ENABLED = get_setting("process_granularity_enabled")  # 流程粒度控制：False-关闭，True-开启
-PRECHECK_MECHANISM_ENABLED = get_setting("precheck_mechanism_enabled")  # 前置检查机制：False-关闭，True-开启
+# 移除高级模式配置，简化代码
+ADVANCED_MODE_ENABLED = False  # 禁用高级模式
+MAIN_LANGUAGE = "全部"  # 默认值
+PROCESS_GRANULARITY_ENABLED = False  # 默认值
+PRECHECK_MECHANISM_ENABLED = False  # 默认值
 
+
+# 修改main函数，移除冗余代码，确保逻辑清晰
 def main():
     """
     主函数
@@ -713,23 +679,6 @@ def main():
         if not load_config():
             print("[ERROR] 加载配置文件失败")
             return
-        
-        # 导入初始化模块
-        from src.init_mode import run_init_tasks
-        
-        # 获取基础路径
-        base_path = get_directory("tool_root")
-        if not base_path:
-            # 回退到当前脚本的项目根目录
-            base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        
-        # 执行初始化任务 - 仅在程序启动阶段执行一次
-        logger.info("开始执行初始化任务")
-        init_result = run_init_tasks(base_path)
-        if init_result['status'] == 'fail':
-            logger.warning(f"初始化任务部分失败，继续执行后续流程")
-        else:
-            logger.info("初始化任务执行成功")
         
         # 验证目录结构
         if not validate_directories():
@@ -747,14 +696,19 @@ def main():
         if not check_project_structure():
             return
         
-        # 导入目录管理函数
-        from src.common.file_utils import cleanup_nested_src_directories, compare_source_with_backup, fix_source_directory
-        
-        # 获取Localization_File目录路径
-        localization_file_path = os.path.join(os.path.dirname(base_path), "Localization_File")
-        source_path = os.path.join(localization_file_path, "source")
-        source_backup_path = os.path.join(localization_file_path, "source_backup")
-        
+        # 初始化init_mode，构建mod映射关系
+        try:
+            from src.init_mode import run_init_tasks
+            from src.common.config_utils import get_directory
+            mod_root = get_directory("mod_root")
+            if mod_root:
+                init_result = run_init_tasks(mod_root)
+                logger.info(f"init_mode初始化完成，状态: {init_result['status']}")
+                if init_result['status'] == 'fail':
+                    print(f"[WARN]  init_mode初始化失败，可能影响后续操作: {init_result['data']['fail_reasons']}")
+        except Exception as e:
+            logger.exception(f"初始化init_mode时发生异常: {e}")
+            print(f"[WARN]  初始化init_mode时发生异常: {e}")
         
         # 解析命令行参数
         parser = argparse.ArgumentParser(
@@ -781,7 +735,6 @@ python main.py decompile -h
 python main.py --test-mode "1,1,1"  # 测试Extract模式-简洁模式-提取英文
 python main.py --test-mode "1,2,1"  # 测试Extract模式-完整模式-已有英文src
 python main.py --test-mode "2,1,1"  # 测试Extend模式-简洁模式-中文映射到英文
-python main.py --test-mode "3,1,1,1"  # 测试高级模式-全部功能-Extract子模式
 python main.py --test-mode "4,1"  # 测试Decompile模式-反编译单个JAR文件
         """,
         )
@@ -801,17 +754,17 @@ python main.py --test-mode "4,1"  # 测试Decompile模式-反编译单个JAR文�
         extract_parser = subparsers.add_parser(
             "extract",
             help="执行Extract模式，用于提取字符串",
-            description="Extract模式用于从src目录提取字符串，不进行翻译\n\n" 
-            "操作模式：\n" 
-            "  简化模式(交互式)：仅显示核心选项，自动检测并执行合适的子流程\n" 
-            "  高级模式(交互式)：显示完整的四种子流程，允许手动选择\n" 
+            description="Extract模式用于从src目录提取字符串，不进行翻译\n\n" \
+            "操作模式：\n" \
+            "  简化模式(交互式)：仅显示核心选项，自动检测并执行合适的子流程\n" \
+            "  高级模式(交互式)：显示完整的四种子流程，允许手动选择\n" \
             "  命令行模式：直接指定子流程类型",
         )
         extract_parser.add_argument(
             "sub_flow",
             nargs="?",
-            help="子流程类型，可选值：\n"  
-            "  简化模式可用：英文提取流程, 中文提取流程\n"  
+            help="子流程类型，可选值：\n"  \
+            "  简化模式可用：英文提取流程, 中文提取流程\n"  \
             "  高级模式可用：已有英文src文件夹提取流程, 没有英文src文件夹提取流程, 已有中文src文件夹提取流程, 没有中文src文件夹提取流程",
         )
 
@@ -824,9 +777,9 @@ python main.py --test-mode "4,1"  # 测试Decompile模式-反编译单个JAR文�
         extend_parser.add_argument(
             "sub_flow",
             nargs="?",
-            help="子流程类型，可选值：\n"  
-            "  已有中文src文件夹映射流程\n"  
-            "  没有中文src文件夹映射流程\n"  
+            help="子流程类型，可选值：\n"  \
+            "  已有中文src文件夹映射流程\n"  \
+            "  没有中文src文件夹映射流程\n"  \
             "  已有中文映射规则文件流程",
         )
         
@@ -834,18 +787,18 @@ python main.py --test-mode "4,1"  # 测试Decompile模式-反编译单个JAR文�
         decompile_parser = subparsers.add_parser(
             "decompile",
             help="执行Decompile模式，用于反编译或提取JAR文件",
-            description="Decompile模式用于反编译或提取JAR文件\n\n" 
-            "操作模式：\n" 
-            "  简化模式(交互式)：仅显示核心选项，自动检测并执行合适的子流程\n" 
+            description="Decompile模式用于反编译或提取JAR文件\n\n" \
+            "操作模式：\n" \
+            "  简化模式(交互式)：仅显示核心选项，自动检测并执行合适的子流程\n" \
             "  命令行模式：直接指定子流程类型",
         )
         decompile_parser.add_argument(
             "sub_flow",
             nargs="?",
-            help="子流程类型，可选值：\n"  
-            "  反编译单个JAR文件\n"  
-            "  反编译目录中所有JAR文件\n"  
-            "  提取单个JAR文件内容\n"  
+            help="子流程类型，可选值：\n"  \
+            "  反编译单个JAR文件\n"  \
+            "  反编译目录中所有JAR文件\n"  \
+            "  提取单个JAR文件内容\n"  \
             "  提取目录中所有JAR文件内容",
         )
 
@@ -883,8 +836,6 @@ python main.py --test-mode "4,1"  # 测试Decompile模式-反编译单个JAR文�
         sub_flow_value = getattr(args, 'sub_flow', None)
         logger.info(f"命令行参数解析完成：mode={args.mode}, sub_flow={sub_flow_value}")
 
-        logger.info(f"工具基础路径：{base_path}")
-
         result = None
         # 执行相应的模式
         if args.mode == "extract":
@@ -896,7 +847,7 @@ python main.py --test-mode "4,1"  # 测试Decompile模式-反编译单个JAR文�
                 print(f"模式：Extract")
                 print(f"流程：{args.sub_flow}")
                 print("==========================================")
-                result = run_extract_sub_flow(args.sub_flow, base_path)
+                result = run_extract_sub_flow(args.sub_flow, None)
             else:
                 # 让用户选择子流程
                 logger.info("用户未指定子流程，显示Extract子流程选择菜单")
@@ -906,7 +857,7 @@ python main.py --test-mode "4,1"  # 测试Decompile模式-反编译单个JAR文�
                 print(f"模式：Extract")
                 print(f"流程：{sub_flow}")
                 print("==========================================")
-                result = run_extract_sub_flow(sub_flow, base_path)
+                result = run_extract_sub_flow(sub_flow, None)
         elif args.mode == "extend":
             logger.info("选择Extend模式")
             if args.sub_flow:
@@ -916,7 +867,7 @@ python main.py --test-mode "4,1"  # 测试Decompile模式-反编译单个JAR文�
                 print(f"模式：Extend")
                 print(f"流程：{args.sub_flow}")
                 print("==========================================")
-                result = run_extend_sub_flow(args.sub_flow, base_path)
+                result = run_extend_sub_flow(args.sub_flow, None)
             else:
                 # 让用户选择子流程
                 logger.info("用户未指定子流程，显示Extend子流程选择菜单")
@@ -926,7 +877,7 @@ python main.py --test-mode "4,1"  # 测试Decompile模式-反编译单个JAR文�
                 print(f"模式：Extend")
                 print(f"流程：{sub_flow}")
                 print("==========================================")
-                result = run_extend_sub_flow(sub_flow, base_path)
+                result = run_extend_sub_flow(sub_flow, None)
         elif args.mode == "decompile":
             logger.info("选择Decompile模式")
             if args.sub_flow:
@@ -936,7 +887,7 @@ python main.py --test-mode "4,1"  # 测试Decompile模式-反编译单个JAR文�
                 print(f"模式：Decompile")
                 print(f"流程：{args.sub_flow}")
                 print("==========================================")
-                result = run_decompile_sub_flow(args.sub_flow, base_path)
+                result = run_decompile_sub_flow(args.sub_flow, None)
             else:
                 # 让用户选择子流程
                 logger.info("用户未指定子流程，显示Decompile子流程选择菜单")
@@ -946,7 +897,7 @@ python main.py --test-mode "4,1"  # 测试Decompile模式-反编译单个JAR文�
                 print(f"模式：Decompile")
                 print(f"流程：{sub_flow}")
                 print("==========================================")
-                result = run_decompile_sub_flow(sub_flow, base_path)
+                result = run_decompile_sub_flow(sub_flow, None)
         else:
             # 没有指定模式，使用交互式菜单
             logger.info("未指定模式，显示主菜单")
@@ -961,7 +912,7 @@ python main.py --test-mode "4,1"  # 测试Decompile模式-反编译单个JAR文�
                 print(f"模式：Extract")
                 print(f"流程：{sub_flow}")
                 print("==========================================")
-                result = run_extract_sub_flow(sub_flow, base_path)
+                result = run_extract_sub_flow(sub_flow, None)
             elif mode == "2":
                 # Extend模式
                 sub_flow = select_extend_sub_flow()
@@ -970,25 +921,8 @@ python main.py --test-mode "4,1"  # 测试Decompile模式-反编译单个JAR文�
                 print(f"模式：Extend")
                 print(f"流程：{sub_flow}")
                 print("==========================================")
-                result = run_extend_sub_flow(sub_flow, base_path)
+                result = run_extend_sub_flow(sub_flow, None)
             elif mode == "3":
-                # 高级模式
-                sub_flow = select_advanced_mode()
-                logger.info(f"用户选择高级模式子流程：{sub_flow}")
-                # 根据子流程类型选择对应的run函数
-                if sub_flow in ["英文提取流程", "中文提取流程", "已有英文src文件夹提取流程", "没有英文src文件夹提取流程", "已有中文src文件夹提取流程", "没有中文src文件夹提取流程"]:
-                    print(f"\n执行配置：")
-                    print(f"模式：Extract(高级模式)")
-                    print(f"流程：{sub_flow}")
-                    print("==========================================")
-                    result = run_extract_sub_flow(sub_flow, base_path)
-                else:
-                    print(f"\n执行配置：")
-                    print(f"模式：Extend(高级模式)")
-                    print(f"流程：{sub_flow}")
-                    print("==========================================")
-                    result = run_extend_sub_flow(sub_flow, base_path)
-            elif mode == "4":
                 # Decompile模式
                 sub_flow = select_decompile_sub_flow()
                 logger.info(f"用户选择Decompile子流程：{sub_flow}")
@@ -996,46 +930,37 @@ python main.py --test-mode "4,1"  # 测试Decompile模式-反编译单个JAR文�
                 print(f"模式：Decompile")
                 print(f"流程：{sub_flow}")
                 print("==========================================")
-                result = run_decompile_sub_flow(sub_flow, base_path)
-
+                result = run_decompile_sub_flow(sub_flow, None)
+            elif mode == "4":
+                # 文件管理模式
+                sub_flow = select_file_management_sub_flow()
+                logger.info(f"用户选择文件管理子流程：{sub_flow}")
+                print(f"\n执行配置：")
+                print(f"模式：文件管理")
+                print(f"流程：{sub_flow}")
+                print("==========================================")
+                result = run_file_management_sub_flow(sub_flow, None)
+        
+        # 处理执行结果
         if result:
-            # 记录结果
-            logger.info(f"流程执行完成，结果：status={result['status']}, total={result['data']['total_count']}, success={result['data']['success_count']}, fail={result['data']['fail_count']}")
-            if result["data"]["fail_count"] > 0:
-                logger.warning(f"执行失败项：{result['data']['fail_reasons']}")
-            
-            # 输出结果到控制台
-            print("\n执行结果：")
-            print(f"状态：{result['status']}")
-            print(f"总数量：{result['data']['total_count']}")
-            print(f"成功数量：{result['data']['success_count']}")
-            print(f"失败数量：{result['data']['fail_count']}")
-            if result["data"]["fail_count"] > 0:
-                print("失败原因：")
-                for reason in result["data"]["fail_reasons"]:
-                    print(f"  - {reason}")
-            
-            # 显示输出引导
-            if result.get("output_path") and result.get("status") == "success":
-                # 从result中提取mode和language
-                mode = result.get("mode", "Extract")
-                language = result.get("language", "English")
-                show_output_guide(result["output_path"], mode, language)
-    
-    except KeyboardInterrupt:
-        logger.info("工具被用户中断")
-        print("\n[WARN] 工具被用户中断")
-    except SystemExit:
-        logger.info("工具正常退出")
-        print("\n[END] 工具正常退出")
+            logger.info(f"模式执行完成：{result['status']}")
+            if result.get("data", {}).get("output_path"):
+                # 根据模式判断语言类型
+                if args.mode == "extract" or mode == "1":
+                    # Extract模式
+                    language = "English" if "英文" in result.get("sub_flow", "") else "Chinese"
+                    show_output_guide(result["data"]["output_path"], "Extract", language)
+                elif args.mode == "extend" or mode == "2":
+                    # Extend模式
+                    language = "English" if "中文→英文" in result.get("sub_flow", "") else "Chinese"
+                    show_output_guide(result["data"]["output_path"], "Extend", language)
+        
+        logger.info("工具执行完成，退出")
     except Exception as e:
-        logger.error(f"工具执行过程中发生错误：{str(e)}", exc_info=True)
-        print(f"\n[ERROR] 工具执行过程中发生错误：{str(e)}")
-        print("详细错误信息已记录到日志文件中")
-    finally:
-        logger.info("==========================================")
-        logger.info("             工具执行结束")
-        logger.info("==========================================")
+        logger.exception(f"工具执行过程中发生异常: {e}")
+        print(f"[ERROR] 工具执行过程中发生异常: {e}")
+        import traceback
+        traceback.print_exc()
 
 
 if __name__ == "__main__":

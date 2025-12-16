@@ -134,7 +134,7 @@ def run_extend_sub_flow(sub_flow: str, base_path: str = None) -> Dict[str, Any]:
             mapping_direction = result.get("mapping_direction", "zh2en")
             
             # 构建映射文件夹路径
-            localization_file_path = os.path.join(os.path.dirname(base_path), "Localization_File")
+            localization_file_path = os.path.join(os.path.dirname(base_path), "File")
             # 根据映射方向确定Extend目录
             extend_dir = f"Extend_{mapping_direction}" if mapping_direction in ["en2zh", "zh2en"] else "Extend"
             mapping_folder_path = os.path.join(localization_file_path, "output", extend_dir, mod_name)
@@ -264,8 +264,8 @@ def _process_existing_chinese_src(
     """
     try:
         # 1. 获取Chinese和English文件夹路径
-        from src.common.config_utils import get_source_directory, get_backup_directory
-        source_dir = get_source_directory("extend", "auto")
+        from src.common.config_utils import get_directory
+        source_dir = get_directory("source")
         if not source_dir:
             return generate_report(
                 process_id=report["process_id"],
@@ -283,7 +283,8 @@ def _process_existing_chinese_src(
         english_file_path = os.path.join(source_dir, "English")
 
         # 4. 获取映射规则文件路径
-        strings_path = os.path.join(base_path, "project", "Extend", "Strings")
+        from src.common.config_utils import get_directory
+        strings_path = get_directory("rules")
         chinese_strings_path = os.path.join(strings_path, "Chinese")
         print(f"[DIR] 映射规则文件路径: {chinese_strings_path}")
         
@@ -294,77 +295,19 @@ def _process_existing_chinese_src(
         mod_mapping = _build_mod_mapping(base_path, chinese_file_path, english_file_path)
 
         # 7. 遍历映射关系，执行映射操作
-        for chinese_mod_path, english_mod_path in mod_mapping.items():
-            mod_name = os.path.basename(chinese_mod_path)
-            print(f"\n[NOTE] 处理mod: {mod_name}")
-            print("----------------------------------")
+        mod_results = _process_mod_mapping(mod_mapping, base_path, timestamp, report)
 
-            # 确保English文件夹下对应的mod文件夹存在
-            os.makedirs(english_mod_path, exist_ok=True)
-
-            # 8. 查找Chinese文件夹下mod内的src文件夹
-            chinese_src_path = os.path.join(chinese_mod_path, "src")
-
-            # 9. 检查src文件夹是否存在且包含中文
-            if os.path.exists(chinese_src_path) and os.path.isdir(chinese_src_path):
-                has_chinese = contains_chinese_in_src(chinese_src_path)
-                if has_chinese:
-                    print("[LIST] 使用src文件夹进行映射(包含中文)")
-                    # 10. 执行字符串映射
-                    print(f"[LIST] 开始对 {chinese_src_path} 执行字符串映射")
-                    
-                    # 遍历映射源下的所有文件
-                    for root, _, files in os.walk(chinese_src_path):
-                        for file in files:
-                            if file.endswith(('.java', '.kt', '.kts')):
-                                source_file = os.path.join(root, file)
-                                # 计算相对路径
-                                relative_path = os.path.relpath(source_file, chinese_src_path)
-                                # 目标文件路径
-                                target_file = os.path.join(english_mod_path, "src", relative_path)
-                                # 确保目标目录存在
-                                os.makedirs(os.path.dirname(target_file), exist_ok=True)
-                                
-                                # 应用YAML映射
-                                from src.common.yaml_utils import apply_yaml_mapping
-                                result = apply_yaml_mapping(source_file, mapping_rules)
-                                if result:
-                                    # 将结果写回目标文件
-                                    with open(target_file, 'w', encoding='utf-8') as f:
-                                        f.write(result)
-                                    print(f"[OK] 成功将 {source_file} 映射到 {target_file}")
-                else:
-                    print("[WARN]  src文件夹不包含中文，跳过映射")
-            else:
-                print("[WARN]  未找到src文件夹")
-
-        # 9. 生成符合框架要求的输出路径
+        # 8. 生成符合框架要求的输出路径
         # 从mod_mapping中获取第一个mod的信息来构建输出路径
         if mod_mapping:
             # 获取第一个mod的路径
             first_mod_path = next(iter(mod_mapping.keys()))
-            # 从mod_info.json获取正确的mod_name
-            def get_mod_name(mod_path: str) -> str:
-                mod_folder_name = os.path.basename(mod_path)
-                mod_info_path = os.path.join(mod_path, "mod_info.json")
-                if os.path.exists(mod_info_path):
-                    try:
-                        with open(mod_info_path, 'r', encoding='utf-8') as f:
-                            mod_info = json.load(f)
-                            name = mod_info.get("name", mod_folder_name)
-                            version = mod_info.get("version", "unknown")
-                            return f"{name} {version}"
-                    except Exception as e:
-                        print(f"[WARN]  读取mod_info.json失败: {mod_info_path} - {e}")
-                return mod_folder_name
-            
-            mod_name = get_mod_name(first_mod_path)
-            # 构建输出路径：Localization_File/output/Extend_zh2en/mod_name/ - 使用mod_root配置
+            mod_name = os.path.basename(first_mod_path)
+            # 构建输出路径：File/output/Extend_zh2en/mod_name/ - 使用mod_root配置
             from src.common.config_utils import get_directory
             mod_root = get_directory("mod_root")
             if mod_root:
                 output_path = os.path.join(mod_root, "output", "Extend_zh2en", mod_name)
-                os.makedirs(output_path, exist_ok=True)
         else:
             output_path = ""
 
@@ -464,8 +407,8 @@ def _process_mod_for_mapping(chinese_mod_path: str, english_mod_path: str) -> No
                     
                     # 从base_path获取映射规则
                     base_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-                    # 使用正确的Localization_File路径（与Localization_Tool同级）
-                    localization_file_path = os.path.join(os.path.dirname(base_path), "Localization_File")
+                    # 使用正确的File路径（与Localization_Tool同级）
+                    localization_file_path = os.path.join(os.path.dirname(base_path), "File")
                     rule_path = os.path.join(localization_file_path, "rule")
                     
                     # 根据映射方向确定使用的规则
@@ -475,15 +418,16 @@ def _process_mod_for_mapping(chinese_mod_path: str, english_mod_path: str) -> No
                     from src.common import load_mapping_rules
                     mapping_rules = []
                     
-                    # 先检查Localization_File/rule文件夹
+                    # 先检查File/rule文件夹
                     language = "Chinese" if mapping_direction == "zh2en" else "English"
                     rule_file_path = os.path.join(rule_path, language)
                     if os.path.exists(rule_file_path):
                         mapping_rules = load_mapping_rules(rule_file_path)
                     
-                    # 如果Localization_File/rule文件夹没有规则，从传统路径加载
+                    # 如果File/rule文件夹没有规则，从传统路径加载
                     if not mapping_rules:
-                        strings_path = os.path.join(base_path, "project", "Extend", "Strings")
+                        from src.common.config_utils import get_directory
+                        strings_path = get_directory("rules")
                         strings_dir = os.path.join(strings_path, language)
                         mapping_rules = load_mapping_rules(strings_dir)
                     
@@ -505,26 +449,70 @@ def _process_mod_for_mapping(chinese_mod_path: str, english_mod_path: str) -> No
         print("[WARN]  未找到可用的src或jar文件夹")
 
 
-def _process_mod_mapping(mod_mapping: dict) -> dict:
+def _process_mod_mapping(mod_mapping: dict, base_path: str, timestamp: str, report: Dict[str, Any]) -> list:
     """
     处理mod映射关系
 
     Args:
         mod_mapping: mod映射关系字典
+        base_path: 基础路径
+        timestamp: 时间戳
+        report: 报告
 
     Returns:
-        dict: 映射结果
+        list: 每个mod的映射结果列表
     """
-    for chinese_mod_path, english_mod_path in mod_mapping.items():
-        _process_mod_for_mapping(chinese_mod_path, english_mod_path)
-
-    # 生成实际映射结果
-    return {
-        "total_count": len(mod_mapping),
-        "success_count": len(mod_mapping),
-        "fail_count": 0,
-        "fail_reasons": [],
-    }
+    mod_results = []
+    
+    for source_mod_path, target_mod_path in mod_mapping.items():
+        mod_name = os.path.basename(source_mod_path)
+        print(f"\n[NOTE] 处理mod: {mod_name}")
+        print("----------------------------------")
+        
+        # 处理单个mod的映射
+        _process_mod_for_mapping(source_mod_path, target_mod_path)
+        
+        # 构建输出路径
+        from src.common.config_utils import get_directory
+        mod_root = get_directory("mod_root")
+        if mod_root:
+            # 确定映射方向
+            if "Chinese" in source_mod_path:
+                mapping_direction = "zh2en"
+                output_path = os.path.join(mod_root, "output", f"Extend_{mapping_direction}", mod_name)
+            else:
+                mapping_direction = "en2zh"
+                output_path = os.path.join(mod_root, "output", f"Extend_{mapping_direction}", mod_name)
+            
+            os.makedirs(output_path, exist_ok=True)
+            
+            # 为每个mod生成单独的报告
+            mod_report = generate_report(
+                process_id=f"{timestamp}_extend_{mod_name}",
+                mode="Extend",
+                sub_flow=report["sub_flow"],
+                status="success",
+                data={
+                    "total_count": 1,
+                    "success_count": 1,
+                    "fail_count": 0,
+                    "fail_reasons": [],
+                    "output_path": output_path
+                }
+            )
+            
+            # 添加mode、language和mapping_direction到结果中
+            mod_report["mode"] = "Extend"
+            mod_report["language"] = "Chinese" if "Chinese" in source_mod_path else "English"
+            mod_report["mapping_direction"] = mapping_direction
+            mod_report["output_path"] = output_path
+            
+            # 保存报告到对应输出文件夹内
+            save_report(mod_report, output_path, timestamp, rule_type="mapping", mod_name=mod_name)
+            
+            mod_results.append(mod_report)
+    
+    return mod_results
 
 
 def _process_no_chinese_src(
@@ -543,8 +531,8 @@ def _process_no_chinese_src(
     """
     try:
         # 1. 获取Chinese和English文件夹路径
-        from src.common.config_utils import get_source_directory, get_backup_directory
-        source_dir = get_source_directory("extend", "auto")
+        from src.common.config_utils import get_directory
+        source_dir = get_directory("source")
         if not source_dir:
             return generate_report(
                 process_id=report["process_id"],
@@ -558,36 +546,29 @@ def _process_no_chinese_src(
                     "fail_reasons": ["无法获取源目录"],
                 },
             )
+        chinese_file_path = os.path.join(source_dir, "Chinese")
         english_file_path = os.path.join(source_dir, "English")
 
         # 6. 基于mod_info.json中的id建立映射关系
         mod_mapping = _build_mod_mapping(base_path, chinese_file_path, english_file_path)
 
         # 7. 处理映射关系
-        mapped_result = _process_mod_mapping(mod_mapping)
+        mod_results = _process_mod_mapping(mod_mapping, base_path, timestamp, report)
 
         # 8. 生成符合框架要求的输出路径
         # 从mod_mapping中获取第一个mod的信息来构建输出路径
+        mapped_result = {
+            "total_count": len(mod_mapping),
+            "success_count": len(mod_mapping),
+            "fail_count": 0,
+            "fail_reasons": [],
+        }
+        
         if mod_mapping:
             # 获取第一个mod的路径
             first_mod_path = next(iter(mod_mapping.keys()))
-            # 从mod_info.json获取正确的mod_name
-            def get_mod_name(mod_path: str) -> str:
-                mod_folder_name = os.path.basename(mod_path)
-                mod_info_path = os.path.join(mod_path, "mod_info.json")
-                if os.path.exists(mod_info_path):
-                    try:
-                        with open(mod_info_path, 'r', encoding='utf-8') as f:
-                            mod_info = json.load(f)
-                            name = mod_info.get("name", mod_folder_name)
-                            version = mod_info.get("version", "unknown")
-                            return f"{name} {version}"
-                    except Exception as e:
-                        print(f"[WARN]  读取mod_info.json失败: {mod_info_path} - {e}")
-                return mod_folder_name
-            
-            mod_name = get_mod_name(first_mod_path)
-            # 构建输出路径：Localization_File/output/Extend_zh2en/mod_name/ - 使用mod_root配置
+            mod_name = os.path.basename(first_mod_path)
+            # 构建输出路径：File/output/Extend_zh2en/mod_name/ - 使用mod_root配置
             from src.common.config_utils import get_directory
             mod_root = get_directory("mod_root")
             if mod_root:
@@ -690,15 +671,16 @@ def _process_existing_chinese_rules(
     """
     try:
         # 1. 获取Chinese和English文件夹路径
-        chinese_file_path = os.path.join(base_path, "project", "Extend", "File", "Chinese")
-        english_file_path = os.path.join(base_path, "project", "Extend", "File", "English")
+        from src.common.config_utils import get_directory
+        source_path = get_directory("source")
+        chinese_file_path = os.path.join(source_path, "Chinese")
+        english_file_path = os.path.join(source_path, "English")
         
         # 4. 获取映射规则文件路径
-        strings_path = os.path.join(base_path, "project", "Extend", "Strings")
+        from src.common.config_utils import get_directory
+        strings_path = get_directory("rules")
         chinese_strings_path = os.path.join(strings_path, "Chinese")
-        rule_path = os.path.join(base_path, "rule", "Chinese")
         print(f"[DIR] 映射规则文件路径: {chinese_strings_path}")
-        print(f"[DIR] 规则文件夹路径: {rule_path}")
         
         # 5. 加载映射规则(优先从rule文件夹加载)
         mapping_rules = []
@@ -759,93 +741,23 @@ def _process_existing_chinese_rules(
         mod_mapping = _build_mod_mapping(base_path, chinese_file_path, english_file_path)
         
         # 9. 遍历映射关系，执行映射操作
-        for chinese_mod_path, english_mod_path in mod_mapping.items():
-            mod_name = os.path.basename(chinese_mod_path)
-            print(f"\n[NOTE] 处理mod: {mod_name}")
-            print("----------------------------------")
-            
-            # 确保English文件夹下对应的mod文件夹存在
-            os.makedirs(english_mod_path, exist_ok=True)
-            
-            # 10. 查找Chinese文件夹下mod内的src和jar文件夹
-            chinese_src_path = os.path.join(chinese_mod_path, "src")
-            chinese_jar_path = os.path.join(chinese_mod_path, "jar")
-            
-            # 11. 确定使用哪个文件夹进行映射
-            use_src = False
-            mapping_source = None
-            
-            # 检查src文件夹是否存在且包含中文
-            if os.path.exists(chinese_src_path) and os.path.isdir(chinese_src_path):
-                has_chinese = contains_chinese_in_src(chinese_src_path)
-                if has_chinese:
-                    use_src = True
-                    mapping_source = chinese_src_path
-                    print(f"[LIST] 使用src文件夹进行映射(包含中文)")
-            
-            # 如果src文件夹不存在或不包含中文，检查jar文件夹
-            if not use_src and os.path.exists(chinese_jar_path) and os.path.isdir(chinese_jar_path):
-                mapping_source = chinese_jar_path
-                print(f"[LIST] 使用jar文件夹进行映射(src文件夹不存在或不包含中文)")
-            
-            # 12. 如果找到映射源，执行映射
-            if mapping_source:
-                print(f"[LIST] 开始对 {mapping_source} 执行字符串映射")
-                
-                # 遍历映射源下的所有文件
-                for root, _, files in os.walk(mapping_source):
-                    for file in files:
-                        if file.endswith(('.java', '.kt', '.kts')):
-                            source_file = os.path.join(root, file)
-                            # 计算相对路径
-                            relative_path = os.path.relpath(source_file, mapping_source)
-                            # 目标文件路径
-                            target_file = os.path.join(english_mod_path, "src", relative_path)
-                            # 确保目标目录存在
-                            os.makedirs(os.path.dirname(target_file), exist_ok=True)
-                            
-                            # 应用YAML映射
-                            from src.common.yaml_utils import apply_yaml_mapping
-                            result = apply_yaml_mapping(source_file, mapping_rules)
-                            if result:
-                                # 将结果写回目标文件
-                                with open(target_file, 'w', encoding='utf-8') as f:
-                                    f.write(result)
-                                print(f"OK 成功将 {source_file} 映射到 {target_file}")
-            else:
-                print(f"[WARN]  未找到可用的src或jar文件夹")
+        mod_results = _process_mod_mapping(mod_mapping, base_path, timestamp, report)
         
-        # 13. 生成符合框架要求的输出路径
+        # 10. 生成符合框架要求的输出路径
         # 从mod_mapping中获取第一个mod的信息来构建输出路径
         if mod_mapping:
             # 获取第一个mod的路径
             first_mod_path = next(iter(mod_mapping.keys()))
-            # 从mod_info.json获取正确的mod_name
-            def get_mod_name(mod_path: str) -> str:
-                mod_folder_name = os.path.basename(mod_path)
-                mod_info_path = os.path.join(mod_path, "mod_info.json")
-                if os.path.exists(mod_info_path):
-                    try:
-                        with open(mod_info_path, 'r', encoding='utf-8') as f:
-                            mod_info = json.load(f)
-                            name = mod_info.get("name", mod_folder_name)
-                            version = mod_info.get("version", "unknown")
-                            return f"{name} {version}"
-                    except Exception as e:
-                        print(f"[WARN]  读取mod_info.json失败: {mod_info_path} - {e}")
-                return mod_folder_name
-            
-            mod_name = get_mod_name(first_mod_path)
+            mod_name = os.path.basename(first_mod_path)
             # 构建输出路径：Localization_File/output/Extend_zh2en/mod_name/ - 使用mod_root配置
             from src.common.config_utils import get_directory
             mod_root = get_directory("mod_root")
             if mod_root:
                 output_path = os.path.join(mod_root, "output", "Extend_zh2en", mod_name)
-                os.makedirs(output_path, exist_ok=True)
         else:
             output_path = ""
 
-        # 13. 实际映射结果
+        # 11. 实际映射结果
         mapped_result = {
             "total_count": len(mod_mapping),
             "success_count": len(mod_mapping),
@@ -899,8 +811,8 @@ def _process_existing_english_src(
     """
     try:
         # 1. 获取English和Chinese文件夹路径
-        from src.common.config_utils import get_source_directory, get_backup_directory
-        source_dir = get_source_directory("extend", "auto")
+        from src.common.config_utils import get_directory
+        source_dir = get_directory("source")
         if not source_dir:
             return generate_report(
                 process_id=report["process_id"],
@@ -918,7 +830,8 @@ def _process_existing_english_src(
         chinese_file_path = os.path.join(source_dir, "Chinese")
 
         # 4. 获取映射规则文件路径
-        strings_path = os.path.join(base_path, "project", "Extend", "Strings")
+        from src.common.config_utils import get_directory
+        strings_path = get_directory("rules")
         english_strings_path = os.path.join(strings_path, "English")
         print(f"[DIR] 映射规则文件路径: {english_strings_path}")
         
@@ -929,73 +842,19 @@ def _process_existing_english_src(
         mod_mapping = _build_mod_mapping(base_path, english_file_path, chinese_file_path)
 
         # 7. 遍历映射关系，执行映射操作
-        for english_mod_path, chinese_mod_path in mod_mapping.items():
-            mod_name = os.path.basename(english_mod_path)
-            print(f"\n[NOTE] 处理mod: {mod_name}")
-            print("----------------------------------")
+        mod_results = _process_mod_mapping(mod_mapping, base_path, timestamp, report)
 
-            # 确保Chinese文件夹下对应的mod文件夹存在
-            os.makedirs(chinese_mod_path, exist_ok=True)
-
-            # 8. 查找English文件夹下mod内的src文件夹
-            english_src_path = os.path.join(english_mod_path, "src")
-
-            # 9. 检查src文件夹是否存在
-            if os.path.exists(english_src_path) and os.path.isdir(english_src_path):
-                print("[LIST] 使用src文件夹进行映射")
-                # 10. 执行字符串映射
-                print(f"[LIST] 开始对 {english_src_path} 执行字符串映射")
-                
-                # 遍历映射源下的所有文件
-                for root, _, files in os.walk(english_src_path):
-                    for file in files:
-                        if file.endswith(('.java', '.kt', '.kts')):
-                            source_file = os.path.join(root, file)
-                            # 计算相对路径
-                            relative_path = os.path.relpath(source_file, english_src_path)
-                            # 目标文件路径
-                            target_file = os.path.join(chinese_mod_path, "src", relative_path)
-                            # 确保目标目录存在
-                            os.makedirs(os.path.dirname(target_file), exist_ok=True)
-                            
-                            # 应用YAML映射
-                            from src.common.yaml_utils import apply_yaml_mapping
-                            result = apply_yaml_mapping(source_file, mapping_rules)
-                            if result:
-                                # 将结果写回目标文件
-                                with open(target_file, 'w', encoding='utf-8') as f:
-                                    f.write(result)
-                                print(f"[OK] 成功将 {source_file} 映射到 {target_file}")
-            else:
-                print("[WARN]  未找到src文件夹")
-
-        # 9. 生成符合框架要求的输出路径
+        # 8. 生成符合框架要求的输出路径
         # 从mod_mapping中获取第一个mod的信息来构建输出路径
         if mod_mapping:
             # 获取第一个mod的路径
             first_mod_path = next(iter(mod_mapping.keys()))
-            # 从mod_info.json获取正确的mod_name
-            def get_mod_name(mod_path: str) -> str:
-                mod_folder_name = os.path.basename(mod_path)
-                mod_info_path = os.path.join(mod_path, "mod_info.json")
-                if os.path.exists(mod_info_path):
-                    try:
-                        with open(mod_info_path, 'r', encoding='utf-8') as f:
-                            mod_info = json.load(f)
-                            name = mod_info.get("name", mod_folder_name)
-                            version = mod_info.get("version", "unknown")
-                            return f"{name} {version}"
-                    except Exception as e:
-                        print(f"[WARN]  读取mod_info.json失败: {mod_info_path} - {e}")
-                return mod_folder_name
-            
-            mod_name = get_mod_name(first_mod_path)
-            # 构建输出路径：Localization_File/output/Extend_en2zh/mod_name/ - 使用mod_root配置
+            mod_name = os.path.basename(first_mod_path)
+            # 构建输出路径：File/output/Extend_en2zh/mod_name/ - 使用mod_root配置
             from src.common.config_utils import get_directory
             mod_root = get_directory("mod_root")
             if mod_root:
                 output_path = os.path.join(mod_root, "output", "Extend_en2zh", mod_name)
-                os.makedirs(output_path, exist_ok=True)
         else:
             output_path = ""
 
@@ -1050,8 +909,8 @@ def _process_no_english_src(
     """
     try:
         # 1. 获取English和Chinese文件夹路径
-        from src.common.config_utils import get_source_directory, get_backup_directory
-        source_dir = get_source_directory("extend", "auto")
+        from src.common.config_utils import get_directory
+        source_dir = get_directory("source")
         if not source_dir:
             return generate_report(
                 process_id=report["process_id"],
@@ -1086,30 +945,22 @@ def _process_no_english_src(
         mod_mapping = _build_mod_mapping(base_path, english_file_path, chinese_file_path)
 
         # 7. 处理映射关系
-        mapped_result = _process_mod_mapping(mod_mapping)
+        mod_results = _process_mod_mapping(mod_mapping, base_path, timestamp, report)
 
         # 8. 生成符合框架要求的输出路径
         # 从mod_mapping中获取第一个mod的信息来构建输出路径
+        mapped_result = {
+            "total_count": len(mod_mapping),
+            "success_count": len(mod_mapping),
+            "fail_count": 0,
+            "fail_reasons": [],
+        }
+        
         if mod_mapping:
             # 获取第一个mod的路径
             first_mod_path = next(iter(mod_mapping.keys()))
-            # 从mod_info.json获取正确的mod_name
-            def get_mod_name(mod_path: str) -> str:
-                mod_folder_name = os.path.basename(mod_path)
-                mod_info_path = os.path.join(mod_path, "mod_info.json")
-                if os.path.exists(mod_info_path):
-                    try:
-                        with open(mod_info_path, 'r', encoding='utf-8') as f:
-                            mod_info = json.load(f)
-                            name = mod_info.get("name", mod_folder_name)
-                            version = mod_info.get("version", "unknown")
-                            return f"{name} {version}"
-                    except Exception as e:
-                        print(f"[WARN]  读取mod_info.json失败: {mod_info_path} - {e}")
-                return mod_folder_name
-            
-            mod_name = get_mod_name(first_mod_path)
-            # 构建输出路径：Localization_File/output/Extend_en2zh/mod_name/ - 使用mod_root配置
+            mod_name = os.path.basename(first_mod_path)
+            # 构建输出路径：File/output/Extend_en2zh/mod_name/ - 使用mod_root配置
             from src.common.config_utils import get_directory
             mod_root = get_directory("mod_root")
             if mod_root:
@@ -1168,15 +1019,16 @@ def _process_existing_english_rules(
     """
     try:
         # 1. 获取English和Chinese文件夹路径
-        english_file_path = os.path.join(base_path, "project", "Extend", "File", "English")
-        chinese_file_path = os.path.join(base_path, "project", "Extend", "File", "Chinese")
+        from src.common.config_utils import get_directory
+        source_path = get_directory("source")
+        english_file_path = os.path.join(source_path, "English")
+        chinese_file_path = os.path.join(source_path, "Chinese")
         
         # 4. 获取映射规则文件路径
-        strings_path = os.path.join(base_path, "project", "Extend", "Strings")
+        from src.common.config_utils import get_directory
+        strings_path = get_directory("rules")
         english_strings_path = os.path.join(strings_path, "English")
-        rule_path = os.path.join(base_path, "rule", "English")
         print(f"[DIR] 映射规则文件路径: {english_strings_path}")
-        print(f"[DIR] 规则文件夹路径: {rule_path}")
         
         # 5. 加载映射规则(优先从rule文件夹加载)
         mapping_rules = []
@@ -1237,61 +1089,9 @@ def _process_existing_english_rules(
         mod_mapping = _build_mod_mapping(base_path, english_file_path, chinese_file_path)
         
         # 9. 遍历映射关系，执行映射操作
-        for english_mod_path, chinese_mod_path in mod_mapping.items():
-            mod_name = os.path.basename(english_mod_path)
-            print(f"\n[NOTE] 处理mod: {mod_name}")
-            print("----------------------------------")
-            
-            # 确保Chinese文件夹下对应的mod文件夹存在
-            os.makedirs(chinese_mod_path, exist_ok=True)
-            
-            # 10. 查找English文件夹下mod内的src和jar文件夹
-            english_src_path = os.path.join(english_mod_path, "src")
-            english_jar_path = os.path.join(english_mod_path, "jar")
-            
-            # 11. 确定使用哪个文件夹进行映射
-            use_src = False
-            mapping_source = None
-            
-            # 检查src文件夹是否存在
-            if os.path.exists(english_src_path) and os.path.isdir(english_src_path):
-                use_src = True
-                mapping_source = english_src_path
-                print(f"[LIST] 使用src文件夹进行映射")
-            
-            # 如果src文件夹不存在，检查jar文件夹
-            if not use_src and os.path.exists(english_jar_path) and os.path.isdir(english_jar_path):
-                mapping_source = english_jar_path
-                print(f"[LIST] 使用jar文件夹进行映射(src文件夹不存在)")
-            
-            # 12. 如果找到映射源，执行映射
-            if mapping_source:
-                print(f"[LIST] 开始对 {mapping_source} 执行字符串映射")
-                
-                # 遍历映射源下的所有文件
-                for root, _, files in os.walk(mapping_source):
-                    for file in files:
-                        if file.endswith(('.java', '.kt', '.kts')):
-                            source_file = os.path.join(root, file)
-                            # 计算相对路径
-                            relative_path = os.path.relpath(source_file, mapping_source)
-                            # 目标文件路径
-                            target_file = os.path.join(chinese_mod_path, "src", relative_path)
-                            # 确保目标目录存在
-                            os.makedirs(os.path.dirname(target_file), exist_ok=True)
-                            
-                            # 应用YAML映射
-                            from src.common.yaml_utils import apply_yaml_mapping
-                            result = apply_yaml_mapping(source_file, mapping_rules)
-                            if result:
-                                # 将结果写回目标文件
-                                with open(target_file, 'w', encoding='utf-8') as f:
-                                    f.write(result)
-                                print(f"OK 成功将 {source_file} 映射到 {target_file}")
-            else:
-                print(f"[WARN]  未找到可用的src或jar文件夹")
+        mod_results = _process_mod_mapping(mod_mapping, base_path, timestamp, report)
         
-        # 13. 生成符合框架要求的输出路径
+        # 10. 生成符合框架要求的输出路径
         # 从mod_mapping中获取第一个mod的信息来构建输出路径
         if mod_mapping:
             # 获取第一个mod的路径
@@ -1299,14 +1099,14 @@ def _process_existing_english_rules(
             mod_name = os.path.basename(first_mod_path)
             # 构建输出路径：Localization_File/output/Extend_en2zh/20251212_220500_Aptly Simple Hullmods 2.1.2c/
             output_folder = f"{timestamp}_{mod_name}"
-            # 使用正确的Localization_File路径（与Localization_Tool同级）
-            localization_file_path = os.path.join(os.path.dirname(base_path), "Localization_File")
+            # 使用正确的File路径（与Localization_Tool同级）
+            localization_file_path = os.path.join(os.path.dirname(base_path), "File")
             output_path = os.path.join(localization_file_path, "output", "Extend_en2zh", output_folder)
             os.makedirs(output_path, exist_ok=True)
         else:
             output_path = ""
 
-        # 13. 实际映射结果
+        # 11. 实际映射结果
         mapped_result = {
             "total_count": len(mod_mapping),
             "success_count": len(mod_mapping),

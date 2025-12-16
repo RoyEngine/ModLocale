@@ -1,0 +1,7 @@
+2025-12-16 20:36:13,608 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:672 - ==========================================
+2025-12-16 20:36:13,609 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:673 -              本地化工具
+2025-12-16 20:36:13,609 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:674 - ==========================================
+2025-12-16 20:36:13,609 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:675 - 工具启动，开始解析命令行参数
+2025-12-16 20:36:13,609 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:693 - 前置检查已默认关闭，直接进入主菜单
+2025-12-16 20:36:13,610 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:268 - 检查项目结构...
+2025-12-16 20:36:13,610 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:310 - 项目结构检查完成，严格按照框架文档生成目录

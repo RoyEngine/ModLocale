@@ -12,7 +12,16 @@ from .core import (
     build_mod_mappings,
     get_mod_mapping,
     get_mod_path_by_id,
-    get_mod_info_by_path
+    get_mod_info_by_path,
+    build_group_mappings,
+    get_group_mapping,
+    get_group_by_id,
+    get_group_path,
+    run_extract_function,
+    run_extend_function,
+    run_decompile_function,
+    run_decompile_and_extract,
+    run_parallel_processing
 )
 
 __all__ = [
@@ -22,5 +31,14 @@ __all__ = [
     "build_mod_mappings",
     "get_mod_mapping",
     "get_mod_path_by_id",
-    "get_mod_info_by_path"
+    "get_mod_info_by_path",
+    "build_group_mappings",
+    "get_group_mapping",
+    "get_group_by_id",
+    "get_group_path",
+    "run_extract_function",
+    "run_extend_function",
+    "run_decompile_function",
+    "run_decompile_and_extract",
+    "run_parallel_processing"
 ]

@@ -73,39 +73,29 @@ def save_report(report: Dict[str, Any], report_path: str, timestamp: str, rule_t
         bool: 是否成功保存
     """
     try:
-        # 根据规则类型确定最终报告保存路径
-        final_report_path = report_path
+        # 根据规则类型确定基础报告保存路径
+        base_report_path = report_path
         
-        if rule_type == "regular" and mod_name and language:
-            # 常规提取规则，保存到rule/{language}/{mod_name}目录
-            localization_file_path = os.path.dirname(os.path.dirname(os.path.dirname(report_path)))
-            final_report_path = os.path.join(localization_file_path, "rule", language, mod_name)
-        elif rule_type == "mapping" and mod_name:
-            # 映射规则，保存到对应的映射文件夹
-            # 从report_path中提取完整路径信息
-            parts = report_path.split(os.sep)
-            
-            # 查找包含Extend的目录
-            extend_dir = None
-            for i, part in enumerate(parts):
-                if part.startswith("Extend_"):
-                    extend_dir = part
-                    break
-            
-            if extend_dir:
-                # 提取语言对信息(如en2zh)
-                lang_pair = extend_dir.split("_")[-1] if "_" in extend_dir else ""
-                
-                # 根据语言对确定目标目录
-                if lang_pair in ["en2zh", "zh2en"]:
-                    # 使用正确的Extend目录结构
-                    final_report_path = report_path
-                else:
-                    # 默认处理
-                    final_report_path = report_path
-            else:
-                # 如果没有找到Extend目录，使用默认路径
-                final_report_path = report_path
+        # 判断是单个文件还是多个文件处理
+        is_single_file = False
+        data = report.get("data", {})
+        total_count = data.get("total_count", 1)
+        
+        # 检查total_count，判断是否为单个文件处理
+        if total_count == 1:
+            is_single_file = True
+        
+        # 检查是否为单个JAR文件反编译报告
+        if report.get("sub_flow") == "反编译单个JAR文件":
+            is_single_file = True
+        
+        # 确定最终报告保存路径
+        if is_single_file:
+            # 单个文件处理，直接保存到输出文件夹根目录
+            final_report_path = base_report_path
+        else:
+            # 多个文件处理，统一保存到Report文件夹内
+            final_report_path = os.path.join(base_report_path, "Report")
         
         # 确保报告目录存在
         os.makedirs(final_report_path, exist_ok=True)

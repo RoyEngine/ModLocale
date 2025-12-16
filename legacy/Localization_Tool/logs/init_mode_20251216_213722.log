@@ -1,0 +1,65 @@
+2025-12-16 21:37:22,382 - init_mode - INFO - [N/A] - [GENERAL] - core.py:1028 - 开始执行初始化任务，基础路径: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File
+2025-12-16 21:37:22,382 - init_mode - INFO - [N/A] - [GENERAL] - core.py:265 - 开始初始化项目文件夹结构，基础路径: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File
+2025-12-16 21:37:22,383 - init_mode - INFO - [N/A] - [GENERAL] - core.py:307 - 项目文件夹结构初始化完成，成功创建: 0/10 个文件夹
+2025-12-16 21:37:22,383 - init_mode - INFO - [N/A] - [GENERAL] - core.py:337 - 开始自动重命名文件/文件夹，mod_root: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File
+2025-12-16 21:37:22,384 - init_mode - INFO - [N/A] - [GENERAL] - core.py:155 - 基于行的解析成功读取mod_info.json: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source/Chinese\Quality Captains 高质量舰长 1.7.0\mod_info.json
+2025-12-16 21:37:22,384 - init_mode - INFO - [N/A] - [GENERAL] - core.py:427 - 跳过文件夹: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source/Chinese\Quality Captains 高质量舰长 1.7.0, 原因: 文件夹名称已符合要求
+2025-12-16 21:37:22,385 - init_mode - INFO - [N/A] - [GENERAL] - core.py:155 - 基于行的解析成功读取mod_info.json: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source/Chinese\Second-in-Command 舰队副官 1.7.0\mod_info.json
+2025-12-16 21:37:22,385 - init_mode - INFO - [N/A] - [GENERAL] - core.py:427 - 跳过文件夹: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source/Chinese\Second-in-Command 舰队副官 1.7.0, 原因: 文件夹名称已符合要求
+2025-12-16 21:37:22,385 - init_mode - INFO - [N/A] - [GENERAL] - core.py:155 - 基于行的解析成功读取mod_info.json: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source/English\Quality Captains 1.7.0\mod_info.json
+2025-12-16 21:37:22,386 - init_mode - INFO - [N/A] - [GENERAL] - core.py:427 - 跳过文件夹: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source/English\Quality Captains 1.7.0, 原因: 文件夹名称已符合要求
+2025-12-16 21:37:22,386 - init_mode - INFO - [N/A] - [GENERAL] - core.py:155 - 基于行的解析成功读取mod_info.json: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source/English\Second-in-Command 1.7.0\mod_info.json
+2025-12-16 21:37:22,386 - init_mode - INFO - [N/A] - [GENERAL] - core.py:427 - 跳过文件夹: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source/English\Second-in-Command 1.7.0, 原因: 文件夹名称已符合要求
+2025-12-16 21:37:22,386 - init_mode - INFO - [N/A] - [GENERAL] - core.py:155 - 基于行的解析成功读取mod_info.json: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source/English\TestMod 1.0.0\mod_info.json
+2025-12-16 21:37:22,386 - init_mode - INFO - [N/A] - [GENERAL] - core.py:427 - 跳过文件夹: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source/English\TestMod 1.0.0, 原因: 文件夹名称已符合要求
+2025-12-16 21:37:22,387 - init_mode - INFO - [N/A] - [GENERAL] - core.py:155 - 基于行的解析成功读取mod_info.json: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source_backup/Chinese\Quality Captains 高质量舰长 1.7.0\mod_info.json
+2025-12-16 21:37:22,387 - init_mode - INFO - [N/A] - [GENERAL] - core.py:427 - 跳过文件夹: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source_backup/Chinese\Quality Captains 高质量舰长 1.7.0, 原因: 文件夹名称已符合要求
+2025-12-16 21:37:22,387 - init_mode - INFO - [N/A] - [GENERAL] - core.py:155 - 基于行的解析成功读取mod_info.json: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source_backup/Chinese\Second-in-Command 舰队副官 1.7.0\mod_info.json
+2025-12-16 21:37:22,388 - init_mode - INFO - [N/A] - [GENERAL] - core.py:427 - 跳过文件夹: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source_backup/Chinese\Second-in-Command 舰队副官 1.7.0, 原因: 文件夹名称已符合要求
+2025-12-16 21:37:22,388 - init_mode - INFO - [N/A] - [GENERAL] - core.py:155 - 基于行的解析成功读取mod_info.json: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source_backup/English\Quality Captains 1.7.0\mod_info.json
+2025-12-16 21:37:22,388 - init_mode - INFO - [N/A] - [GENERAL] - core.py:427 - 跳过文件夹: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source_backup/English\Quality Captains 1.7.0, 原因: 文件夹名称已符合要求
+2025-12-16 21:37:22,388 - init_mode - INFO - [N/A] - [GENERAL] - core.py:155 - 基于行的解析成功读取mod_info.json: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source_backup/English\Second-in-Command 1.7.0\mod_info.json
+2025-12-16 21:37:22,389 - init_mode - INFO - [N/A] - [GENERAL] - core.py:427 - 跳过文件夹: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source_backup/English\Second-in-Command 1.7.0, 原因: 文件夹名称已符合要求
+2025-12-16 21:37:22,389 - init_mode - INFO - [N/A] - [GENERAL] - core.py:155 - 基于行的解析成功读取mod_info.json: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source_backup/English\TestMod 1.0.0\mod_info.json
+2025-12-16 21:37:22,389 - init_mode - INFO - [N/A] - [GENERAL] - core.py:427 - 跳过文件夹: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source_backup/English\TestMod 1.0.0, 原因: 文件夹名称已符合要求
+2025-12-16 21:37:22,389 - init_mode - INFO - [N/A] - [GENERAL] - core.py:457 - 自动重命名完成，成功: 0, 失败: 0, 跳过: 10
+2025-12-16 21:37:22,389 - init_mode - INFO - [N/A] - [RENAME] - core.py:1037 - 开始执行文件夹重命名任务
+2025-12-16 21:37:22,390 - init_mode - INFO - [N/A] - [RENAME_UNKNOWN] - core.py:1072 - 开始重命名 c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source/Chinese 下的模组文件夹
+2025-12-16 21:37:22,392 - init_mode - INFO - [N/A] - [RENAME_UNKNOWN] - core.py:1076 - 重命名完成: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source/Chinese
+2025-12-16 21:37:22,392 - init_mode - INFO - [N/A] - [RENAME_UNKNOWN] - core.py:1072 - 开始重命名 c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source/English 下的模组文件夹
+2025-12-16 21:37:22,394 - init_mode - INFO - [N/A] - [RENAME_UNKNOWN] - core.py:1076 - 重命名完成: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source/English
+2025-12-16 21:37:22,394 - init_mode - INFO - [N/A] - [RENAME_UNKNOWN] - core.py:1072 - 开始重命名 c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source_backup/Chinese 下的模组文件夹
+2025-12-16 21:37:22,396 - init_mode - INFO - [N/A] - [RENAME_UNKNOWN] - core.py:1076 - 重命名完成: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source_backup/Chinese
+2025-12-16 21:37:22,396 - init_mode - INFO - [N/A] - [RENAME_UNKNOWN] - core.py:1072 - 开始重命名 c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source_backup/English 下的模组文件夹
+2025-12-16 21:37:22,398 - init_mode - INFO - [N/A] - [RENAME_UNKNOWN] - core.py:1076 - 重命名完成: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source_backup/English
+2025-12-16 21:37:22,398 - init_mode - INFO - [N/A] - [BACKUP_RESTORE] - core.py:1087 - 开始执行备份恢复任务
+2025-12-16 21:37:23,030 - init_mode - INFO - [N/A] - [BUILD_MOD_MAPPINGS] - core.py:1105 - 开始构建mod映射关系
+2025-12-16 21:37:23,030 - init_mode - INFO - [N/A] - [GENERAL] - core.py:475 - 开始构建mod映射关系，mod_root: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File
+2025-12-16 21:37:23,030 - init_mode - INFO - [N/A] - [GENERAL] - core.py:497 - 处理目录: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source\Chinese (source_type: source, language: Chinese)
+2025-12-16 21:37:23,031 - init_mode - INFO - [N/A] - [GENERAL] - core.py:155 - 基于行的解析成功读取mod_info.json: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source\Chinese\Quality Captains 高质量舰长 1.7.0\mod_info.json
+2025-12-16 21:37:23,031 - init_mode - INFO - [N/A] - [GENERAL] - core.py:155 - 基于行的解析成功读取mod_info.json: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source\Chinese\Second-in-Command 舰队副官 1.7.0\mod_info.json
+2025-12-16 21:37:23,032 - init_mode - INFO - [N/A] - [GENERAL] - core.py:497 - 处理目录: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source\English (source_type: source, language: English)
+2025-12-16 21:37:23,032 - init_mode - INFO - [N/A] - [GENERAL] - core.py:155 - 基于行的解析成功读取mod_info.json: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source\English\Quality Captains 1.7.0\mod_info.json
+2025-12-16 21:37:23,033 - init_mode - INFO - [N/A] - [GENERAL] - core.py:155 - 基于行的解析成功读取mod_info.json: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source\English\Second-in-Command 1.7.0\mod_info.json
+2025-12-16 21:37:23,033 - init_mode - INFO - [N/A] - [GENERAL] - core.py:155 - 基于行的解析成功读取mod_info.json: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source\English\TestMod 1.0.0\mod_info.json
+2025-12-16 21:37:23,033 - init_mode - INFO - [N/A] - [GENERAL] - core.py:497 - 处理目录: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source_backup\Chinese (source_type: source_backup, language: Chinese)
+2025-12-16 21:37:23,034 - init_mode - INFO - [N/A] - [GENERAL] - core.py:155 - 基于行的解析成功读取mod_info.json: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source_backup\Chinese\Quality Captains 高质量舰长 1.7.0\mod_info.json
+2025-12-16 21:37:23,034 - init_mode - INFO - [N/A] - [GENERAL] - core.py:155 - 基于行的解析成功读取mod_info.json: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source_backup\Chinese\Second-in-Command 舰队副官 1.7.0\mod_info.json
+2025-12-16 21:37:23,035 - init_mode - INFO - [N/A] - [GENERAL] - core.py:497 - 处理目录: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source_backup\English (source_type: source_backup, language: English)
+2025-12-16 21:37:23,035 - init_mode - INFO - [N/A] - [GENERAL] - core.py:155 - 基于行的解析成功读取mod_info.json: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source_backup\English\Quality Captains 1.7.0\mod_info.json
+2025-12-16 21:37:23,035 - init_mode - INFO - [N/A] - [GENERAL] - core.py:155 - 基于行的解析成功读取mod_info.json: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source_backup\English\Second-in-Command 1.7.0\mod_info.json
+2025-12-16 21:37:23,036 - init_mode - INFO - [N/A] - [GENERAL] - core.py:155 - 基于行的解析成功读取mod_info.json: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source_backup\English\TestMod 1.0.0\mod_info.json
+2025-12-16 21:37:23,036 - init_mode - INFO - [N/A] - [GENERAL] - core.py:543 - mod映射构建完成，成功: 10, 失败: 0, 跳过: 0
+2025-12-16 21:37:23,036 - init_mode - INFO - [N/A] - [BUILD_GROUP_MAPPINGS] - core.py:1109 - 开始构建分组映射关系
+2025-12-16 21:37:23,036 - init_mode - INFO - [N/A] - [GENERAL] - core.py:629 - 开始构建分组映射关系，mod_root: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File
+2025-12-16 21:37:23,037 - init_mode - INFO - [N/A] - [GENERAL] - core.py:681 - 构建分组映射: QualityCaptains
+2025-12-16 21:37:23,037 - init_mode - INFO - [N/A] - [GENERAL] - core.py:681 - 构建分组映射: second_in_command
+2025-12-16 21:37:23,037 - init_mode - INFO - [N/A] - [GENERAL] - core.py:681 - 构建分组映射: testmod
+2025-12-16 21:37:23,037 - init_mode - INFO - [N/A] - [GENERAL] - core.py:687 - 分组映射构建完成，成功: 3, 失败: 0, 跳过: 0
+2025-12-16 21:37:23,037 - init_mode - INFO - [N/A] - [GENERAL] - core.py:1169 - 初始化任务执行完成，成功: 18/38
+2025-12-16 21:37:26,297 - init_mode - INFO - [N/A] - [GENERAL] - core.py:475 - 开始构建mod映射关系，mod_root: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File
+2025-12-16 21:37:26,298 - init_mode - INFO - [N/A] - [GENERAL] - core.py:497 - 处理目录: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source\Chinese (source_type: source, language: Chinese)
+2025-12-16 21:37:26,298 - init_mode - INFO - [N/A] - [GENERAL] - core.py:497 - 处理目录: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source\English (source_type: source, language: English)
+2025-12-16 21:37:26,299 - init_mode - INFO - [N/A] - [GENERAL] - core.py:497 - 处理目录: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source_backup\Chinese (source_type: source_backup, language: Chinese)
+2025-12-16 21:37:26,300 - init_mode - INFO - [N/A] - [GENERAL] - core.py:497 - 处理目录: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source_backup\English (source_type: source_backup, language: English)
+2025-12-16 21:37:26,301 - init_mode - INFO - [N/A] - [GENERAL] - core.py:543 - mod映射构建完成，成功: 10, 失败: 0, 跳过: 0

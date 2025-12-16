@@ -29,3 +29,5 @@ tmp/
 
 # Optional: if you later decide to NOT version jar files
 # **/*.jar
+
+.trae/

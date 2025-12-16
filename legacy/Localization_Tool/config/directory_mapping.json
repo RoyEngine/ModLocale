@@ -3,10 +3,10 @@
   "description": "本地化工具目录映射配置",
   "source_mappings": {
     "extract": {
-      "localization_file": "${mod_root}/source"
+      "file": "${mod_root}/source"
     },
     "extend": {
-      "localization_file": "${mod_root}/source"
+      "file": "${mod_root}/source"
     }
   },
   "backup_mappings": {

@@ -852,7 +852,7 @@ class ConfigManager:
                 "version": "1.0.0",
                 "directories": {
                     "tool_root": "${current_dir}",
-                    "mod_root": "${current_dir}/Localization_File",
+                    "mod_root": "${current_dir}/File",
                     "source": "${mod_root}/source",
                     "output": "${mod_root}/output",
                     "logs": "${tool_root}/logs",

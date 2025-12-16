@@ -597,7 +597,7 @@ def _get_yaml_mappings(yaml_data: Any) -> List[Dict[str, Any]]:
         return yaml_data["mappings"]
     return []
 
-def _save_yaml_version(file_path: str, mappings: List[Dict[str, Any]], version: str = "1.0") -> bool:
+def _save_yaml_version(file_path: str, mappings: List[Dict[str, Any]], version: str = "1.0", mod_id: str = "") -> bool:
     """
     保存带有版本信息的YAML映射
     
@@ -605,6 +605,7 @@ def _save_yaml_version(file_path: str, mappings: List[Dict[str, Any]], version: 
         file_path: 文件路径
         mappings: 映射列表
         version: 版本号
+        mod_id: 模组ID，用于直接匹配文件夹
     
     Returns:
         bool: 是否保存成功
@@ -614,6 +615,7 @@ def _save_yaml_version(file_path: str, mappings: List[Dict[str, Any]], version: 
         yaml_data = {
             "version": version,
             "created_at": datetime.now().isoformat(),
+            "id": mod_id,  # 添加mod_id字段，用于直接匹配文件夹
             "mappings": mappings
         }
         
@@ -623,6 +625,7 @@ def _save_yaml_version(file_path: str, mappings: List[Dict[str, Any]], version: 
             f.write("# 字段说明：\n")
             f.write("#   version: 版本信息\n")
             f.write("#   created_at: 创建时间\n")
+            f.write("#   id: 模组唯一标识符，用于直接匹配文件夹\n")
             f.write("#   mappings: 映射规则列表\n")
             f.write("# 映射规则字段说明：\n")
             f.write("#   id: 唯一标识符，格式为 文件路径:行号\n")
@@ -639,7 +642,7 @@ def _save_yaml_version(file_path: str, mappings: List[Dict[str, Any]], version: 
         print(f"[ERROR] 保存带版本信息的YAML映射失败: {file_path} - {e}")
         return False
 
-def save_yaml_mappings(mappings: List[Dict[str, Any]], file_path: str, version_control: bool = True) -> bool:
+def save_yaml_mappings(mappings: List[Dict[str, Any]], file_path: str, version_control: bool = True, mod_id: str = "") -> bool:
     """
     保存YAML映射到文件，支持版本控制
     
@@ -647,6 +650,7 @@ def save_yaml_mappings(mappings: List[Dict[str, Any]], file_path: str, version_c
         mappings: YAML映射列表
         file_path: 文件路径
         version_control: 是否启用版本控制
+        mod_id: 模组ID，用于直接匹配文件夹
     
     Returns:
         bool: 是否保存成功
@@ -675,7 +679,7 @@ def save_yaml_mappings(mappings: List[Dict[str, Any]], file_path: str, version_c
         # 保存当前版本
         if version_control:
             # 使用版本控制格式保存
-            success = _save_yaml_version(file_path, mappings)
+            success = _save_yaml_version(file_path, mappings, mod_id=mod_id)
         else:
             # 使用传统格式保存，添加中文注释
             with open(file_path, 'w', encoding='utf-8') as f:

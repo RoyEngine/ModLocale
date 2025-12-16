@@ -91,8 +91,9 @@ def rename_mod_folders(file_path: str) -> bool:
         for item_name in items:
             item_path = os.path.join(file_path, item_name)
             if os.path.isdir(item_path):
-                # 跳过src和jar目录，这些是固定的目录结构
-                if item_name in ["src", "jar"]:
+                # 跳过固定目录结构
+                fixed_dirs = ["src", "jars", "Chinese", "English"]
+                if item_name in fixed_dirs:
                     print(f"[INFO] 跳过固定目录: {item_path}")
                     continue
                 
@@ -452,7 +453,8 @@ def get_folder_by_mod_id(base_path: str, mod_id: str, language: Optional[str] = 
     # 构建搜索目录
     search_dir = base_path
     if mode:
-        search_dir = os.path.join(base_path, "project", mode)
+        from src.common.config_utils import get_directory
+        search_dir = get_directory("output")
     
     # 使用find_folder_by_mod_id函数查找文件夹
     return find_folder_by_mod_id(search_dir, mod_id, language)

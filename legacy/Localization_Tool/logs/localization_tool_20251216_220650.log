@@ -1,0 +1,17 @@
+2025-12-16 22:06:50,140 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:672 - ==========================================
+2025-12-16 22:06:50,140 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:673 -              本地化工具
+2025-12-16 22:06:50,140 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:674 - ==========================================
+2025-12-16 22:06:50,141 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:675 - 工具启动，开始解析命令行参数
+2025-12-16 22:06:50,141 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:693 - 前置检查已默认关闭，直接进入主菜单
+2025-12-16 22:06:50,142 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:268 - 检查项目结构...
+2025-12-16 22:06:50,142 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:308 - 创建文件夹: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\rule\English
+2025-12-16 22:06:50,143 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:308 - 创建文件夹: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\rule\Chinese
+2025-12-16 22:06:50,143 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:308 - 创建文件夹: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\output\Extract_Chinese
+2025-12-16 22:06:50,143 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:308 - 创建文件夹: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\output\Extract_English
+2025-12-16 22:06:50,144 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:308 - 创建文件夹: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\output\Extend_en2zh
+2025-12-16 22:06:50,144 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:308 - 创建文件夹: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\output\Extend_zh2en
+2025-12-16 22:06:50,144 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:310 - 项目结构检查完成，严格按照框架文档生成目录
+2025-12-16 22:06:50,770 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:706 - init_mode初始化完成，状态: success
+2025-12-16 22:06:50,774 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:837 - 命令行参数解析完成：mode=None, sub_flow=None
+2025-12-16 22:06:50,774 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:903 - 未指定模式，显示主菜单
+2025-12-16 22:07:15,000 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:905 - 用户选择主模式：1

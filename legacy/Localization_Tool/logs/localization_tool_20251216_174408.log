@@ -1,0 +1,14 @@
+2025-12-16 17:44:08,045 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:650 - ==========================================
+2025-12-16 17:44:08,046 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:651 -              本地化工具
+2025-12-16 17:44:08,046 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:652 - ==========================================
+2025-12-16 17:44:08,046 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:653 - 工具启动，开始解析命令行参数
+2025-12-16 17:44:08,046 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:671 - 前置检查已默认关闭，直接进入主菜单
+2025-12-16 17:44:08,046 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:249 - 检查项目结构...
+2025-12-16 17:44:08,047 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:289 - 创建文件夹: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source\English
+2025-12-16 17:44:08,047 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:289 - 创建文件夹: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source\Chinese
+2025-12-16 17:44:08,047 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:289 - 创建文件夹: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source_backup\English
+2025-12-16 17:44:08,048 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:289 - 创建文件夹: c:\Users\Roki\Documents\GitHub\Tool\legacy\Localization_Tool\File\source_backup\Chinese
+2025-12-16 17:44:08,048 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:291 - 项目结构检查完成，严格按照框架文档生成目录
+2025-12-16 17:44:08,051 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:801 - 命令行参数解析完成：mode=None, sub_flow=None
+2025-12-16 17:44:08,051 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:867 - 未指定模式，显示主菜单
+2025-12-16 17:44:13,268 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:869 - 用户选择主模式：1

@@ -1,0 +1,12 @@
+2025-12-16 20:36:27,902 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:672 - ==========================================
+2025-12-16 20:36:27,903 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:673 -              本地化工具
+2025-12-16 20:36:27,903 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:674 - ==========================================
+2025-12-16 20:36:27,903 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:675 - 工具启动，开始解析命令行参数
+2025-12-16 20:36:27,904 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:693 - 前置检查已默认关闭，直接进入主菜单
+2025-12-16 20:36:27,904 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:268 - 检查项目结构...
+2025-12-16 20:36:27,914 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:310 - 项目结构检查完成，严格按照框架文档生成目录
+2025-12-16 20:36:27,918 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:823 - 命令行参数解析完成：mode=extract, sub_flow=中文提取流程
+2025-12-16 20:36:27,919 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:828 - 选择Extract模式
+2025-12-16 20:36:27,919 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:831 - 直接执行Extract子流程：中文提取流程
+2025-12-16 20:36:31,455 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:932 - 模式执行完成：success
+2025-12-16 20:36:31,456 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:944 - 工具执行完成，退出

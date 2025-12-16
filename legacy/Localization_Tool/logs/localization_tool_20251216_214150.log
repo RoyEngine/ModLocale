@@ -1,0 +1,14 @@
+2025-12-16 21:41:50,494 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:672 - ==========================================
+2025-12-16 21:41:50,495 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:673 -              本地化工具
+2025-12-16 21:41:50,495 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:674 - ==========================================
+2025-12-16 21:41:50,495 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:675 - 工具启动，开始解析命令行参数
+2025-12-16 21:41:50,495 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:693 - 前置检查已默认关闭，直接进入主菜单
+2025-12-16 21:41:50,495 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:268 - 检查项目结构...
+2025-12-16 21:41:50,496 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:310 - 项目结构检查完成，严格按照框架文档生成目录
+2025-12-16 21:41:51,266 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:706 - init_mode初始化完成，状态: success
+2025-12-16 21:41:51,271 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:837 - 命令行参数解析完成：mode=None, sub_flow=None
+2025-12-16 21:41:51,272 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:903 - 未指定模式，显示主菜单
+2025-12-16 21:42:27,137 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:905 - 用户选择主模式：2
+2025-12-16 21:42:29,923 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:919 - 用户选择Extend子流程：已有中文src文件夹映射流程
+2025-12-16 21:42:32,117 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:946 - 模式执行完成：success
+2025-12-16 21:42:32,117 - localization_tool - INFO - [N/A] - [GENERAL] - main.py:958 - 工具执行完成，退出
