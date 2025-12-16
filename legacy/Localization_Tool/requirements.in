@@ -1,6 +1,0 @@
-# 核心依赖
-requests
-PyYAML
-tree-sitter
-tree-sitter-java
-tree-sitter-kotlin
