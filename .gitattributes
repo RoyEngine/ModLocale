@@ -20,6 +20,9 @@ Thumbs.db
 *.tmp
 *.bak
 
+# Trae 
+.trae/
+
 # If you generate new outputs/reports later, ignore these:
 # (Keep legacy/Localization_File/output/Extract_* as historical baselines for now)
 out/
@@ -29,5 +32,3 @@ tmp/
 
 # Optional: if you later decide to NOT version jar files
 # **/*.jar
-
-.trae/
