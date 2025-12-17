@@ -56,7 +56,9 @@ tmp/
 temp_output/
 
 # Project specific
-File/
+# 跟踪File文件夹但忽略内部文件
+File/*
+!File/.gitkeep
 build/
 dist/
 
