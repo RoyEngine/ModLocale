@@ -4,14 +4,35 @@
 **/*.pyo
 **/*.pyd
 .pytest_cache/
+
+# Coverage files
 .coverage
+.coverage.*
+coverage.xml
+htmlcov/
 
 # Virtual env / tooling
 .venv/
 venv/
 .env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Python build artifacts
+.eggs/
+*.egg-info/
+*.egg
+*.whl
+*.tar.gz
+
+# IDE files
 .idea/
 .vscode/
+*.swp
+*.swo
+*~
 
 # OS files
 .DS_Store
@@ -36,13 +57,15 @@ temp_output/
 
 # Project specific
 File/
+build/
+dist/
 
 # Temporary files
 temp_*.yaml
 
-# Test directories
-test/
-htmlcov/
-
 # Tools directories
 tools/**/*.jar
+
+# Docker files
+Dockerfile*
+docker-compose*.yml

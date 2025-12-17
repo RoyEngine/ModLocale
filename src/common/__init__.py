@@ -95,8 +95,7 @@ from .logger_utils import (
     LoggerManager,
 )
 
-# 导入localization_tool主函数
-from .localization_tool import main as localization_main
+# 注意：localization_tool已被迁移到extend_mode目录下，移除导入
 
 __all__ = [
     "file_utils",
@@ -169,5 +168,4 @@ __all__ = [
     "LogLevel",
     "LoggerConfig",
     "LoggerManager",
-    "localization_main",
 ]

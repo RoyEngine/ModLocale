@@ -1,7 +1,7 @@
 # common 模块
 
 ## 功能描述
-通用工具模块，为本地化工具提供各种基础功能支持，包括文件操作、JAR处理、AST解析、YAML处理、配置管理等。
+通用工具模块，为ModLocale提供各种基础功能支持，包括文件操作、JAR处理、AST解析、YAML处理、配置管理等。
 
 ## 主要文件及其用途
 
@@ -10,10 +10,10 @@
 | `__init__.py` | 模块初始化文件，导出所有工具函数 |
 | `config_utils.py` | 配置管理工具，用于加载和管理配置文件 |
 | `file_utils.py` | 文件操作工具，包括文件夹创建、文件复制、移动等 |
-| `flow_executor.py` | 流程执行器，用于管理和执行本地化工具的工作流程 |
+| `flow_executor.py` | 流程执行器，用于管理和执行ModLocale的工作流程 |
 | `jar_utils.py` | JAR文件处理工具，包括JAR文件检测、反编译等 |
 | `levenshtein_utils.py` | 编辑距离计算工具，用于字符串相似度比较 |
-| `localization_tool.py` | 本地化工具核心类，提供主要的本地化功能 |
+| `localization_tool.py` | ModLocale核心类，提供主要的本地化功能 |
 | `logger_utils.py` | 日志记录工具，用于设置和获取日志记录器 |
 | `mod_info_utils.py` | 模组信息处理工具，用于加载和管理模组信息 |
 | `report_utils.py` | 报告生成工具，用于生成和保存处理报告 |

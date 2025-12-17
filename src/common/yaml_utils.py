@@ -1092,6 +1092,61 @@ def generate_initial_yaml_mappings(ast_mappings: List[Dict[str, Any]], mark_unma
     return yaml_mappings
 
 
+def generate_legal_literal_token(original_literal: str, translated_text: str) -> str:
+    """
+    生成合法的Java/Kotlin字面量token
+    
+    Args:
+        original_literal: 原始字面量（包含引号）
+        translated_text: 翻译后的文本（不包含引号）
+    
+    Returns:
+        str: 合法的字面量token
+    """
+    import re
+    
+    # 检测原始字面量的引号类型
+    if original_literal.startswith('"""') and original_literal.endswith('"""'):
+        # Kotlin三引号字符串
+        quote_type = '"""'
+    elif original_literal.startswith('"') and original_literal.endswith('"'):
+        # 双引号字符串
+        quote_type = '"'
+    elif original_literal.startswith("'") and original_literal.endswith("'"):
+        # 单引号字符串
+        quote_type = "'"
+    else:
+        # 默认使用双引号
+        quote_type = '"'
+    
+    # 根据引号类型进行转义
+    if quote_type == '"""':
+        # Kotlin三引号字符串，只需要处理转义字符，但不需要转义引号
+        translated = translated_text
+        # 处理换行符
+        translated = translated.replace('\n', '\\n')
+        # 处理制表符
+        translated = translated.replace('\t', '\\t')
+        # 处理反斜杠
+        translated = translated.replace('\\', '\\\\')
+    else:
+        # 普通引号字符串，需要转义引号和其他特殊字符
+        translated = translated_text
+        # 处理反斜杠
+        translated = translated.replace('\\', '\\\\')
+        # 处理引号
+        translated = translated.replace(quote_type, f'\\{quote_type}')
+        # 处理换行符
+        translated = translated.replace('\n', '\\n')
+        # 处理制表符
+        translated = translated.replace('\t', '\\t')
+        # 处理回车符
+        translated = translated.replace('\r', '\\r')
+    
+    # 返回完整的字面量token
+    return f'{quote_type}{translated}{quote_type}'
+
+
 def apply_yaml_mapping(source_file: str, yaml_mappings: List[Dict[str, Any]]) -> str:
     """
     应用YAML映射到源代码文件
@@ -1118,19 +1173,12 @@ def apply_yaml_mapping(source_file: str, yaml_mappings: List[Dict[str, Any]]) ->
             print(f"[WARN]  读取源文件失败: {source_file} - {e}")
             return ""
     
-    # 创建映射字典，使用original作为键，translated作为值
+    # 创建映射字典，使用occurrence_key作为键
     mapping_dict = {}
-    unmapped_strings = set()
-    
     for mapping in yaml_mappings:
-        if "original" in mapping:
-            original = mapping["original"]
-            if "translated" in mapping and mapping["status"] in ["translated", "untranslated"]:
-                translated = mapping["translated"]
-                mapping_dict[original] = translated
-            else:
-                # 标记为未映射字符串
-                unmapped_strings.add(original)
+        rule_id = mapping.get("id")
+        if rule_id and "translated" in mapping and mapping["status"] in ["translated", "untranslated"]:
+            mapping_dict[rule_id] = mapping
     
     # 读取源文件内容
     try:
@@ -1141,34 +1189,33 @@ def apply_yaml_mapping(source_file: str, yaml_mappings: List[Dict[str, Any]]) ->
         return ""
     
     # 应用映射，从后往前替换，避免位置偏移问题
-    # 确保meta字段中包含start_line
-    for string_info in source_strings:
-        if "start_line" not in string_info["meta"]:
-            string_info["meta"]["start_line"] = string_info["meta"].get("line", 1)
-    
-    sorted_strings = sorted(source_strings, key=lambda x: x["meta"]["start_line"], reverse=True)
+    # 按start_byte从大到小排序
+    sorted_strings = sorted(source_strings, key=lambda x: x["meta"]["start_byte"], reverse=True)
     
     result = content
     for string_info in sorted_strings:
-        original = string_info["original"]
-        if original in mapping_dict:
-            translated = mapping_dict[original]
-            start_byte = string_info["meta"].get("start_byte", None)
-            end_byte = string_info["meta"].get("end_byte", None)
+        occurrence_key = string_info["id"]
+        if occurrence_key in mapping_dict:
+            mapping = mapping_dict[occurrence_key]
+            translated = mapping["translated"]
             
-            if start_byte is not None and end_byte is not None:
-                # 替换字符串内容
-                result = result[:start_byte] + translated.encode('utf-8') + result[end_byte:]
-                line_num = string_info["meta"]["start_line"]
-                print(f"OK 替换 {source_file}:{line_num} - {original} -> {translated}")
-        elif original in unmapped_strings:
-            # 记录未映射字符串
-            line_num = string_info["meta"]["start_line"]
-            print(f"[WARN]  未映射内容: {source_file}:{line_num} - {original}")
+            # 获取原始字面量（包含引号）
+            original_literal = string_info.get("literal", string_info["meta"].get("literal", f'"{string_info["original"]}"'))
+            
+            # 生成合法的字面量token
+            legal_literal = generate_legal_literal_token(original_literal, translated)
+            
+            start_byte = string_info["meta"]["start_byte"]
+            end_byte = string_info["meta"]["end_byte"]
+            
+            # 替换字符串内容
+            result = result[:start_byte] + legal_literal.encode('utf-8') + result[end_byte:]
+            line_num = string_info["meta"]["line"]
+            print(f"OK 替换 {source_file}:{line_num} - {string_info['original']} -> {translated}")
         else:
             # 未在映射规则中找到的字符串，标记为未映射
-            line_num = string_info["meta"]["start_line"]
-            print(f"[WARN]  未映射内容: {source_file}:{line_num} - {original}")
+            line_num = string_info["meta"]["line"]
+            print(f"[WARN]  未映射内容: {source_file}:{line_num} - {string_info['original']} (occurrence_key: {occurrence_key})")
     
     # 返回应用映射后的内容
     try:

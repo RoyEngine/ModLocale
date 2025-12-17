@@ -26,6 +26,13 @@ from src.common import (generate_report,  # noqa: E402, E501
                         read_mod_info, load_mapping_rules,
                         setup_logger, get_logger, log_progress, log_result)  # noqa: E402, E501
 from src.common.config_utils import get_directory  # noqa: E402
+from src.common.yaml_utils import (
+    extract_mappings_from_processed_folder, 
+    load_yaml_mappings, 
+    merge_mapping_rules,
+    update_mapping_status,
+    save_yaml_mappings
+)  # noqa: E402
 
 # 设置日志记录器
 logger = setup_logger("extend_mode")
@@ -620,14 +627,6 @@ def extract_rules_from_processed(processed_folder: str, rule_file: str, language
         rule_file: 现有规则文件路径
         language: 语言类型
     """
-    from src.common.yaml_utils import (
-        extract_mappings_from_processed_folder, 
-        load_yaml_mappings, 
-        merge_mapping_rules,
-        update_mapping_status,
-        save_yaml_mappings
-    )
-    
     print(f"[INFO] 从已处理文件夹提取规则: {processed_folder}")
     print(f"[INFO] 现有规则文件: {rule_file}")
     
@@ -671,19 +670,21 @@ def _process_existing_chinese_rules(
     """
     try:
         # 1. 获取Chinese和English文件夹路径
-        from src.common.config_utils import get_directory
         source_path = get_directory("source")
         chinese_file_path = os.path.join(source_path, "Chinese")
         english_file_path = os.path.join(source_path, "English")
         
         # 4. 获取映射规则文件路径
-        from src.common.config_utils import get_directory
         strings_path = get_directory("rules")
         chinese_strings_path = os.path.join(strings_path, "Chinese")
         print(f"[DIR] 映射规则文件路径: {chinese_strings_path}")
         
         # 5. 加载映射规则(优先从rule文件夹加载)
         mapping_rules = []
+        
+        # 构建rule文件夹路径
+        localization_file_path = os.path.join(os.path.dirname(base_path), "File")
+        rule_path = os.path.join(localization_file_path, "rule")
         
         # 先检查rule文件夹
         if os.path.exists(rule_path):
@@ -1020,19 +1021,21 @@ def _process_existing_english_rules(
     """
     try:
         # 1. 获取English和Chinese文件夹路径
-        from src.common.config_utils import get_directory
         source_path = get_directory("source")
         english_file_path = os.path.join(source_path, "English")
         chinese_file_path = os.path.join(source_path, "Chinese")
         
         # 4. 获取映射规则文件路径
-        from src.common.config_utils import get_directory
         strings_path = get_directory("rules")
         english_strings_path = os.path.join(strings_path, "English")
         print(f"[DIR] 映射规则文件路径: {english_strings_path}")
         
         # 5. 加载映射规则(优先从rule文件夹加载)
         mapping_rules = []
+        
+        # 构建rule文件夹路径
+        localization_file_path = os.path.join(os.path.dirname(base_path), "File")
+        rule_path = os.path.join(localization_file_path, "rule")
         
         # 先检查rule文件夹
         if os.path.exists(rule_path):

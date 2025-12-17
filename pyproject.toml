@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "localization-tool"
+name = "modlocale"
 version = "1.0.0"
-description = "游戏模组本地化工具，用于提取和管理本地化字符串"
+description = "ModLocale - 游戏模组本地化工具，用于提取和管理本地化字符串"
 authors = ["Author Name <author@example.com>"]
 readme = "README.md"
 packages = [{ include = "src", from = "." }]

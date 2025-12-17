@@ -237,7 +237,14 @@ class ASTNode:
     @property
     def text(self) -> str:
         """获取节点文本"""
-        return self.node.text.decode('utf-8')
+        try:
+            return self.node.text.decode('utf-8')
+        except UnicodeDecodeError:
+            # 尝试使用gbk编码，处理中文文件常见编码问题
+            return self.node.text.decode('gbk')
+        except UnicodeDecodeError:
+            # 最后尝试使用replace模式，避免程序崩溃
+            return self.node.text.decode('utf-8', errors='replace')
     
     @property
     def start_line(self) -> int:
@@ -338,12 +345,13 @@ def get_parser(file_path: str) -> Optional[Parser]:
     return None
 
 
-def _extract_strings_from_single_file(file_path: str) -> List[Dict[str, Any]]:
+def _extract_strings_from_single_file(file_path: str, root_dir: str = None) -> List[Dict[str, Any]]:
     """
     从单个文件中提取字符串
     
     Args:
         file_path: 文件路径
+        root_dir: 根目录路径，用于计算相对路径
     
     Returns:
         List[Dict[str, Any]]: 提取的字符串列表
@@ -369,7 +377,7 @@ def _extract_strings_from_single_file(file_path: str) -> List[Dict[str, Any]]:
         return []
     
     # 遍历AST，提取字符串节点
-    return extract_strings_from_ast(tree, file_path)
+    return extract_strings_from_ast(tree, file_path, root_dir)
 
 
 def extract_ast_mappings(root_dir: str, use_parallel: bool = False, max_workers: int = None, use_cache: bool = True) -> Iterator[Dict[str, Any]]:
@@ -415,7 +423,7 @@ def extract_ast_mappings(root_dir: str, use_parallel: bool = False, max_workers:
     if use_parallel and len(files_to_process) > 1:
         # 使用并行处理
         processor = ParallelProcessor(max_workers=max_workers, use_multiprocessing=False)
-        results = processor.process_files(files_to_process, _extract_strings_from_single_file)
+        results = processor.process_files(files_to_process, _extract_strings_from_single_file, root_dir)
         
         # 输出并行处理结果
         print(f"[INFO] 并行处理完成: 成功 {len(results['success'])} 个文件, 失败 {len(results['failed'])} 个文件, 耗时 {results['time']:.2f} 秒")
@@ -434,7 +442,7 @@ def extract_ast_mappings(root_dir: str, use_parallel: bool = False, max_workers:
     else:
         # 顺序处理
         for file_path in files_to_process:
-            strings = _extract_strings_from_single_file(file_path)
+            strings = _extract_strings_from_single_file(file_path, root_dir)
             yield from strings
             
             # 更新缓存
@@ -451,6 +459,52 @@ def extract_ast_mappings(root_dir: str, use_parallel: bool = False, max_workers:
 
 
 import re
+import hashlib
+import json
+
+def generate_ast_signature(node: ASTNode) -> str:
+    """
+    生成稳定的AST签名，包含节点上下文信息和语法结构
+    
+    Args:
+        node: AST节点对象
+    
+    Returns:
+        str: 稳定的AST签名
+    """
+    # 获取节点的上下文元数据
+    context = node.get_context_metadata()
+    
+    # 生成AST签名，包含父节点类型、节点类型和位置信息
+    signature_parts = [
+        # 父节点类型链，最多取3层
+        ','.join(context['parent_types'][:3]),
+        # 节点类型
+        context['node_type'],
+        # 节点在文件中的相对位置（行号差，而非绝对行号）
+        f"{node.start_line % 100}:{node.start_column}"
+    ]
+    
+    return '|'.join(signature_parts)
+
+def generate_occurrence_key(rel_path: str, ast_signature: str, literal_kind: str) -> str:
+    """
+    生成稳定的occurrence_key
+    
+    Args:
+        rel_path: 相对文件路径
+        ast_signature: AST签名
+        literal_kind: 字面量类型
+    
+    Returns:
+        str: 稳定的occurrence_key
+    """
+    # 使用可移植的路径分隔符
+    rel_path = rel_path.replace('\\', '/')
+    
+    # 生成哈希值
+    hash_input = f"{rel_path}|{ast_signature}|{literal_kind}"
+    return hashlib.sha256(hash_input.encode()).hexdigest()[:16]
 
 def _should_filter_string(text: str) -> bool:
     """
@@ -519,13 +573,14 @@ def _should_filter_string(text: str) -> bool:
     return False
 
 
-def extract_strings_from_ast(tree: tree_sitter.Tree, file_path: str) -> List[Dict[str, Any]]:
+def extract_strings_from_ast(tree: tree_sitter.Tree, file_path: str, root_dir: str = None) -> List[Dict[str, Any]]:
     """
     从AST中提取字符串节点
     
     Args:
         tree: AST树
         file_path: 文件路径
+        root_dir: 根目录路径，用于计算相对路径
     
     Returns:
         List[Dict[str, Any]]: 提取的字符串列表
@@ -554,8 +609,21 @@ def extract_strings_from_ast(tree: tree_sitter.Tree, file_path: str) -> List[Dic
                 # 提取上下文元数据
                 context = ast_node.get_context_metadata()
                 
-                # 生成唯一ID
-                node_id = f"{file_path}:{ast_node.start_line}"
+                # 生成AST签名
+                ast_signature = generate_ast_signature(ast_node)
+                
+                # 确定字面量类型
+                literal_kind = cursor.node.type
+                
+                # 计算相对路径
+                rel_path = file_path
+                if root_dir:
+                    rel_path = os.path.relpath(file_path, root_dir)
+                    # 转换为可移植的路径分隔符
+                    rel_path = rel_path.replace('\\', '/')
+                
+                # 生成稳定的occurrence_key
+                occurrence_key = generate_occurrence_key(rel_path, ast_signature, literal_kind)
                 
                 # 获取节点的字节范围
                 start_byte = cursor.node.start_byte
@@ -563,16 +631,19 @@ def extract_strings_from_ast(tree: tree_sitter.Tree, file_path: str) -> List[Dic
                 
                 # 添加到提取结果
                 extracted_strings.append({
-                    "id": node_id,
+                    "id": occurrence_key,
                     "original": text,
                     "meta": {
                         "file": file_path,
+                        "rel_path": rel_path,
                         "line": ast_node.start_line,
                         "column": ast_node.start_column,
                         "end_line": ast_node.end_line,
                         "end_column": ast_node.end_column,
                         "start_byte": start_byte,
-                        "end_byte": end_byte
+                        "end_byte": end_byte,
+                        "ast_signature": ast_signature,
+                        "literal_kind": literal_kind
                     },
                     "context": context
                 })
@@ -589,12 +660,13 @@ def extract_strings_from_ast(tree: tree_sitter.Tree, file_path: str) -> List[Dic
     return extracted_strings
 
 
-def extract_strings_from_file(file_path: str) -> List[Dict[str, Any]]:
+def extract_strings_from_file(file_path: str, root_dir: str = None) -> List[Dict[str, Any]]:
     """
     从单个文件中提取字符串
     
     Args:
         file_path: 文件路径
+        root_dir: 根目录路径，用于计算相对路径
     
     Returns:
         List[Dict[str, Any]]: 提取的字符串列表
@@ -620,6 +692,16 @@ def extract_strings_from_file(file_path: str) -> List[Dict[str, Any]]:
         return []
     
     # 提取字符串
-    return extract_strings_from_ast(tree, file_path)
+    strings = extract_strings_from_ast(tree, file_path, root_dir)
+    
+    # 为每个字符串添加原始字面量（包含引号）
+    for string in strings:
+        # 从文件中提取原始字面量（包含引号）
+        start_byte = string["meta"]["start_byte"]
+        end_byte = string["meta"]["end_byte"]
+        original_literal = code[start_byte:end_byte].decode('utf-8')
+        string["meta"]["literal"] = original_literal
+    
+    return strings
 
 # 注意：不再在模块级别自动初始化，而是在需要时手动调用
